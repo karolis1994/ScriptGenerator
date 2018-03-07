@@ -90,7 +90,6 @@ namespace ScriptGenerator
         #endregion
 
         #region Events
-
         //Column creation tab events
         private void columnIsFkCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -283,8 +282,6 @@ namespace ScriptGenerator
                 $"/";
         }
 
-        #endregion
-
         //Audit trigger creation events
         private void auditBtn_Click(object sender, EventArgs e)
         {
@@ -311,5 +308,7 @@ namespace ScriptGenerator
                 $"  END IF;" + Environment.NewLine +
                 $"END;";
         }
+        #endregion
+
     }
 }
