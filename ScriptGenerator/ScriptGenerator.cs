@@ -81,9 +81,16 @@ namespace ScriptGenerator
 
             return $"''{input}''";
         }
+        private void AddUneditableRow(String columnName, String type, String comment)
+        {
+            Int32 index = tableColumnsGrid.Rows.Add(false, columnName, type, null, true, comment, false, null, false, null, null, null, null, null);
+            tableColumnsGrid.Rows[index].ReadOnly = true;
+            tableColumnsGrid.Rows[index].DefaultCellStyle.BackColor = Color.Gray;
+        }
         #endregion
 
         #region Events
+
         //Column creation tab events
         private void columnIsFkCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -199,6 +206,13 @@ namespace ScriptGenerator
             }
                 
         }
+        private void tableAuditBtn_Click(object sender, EventArgs e)
+        {
+            AddUneditableRow("RECORD_DATE", "DATE", "Date of record creation");
+            AddUneditableRow("EDIT_DATE", "DATE", "Date of record edit");
+            AddUneditableRow("RECORD_USER", "VARCHAR2(250)", "User name of record creator");
+            AddUneditableRow("EDIT_USER", "VARCHAR2(250)", "User name of last record editor");
+        }
         private void tableAddBtn_Click(object sender, EventArgs e)
         {
             Int32 index = tableColumnsGrid.Rows.Add(false, null, null, null, true, null, false, null, false, null, null, null, null, null);
@@ -268,7 +282,34 @@ namespace ScriptGenerator
                 $"END;" + Environment.NewLine +
                 $"/";
         }
+
         #endregion
 
+        //Audit trigger creation events
+        private void auditBtn_Click(object sender, EventArgs e)
+        {
+            scriptTextBox.Text = $"CREATE OR REPLACE TRIGGER {auditSchemaTextBox.Text}.{auditTableNameTextBox.Text}.{auditTriggerNameTextBox.Text}" + Environment.NewLine +
+                $"  BEFORE INSERT OR UPDATE ON {auditSchemaTextBox.Text}.{auditTableNameTextBox.Text}" + Environment.NewLine +
+                $"  FOR EACH ROW" + Environment.NewLine +
+                $"DECLARE" + Environment.NewLine +
+                $"  ls_user VARCHAR2(250);" + Environment.NewLine +
+                $"BEGIN" + Environment.NewLine +
+                $"  SELECT NVL(settings.glob.s_current_user_name, MIN(vs.osuser))" + Environment.NewLine +
+                $"    INTO ls_user" + Environment.NewLine +
+                $"    FROM v$session vs" + Environment.NewLine +
+                $"   WHERE vs.audsid = userenv('sessionid');" + Environment.NewLine +
+                $"  IF INSERTING THEN" + Environment.NewLine +
+                $"    :NEW.record_date := sysdate;" + Environment.NewLine +
+                $"    IF :NEW.record_user IS NULL THEN" + Environment.NewLine +
+                $"      :NEW.record_user := s_user;" + Environment.NewLine +
+                $"    END IF;" + Environment.NewLine +
+                $"  ELSE" + Environment.NewLine +
+                $"    :NEW.edit_date := sysdate;" + Environment.NewLine +
+                $"    IF :NEW.edit_user IS NULL THEN" + Environment.NewLine +
+                $"      :NEW.edit_user := s_user;" + Environment.NewLine +
+                $"    END IF;" + Environment.NewLine +
+                $"  END IF;" + Environment.NewLine +
+                $"END;";
+        }
     }
 }

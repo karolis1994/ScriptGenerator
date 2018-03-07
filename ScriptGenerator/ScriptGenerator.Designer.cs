@@ -87,10 +87,20 @@
             this.columnsSchemaTextBox = new System.Windows.Forms.TextBox();
             this.columnsTableNameLbl = new System.Windows.Forms.Label();
             this.columnsSchemaLbl = new System.Windows.Forms.Label();
+            this.tableAuditBtn = new System.Windows.Forms.Button();
+            this.auditTabPage = new System.Windows.Forms.TabPage();
+            this.auditTableNameTextBox = new System.Windows.Forms.TextBox();
+            this.auditSchemaTextBox = new System.Windows.Forms.TextBox();
+            this.auditTableNameLbl = new System.Windows.Forms.Label();
+            this.auditSchemaLbl = new System.Windows.Forms.Label();
+            this.auditBtn = new System.Windows.Forms.Button();
+            this.auditTriggerNameTextBox = new System.Windows.Forms.TextBox();
+            this.auditTriggerNameLbl = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
             this.columnTabPage.SuspendLayout();
+            this.auditTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // scriptTextBox
@@ -151,6 +161,7 @@
             // 
             this.tabControl1.Controls.Add(this.tableTabPage);
             this.tabControl1.Controls.Add(this.columnTabPage);
+            this.tabControl1.Controls.Add(this.auditTabPage);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -159,6 +170,7 @@
             // 
             // tableTabPage
             // 
+            this.tableTabPage.Controls.Add(this.tableAuditBtn);
             this.tableTabPage.Controls.Add(this.tableTableCommentTextBox);
             this.tableTabPage.Controls.Add(this.tableTableCommentLbl);
             this.tableTabPage.Controls.Add(this.tableRemoveBtn);
@@ -620,6 +632,94 @@
             this.columnsSchemaLbl.TabIndex = 8;
             this.columnsSchemaLbl.Text = "Schema:";
             // 
+            // tableAuditBtn
+            // 
+            this.tableAuditBtn.Location = new System.Drawing.Point(257, 55);
+            this.tableAuditBtn.Name = "tableAuditBtn";
+            this.tableAuditBtn.Size = new System.Drawing.Size(107, 23);
+            this.tableAuditBtn.TabIndex = 18;
+            this.tableAuditBtn.Text = "Add Audit Columns";
+            this.tableAuditBtn.UseVisualStyleBackColor = true;
+            this.tableAuditBtn.Click += new System.EventHandler(this.tableAuditBtn_Click);
+            // 
+            // auditTabPage
+            // 
+            this.auditTabPage.Controls.Add(this.auditTriggerNameTextBox);
+            this.auditTabPage.Controls.Add(this.auditTriggerNameLbl);
+            this.auditTabPage.Controls.Add(this.auditBtn);
+            this.auditTabPage.Controls.Add(this.auditTableNameTextBox);
+            this.auditTabPage.Controls.Add(this.auditSchemaTextBox);
+            this.auditTabPage.Controls.Add(this.auditTableNameLbl);
+            this.auditTabPage.Controls.Add(this.auditSchemaLbl);
+            this.auditTabPage.Location = new System.Drawing.Point(4, 22);
+            this.auditTabPage.Name = "auditTabPage";
+            this.auditTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.auditTabPage.Size = new System.Drawing.Size(1414, 348);
+            this.auditTabPage.TabIndex = 2;
+            this.auditTabPage.Text = "Audit trigger creation";
+            this.auditTabPage.UseVisualStyleBackColor = true;
+            // 
+            // auditTableNameTextBox
+            // 
+            this.auditTableNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.auditTableNameTextBox.Location = new System.Drawing.Point(77, 32);
+            this.auditTableNameTextBox.Name = "auditTableNameTextBox";
+            this.auditTableNameTextBox.Size = new System.Drawing.Size(149, 20);
+            this.auditTableNameTextBox.TabIndex = 11;
+            // 
+            // auditSchemaTextBox
+            // 
+            this.auditSchemaTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.auditSchemaTextBox.Location = new System.Drawing.Point(77, 6);
+            this.auditSchemaTextBox.Name = "auditSchemaTextBox";
+            this.auditSchemaTextBox.Size = new System.Drawing.Size(149, 20);
+            this.auditSchemaTextBox.TabIndex = 10;
+            // 
+            // auditTableNameLbl
+            // 
+            this.auditTableNameLbl.AutoSize = true;
+            this.auditTableNameLbl.Location = new System.Drawing.Point(5, 35);
+            this.auditTableNameLbl.Name = "auditTableNameLbl";
+            this.auditTableNameLbl.Size = new System.Drawing.Size(66, 13);
+            this.auditTableNameLbl.TabIndex = 13;
+            this.auditTableNameLbl.Text = "Table name:";
+            // 
+            // auditSchemaLbl
+            // 
+            this.auditSchemaLbl.AutoSize = true;
+            this.auditSchemaLbl.Location = new System.Drawing.Point(22, 9);
+            this.auditSchemaLbl.Name = "auditSchemaLbl";
+            this.auditSchemaLbl.Size = new System.Drawing.Size(49, 13);
+            this.auditSchemaLbl.TabIndex = 12;
+            this.auditSchemaLbl.Text = "Schema:";
+            // 
+            // auditBtn
+            // 
+            this.auditBtn.Location = new System.Drawing.Point(66, 107);
+            this.auditBtn.Name = "auditBtn";
+            this.auditBtn.Size = new System.Drawing.Size(75, 23);
+            this.auditBtn.TabIndex = 15;
+            this.auditBtn.Text = "Generate";
+            this.auditBtn.UseVisualStyleBackColor = true;
+            this.auditBtn.Click += new System.EventHandler(this.auditBtn_Click);
+            // 
+            // auditTriggerNameTextBox
+            // 
+            this.auditTriggerNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.auditTriggerNameTextBox.Location = new System.Drawing.Point(77, 58);
+            this.auditTriggerNameTextBox.Name = "auditTriggerNameTextBox";
+            this.auditTriggerNameTextBox.Size = new System.Drawing.Size(149, 20);
+            this.auditTriggerNameTextBox.TabIndex = 16;
+            // 
+            // auditTriggerNameLbl
+            // 
+            this.auditTriggerNameLbl.AutoSize = true;
+            this.auditTriggerNameLbl.Location = new System.Drawing.Point(-1, 61);
+            this.auditTriggerNameLbl.Name = "auditTriggerNameLbl";
+            this.auditTriggerNameLbl.Size = new System.Drawing.Size(72, 13);
+            this.auditTriggerNameLbl.TabIndex = 17;
+            this.auditTriggerNameLbl.Text = "Trigger name:";
+            // 
             // ScriptGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -635,6 +735,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).EndInit();
             this.columnTabPage.ResumeLayout(false);
             this.columnTabPage.PerformLayout();
+            this.auditTabPage.ResumeLayout(false);
+            this.auditTabPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -701,6 +803,15 @@
         private System.Windows.Forms.Label columnRefTableNameLbl;
         private System.Windows.Forms.TextBox columnRefSchemaNameTextBox;
         private System.Windows.Forms.Label columnRefSchemaNameLbl;
+        private System.Windows.Forms.Button tableAuditBtn;
+        private System.Windows.Forms.TabPage auditTabPage;
+        private System.Windows.Forms.Button auditBtn;
+        private System.Windows.Forms.TextBox auditTableNameTextBox;
+        private System.Windows.Forms.TextBox auditSchemaTextBox;
+        private System.Windows.Forms.Label auditTableNameLbl;
+        private System.Windows.Forms.Label auditSchemaLbl;
+        private System.Windows.Forms.TextBox auditTriggerNameTextBox;
+        private System.Windows.Forms.Label auditTriggerNameLbl;
     }
 }
 
