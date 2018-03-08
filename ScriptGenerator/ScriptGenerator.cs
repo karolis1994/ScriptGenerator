@@ -16,13 +16,13 @@ namespace ScriptGenerator
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             Text = Text + " " + version.Major + "." + version.Minor;
 
-            //Init first tab default values
+            //Init table creation tab default values
             tableColumnsGrid.Rows.Add(true, "ID", "NUMBER", null, false, "Identificator", false, null, false, null, null, null, null, null);
             tableColumnsGrid.Rows[0].ReadOnly = true;
             tableColumnsGrid.Columns["tableColumnsIsPK"].DefaultCellStyle.BackColor = Color.Gray;
             tableColumnsGrid.Rows[0].DefaultCellStyle.BackColor = Color.Gray;
 
-            //Init second tab default values
+            //Init column creation tab default values
             columnFkNameTextBox.BackColor = Color.Gray;
             columnFkNameTextBox.ReadOnly = true;
             columnIndexNameTextBox.BackColor = Color.Gray;
@@ -33,6 +33,10 @@ namespace ScriptGenerator
             columnRefTableNameTextBox.ReadOnly = true;
             columnRefColumnNameTextBox.BackColor = Color.Gray;
             columnRefColumnNameTextBox.ReadOnly = true;
+
+            //Init sequence creation tab default values
+            seqIncrementByTextBox.Text = "1";
+            seqStartWithTextBox.Text = "1";
         }
 
         #region Generation methods
@@ -308,7 +312,26 @@ namespace ScriptGenerator
                 $"  END IF;" + Environment.NewLine +
                 $"END;";
         }
+
+        //Sequence creation events
+        private void seqBtn_Click(object sender, EventArgs e)
+        {
+            scriptTextBox.Text = $"DECLARE" + Environment.NewLine +
+                $"  ln_exist NUMBER;" + Environment.NewLine +
+                $"BEGIN" + Environment.NewLine +
+                $"  SELECT COUNT(1)" + Environment.NewLine +
+                $"    INTO ln_exist" + Environment.NewLine +
+                $"    FROM ALL_SEQUENCES A" + Environment.NewLine +
+                $"   WHERE A.SEQUENCE_NAME = '{seqSequenceNameTextBox.Text}'" + Environment.NewLine +
+                $"     AND A.SEQUENCE_OWNER = '{seqSchemaTextBox.Text}';" + Environment.NewLine +
+                $"  IF ln_exist = 0 THEN" + Environment.NewLine +
+                $"    EXECUTE IMMEDIATE 'CREATE SEQUENCE {seqSchemaTextBox.Text}.{seqSequenceNameTextBox.Text} START WITH {seqStartWithTextBox.Text} " +
+                $"INCREMENT BY {seqIncrementByTextBox.Text} NOCACHE';" + Environment.NewLine +
+                $"  END IFL" + Environment.NewLine +
+                $"END;";
+        }
         #endregion
+
 
     }
 }

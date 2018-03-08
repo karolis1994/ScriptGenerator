@@ -37,6 +37,7 @@
             this.tableBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tableTabPage = new System.Windows.Forms.TabPage();
+            this.tableAuditBtn = new System.Windows.Forms.Button();
             this.tableTableCommentTextBox = new System.Windows.Forms.TextBox();
             this.tableTableCommentLbl = new System.Windows.Forms.Label();
             this.tableRemoveBtn = new System.Windows.Forms.Button();
@@ -87,20 +88,30 @@
             this.columnsSchemaTextBox = new System.Windows.Forms.TextBox();
             this.columnsTableNameLbl = new System.Windows.Forms.Label();
             this.columnsSchemaLbl = new System.Windows.Forms.Label();
-            this.tableAuditBtn = new System.Windows.Forms.Button();
             this.auditTabPage = new System.Windows.Forms.TabPage();
+            this.auditTriggerNameTextBox = new System.Windows.Forms.TextBox();
+            this.auditTriggerNameLbl = new System.Windows.Forms.Label();
+            this.auditBtn = new System.Windows.Forms.Button();
             this.auditTableNameTextBox = new System.Windows.Forms.TextBox();
             this.auditSchemaTextBox = new System.Windows.Forms.TextBox();
             this.auditTableNameLbl = new System.Windows.Forms.Label();
             this.auditSchemaLbl = new System.Windows.Forms.Label();
-            this.auditBtn = new System.Windows.Forms.Button();
-            this.auditTriggerNameTextBox = new System.Windows.Forms.TextBox();
-            this.auditTriggerNameLbl = new System.Windows.Forms.Label();
+            this.SequenceTabPage = new System.Windows.Forms.TabPage();
+            this.seqSequenceNameTextBox = new System.Windows.Forms.TextBox();
+            this.seqSchemaTextBox = new System.Windows.Forms.TextBox();
+            this.seqSequenceNameLbl = new System.Windows.Forms.Label();
+            this.seqSchemaLbl = new System.Windows.Forms.Label();
+            this.seqIncrementByTextBox = new System.Windows.Forms.TextBox();
+            this.seqStartWithTextBox = new System.Windows.Forms.TextBox();
+            this.seqIncrementByLbl = new System.Windows.Forms.Label();
+            this.seqStartWithLbl = new System.Windows.Forms.Label();
+            this.seqBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
             this.columnTabPage.SuspendLayout();
             this.auditTabPage.SuspendLayout();
+            this.SequenceTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // scriptTextBox
@@ -162,6 +173,7 @@
             this.tabControl1.Controls.Add(this.tableTabPage);
             this.tabControl1.Controls.Add(this.columnTabPage);
             this.tabControl1.Controls.Add(this.auditTabPage);
+            this.tabControl1.Controls.Add(this.SequenceTabPage);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -191,6 +203,16 @@
             this.tableTabPage.TabIndex = 0;
             this.tableTabPage.Text = "Table creation";
             this.tableTabPage.UseVisualStyleBackColor = true;
+            // 
+            // tableAuditBtn
+            // 
+            this.tableAuditBtn.Location = new System.Drawing.Point(257, 55);
+            this.tableAuditBtn.Name = "tableAuditBtn";
+            this.tableAuditBtn.Size = new System.Drawing.Size(107, 23);
+            this.tableAuditBtn.TabIndex = 18;
+            this.tableAuditBtn.Text = "Add Audit Columns";
+            this.tableAuditBtn.UseVisualStyleBackColor = true;
+            this.tableAuditBtn.Click += new System.EventHandler(this.tableAuditBtn_Click);
             // 
             // tableTableCommentTextBox
             // 
@@ -632,16 +654,6 @@
             this.columnsSchemaLbl.TabIndex = 8;
             this.columnsSchemaLbl.Text = "Schema:";
             // 
-            // tableAuditBtn
-            // 
-            this.tableAuditBtn.Location = new System.Drawing.Point(257, 55);
-            this.tableAuditBtn.Name = "tableAuditBtn";
-            this.tableAuditBtn.Size = new System.Drawing.Size(107, 23);
-            this.tableAuditBtn.TabIndex = 18;
-            this.tableAuditBtn.Text = "Add Audit Columns";
-            this.tableAuditBtn.UseVisualStyleBackColor = true;
-            this.tableAuditBtn.Click += new System.EventHandler(this.tableAuditBtn_Click);
-            // 
             // auditTabPage
             // 
             this.auditTabPage.Controls.Add(this.auditTriggerNameTextBox);
@@ -658,6 +670,33 @@
             this.auditTabPage.TabIndex = 2;
             this.auditTabPage.Text = "Audit trigger creation";
             this.auditTabPage.UseVisualStyleBackColor = true;
+            // 
+            // auditTriggerNameTextBox
+            // 
+            this.auditTriggerNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.auditTriggerNameTextBox.Location = new System.Drawing.Point(77, 58);
+            this.auditTriggerNameTextBox.Name = "auditTriggerNameTextBox";
+            this.auditTriggerNameTextBox.Size = new System.Drawing.Size(149, 20);
+            this.auditTriggerNameTextBox.TabIndex = 16;
+            // 
+            // auditTriggerNameLbl
+            // 
+            this.auditTriggerNameLbl.AutoSize = true;
+            this.auditTriggerNameLbl.Location = new System.Drawing.Point(-1, 61);
+            this.auditTriggerNameLbl.Name = "auditTriggerNameLbl";
+            this.auditTriggerNameLbl.Size = new System.Drawing.Size(72, 13);
+            this.auditTriggerNameLbl.TabIndex = 17;
+            this.auditTriggerNameLbl.Text = "Trigger name:";
+            // 
+            // auditBtn
+            // 
+            this.auditBtn.Location = new System.Drawing.Point(77, 84);
+            this.auditBtn.Name = "auditBtn";
+            this.auditBtn.Size = new System.Drawing.Size(75, 23);
+            this.auditBtn.TabIndex = 15;
+            this.auditBtn.Text = "Generate";
+            this.auditBtn.UseVisualStyleBackColor = true;
+            this.auditBtn.Click += new System.EventHandler(this.auditBtn_Click);
             // 
             // auditTableNameTextBox
             // 
@@ -693,32 +732,101 @@
             this.auditSchemaLbl.TabIndex = 12;
             this.auditSchemaLbl.Text = "Schema:";
             // 
-            // auditBtn
+            // SequenceTabPage
             // 
-            this.auditBtn.Location = new System.Drawing.Point(66, 107);
-            this.auditBtn.Name = "auditBtn";
-            this.auditBtn.Size = new System.Drawing.Size(75, 23);
-            this.auditBtn.TabIndex = 15;
-            this.auditBtn.Text = "Generate";
-            this.auditBtn.UseVisualStyleBackColor = true;
-            this.auditBtn.Click += new System.EventHandler(this.auditBtn_Click);
+            this.SequenceTabPage.Controls.Add(this.seqBtn);
+            this.SequenceTabPage.Controls.Add(this.seqIncrementByTextBox);
+            this.SequenceTabPage.Controls.Add(this.seqStartWithTextBox);
+            this.SequenceTabPage.Controls.Add(this.seqIncrementByLbl);
+            this.SequenceTabPage.Controls.Add(this.seqStartWithLbl);
+            this.SequenceTabPage.Controls.Add(this.seqSequenceNameTextBox);
+            this.SequenceTabPage.Controls.Add(this.seqSchemaTextBox);
+            this.SequenceTabPage.Controls.Add(this.seqSequenceNameLbl);
+            this.SequenceTabPage.Controls.Add(this.seqSchemaLbl);
+            this.SequenceTabPage.Location = new System.Drawing.Point(4, 22);
+            this.SequenceTabPage.Name = "SequenceTabPage";
+            this.SequenceTabPage.Size = new System.Drawing.Size(1414, 348);
+            this.SequenceTabPage.TabIndex = 3;
+            this.SequenceTabPage.Text = "Sequence creation";
+            this.SequenceTabPage.UseVisualStyleBackColor = true;
             // 
-            // auditTriggerNameTextBox
+            // seqSequenceNameTextBox
             // 
-            this.auditTriggerNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.auditTriggerNameTextBox.Location = new System.Drawing.Point(77, 58);
-            this.auditTriggerNameTextBox.Name = "auditTriggerNameTextBox";
-            this.auditTriggerNameTextBox.Size = new System.Drawing.Size(149, 20);
-            this.auditTriggerNameTextBox.TabIndex = 16;
+            this.seqSequenceNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.seqSequenceNameTextBox.Location = new System.Drawing.Point(98, 29);
+            this.seqSequenceNameTextBox.Name = "seqSequenceNameTextBox";
+            this.seqSequenceNameTextBox.Size = new System.Drawing.Size(149, 20);
+            this.seqSequenceNameTextBox.TabIndex = 15;
             // 
-            // auditTriggerNameLbl
+            // seqSchemaTextBox
             // 
-            this.auditTriggerNameLbl.AutoSize = true;
-            this.auditTriggerNameLbl.Location = new System.Drawing.Point(-1, 61);
-            this.auditTriggerNameLbl.Name = "auditTriggerNameLbl";
-            this.auditTriggerNameLbl.Size = new System.Drawing.Size(72, 13);
-            this.auditTriggerNameLbl.TabIndex = 17;
-            this.auditTriggerNameLbl.Text = "Trigger name:";
+            this.seqSchemaTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.seqSchemaTextBox.Location = new System.Drawing.Point(98, 3);
+            this.seqSchemaTextBox.Name = "seqSchemaTextBox";
+            this.seqSchemaTextBox.Size = new System.Drawing.Size(149, 20);
+            this.seqSchemaTextBox.TabIndex = 14;
+            // 
+            // seqSequenceNameLbl
+            // 
+            this.seqSequenceNameLbl.AutoSize = true;
+            this.seqSequenceNameLbl.Location = new System.Drawing.Point(4, 32);
+            this.seqSequenceNameLbl.Name = "seqSequenceNameLbl";
+            this.seqSequenceNameLbl.Size = new System.Drawing.Size(88, 13);
+            this.seqSequenceNameLbl.TabIndex = 17;
+            this.seqSequenceNameLbl.Text = "Sequence name:";
+            // 
+            // seqSchemaLbl
+            // 
+            this.seqSchemaLbl.AutoSize = true;
+            this.seqSchemaLbl.Location = new System.Drawing.Point(21, 6);
+            this.seqSchemaLbl.Name = "seqSchemaLbl";
+            this.seqSchemaLbl.Size = new System.Drawing.Size(49, 13);
+            this.seqSchemaLbl.TabIndex = 16;
+            this.seqSchemaLbl.Text = "Schema:";
+            // 
+            // seqIncrementByTextBox
+            // 
+            this.seqIncrementByTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.seqIncrementByTextBox.Location = new System.Drawing.Point(332, 29);
+            this.seqIncrementByTextBox.Name = "seqIncrementByTextBox";
+            this.seqIncrementByTextBox.Size = new System.Drawing.Size(149, 20);
+            this.seqIncrementByTextBox.TabIndex = 19;
+            // 
+            // seqStartWithTextBox
+            // 
+            this.seqStartWithTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.seqStartWithTextBox.Location = new System.Drawing.Point(332, 3);
+            this.seqStartWithTextBox.Name = "seqStartWithTextBox";
+            this.seqStartWithTextBox.Size = new System.Drawing.Size(149, 20);
+            this.seqStartWithTextBox.TabIndex = 18;
+            // 
+            // seqIncrementByLbl
+            // 
+            this.seqIncrementByLbl.AutoSize = true;
+            this.seqIncrementByLbl.Location = new System.Drawing.Point(255, 32);
+            this.seqIncrementByLbl.Name = "seqIncrementByLbl";
+            this.seqIncrementByLbl.Size = new System.Drawing.Size(71, 13);
+            this.seqIncrementByLbl.TabIndex = 21;
+            this.seqIncrementByLbl.Text = "Increment by:";
+            // 
+            // seqStartWithLbl
+            // 
+            this.seqStartWithLbl.AutoSize = true;
+            this.seqStartWithLbl.Location = new System.Drawing.Point(272, 6);
+            this.seqStartWithLbl.Name = "seqStartWithLbl";
+            this.seqStartWithLbl.Size = new System.Drawing.Size(54, 13);
+            this.seqStartWithLbl.TabIndex = 20;
+            this.seqStartWithLbl.Text = "Start with:";
+            // 
+            // seqBtn
+            // 
+            this.seqBtn.Location = new System.Drawing.Point(98, 55);
+            this.seqBtn.Name = "seqBtn";
+            this.seqBtn.Size = new System.Drawing.Size(75, 23);
+            this.seqBtn.TabIndex = 22;
+            this.seqBtn.Text = "Generate";
+            this.seqBtn.UseVisualStyleBackColor = true;
+            this.seqBtn.Click += new System.EventHandler(this.seqBtn_Click);
             // 
             // ScriptGenerator
             // 
@@ -737,6 +845,8 @@
             this.columnTabPage.PerformLayout();
             this.auditTabPage.ResumeLayout(false);
             this.auditTabPage.PerformLayout();
+            this.SequenceTabPage.ResumeLayout(false);
+            this.SequenceTabPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -812,6 +922,16 @@
         private System.Windows.Forms.Label auditSchemaLbl;
         private System.Windows.Forms.TextBox auditTriggerNameTextBox;
         private System.Windows.Forms.Label auditTriggerNameLbl;
+        private System.Windows.Forms.TabPage SequenceTabPage;
+        private System.Windows.Forms.TextBox seqIncrementByTextBox;
+        private System.Windows.Forms.TextBox seqStartWithTextBox;
+        private System.Windows.Forms.Label seqIncrementByLbl;
+        private System.Windows.Forms.Label seqStartWithLbl;
+        private System.Windows.Forms.TextBox seqSequenceNameTextBox;
+        private System.Windows.Forms.TextBox seqSchemaTextBox;
+        private System.Windows.Forms.Label seqSequenceNameLbl;
+        private System.Windows.Forms.Label seqSchemaLbl;
+        private System.Windows.Forms.Button seqBtn;
     }
 }
 
