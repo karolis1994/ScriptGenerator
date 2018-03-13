@@ -42,23 +42,23 @@ namespace ScriptGenerator
         #region Generation methods
         private String GenerateForeignKeyScript(String schema, String tableName, String columnName, String fkName, String refSchema, String refTableName, String refColumnName, String indentation = "")
         {
-            return $"EXECUTE IMMEDIATE 'ALTER TABLE {schema}.{tableName} ADD CONSTRAINT {fkName} FOREIGN KEY ({columnName}) REFERENCES {refSchema}.{refTableName}({refColumnName})';";
+            return $"{indentation}EXECUTE IMMEDIATE 'ALTER TABLE {schema}.{tableName} ADD CONSTRAINT {fkName} FOREIGN KEY ({columnName}) REFERENCES {refSchema}.{refTableName}({refColumnName})';";
         }
         private String GenerateColumnDefinition(String columnName, String columnType, String defaultValue, Boolean isNullable, String indentation = "")
         {
-            return $"{columnName} {columnType}{(String.IsNullOrEmpty(defaultValue) ? "" : " DEFAULT " + GetDefaultValue(defaultValue))}{(isNullable ? "" : " NOT NULL")}";
+            return $"{indentation}{columnName} {columnType}{(String.IsNullOrEmpty(defaultValue) ? "" : " DEFAULT " + GetDefaultValue(defaultValue))}{(isNullable ? "" : " NOT NULL")}";
         }
         private String GenerateColumnCommentScript(String schema, String tableName, String columnName, String comment, String indentation = "")
         {
-            return $"EXECUTE IMMEDIATE 'COMMENT ON COLUMN {schema}.{tableName}.\"{columnName}\" IS ''{comment}''';";
+            return $"{indentation}EXECUTE IMMEDIATE 'COMMENT ON COLUMN {schema}.{tableName}.\"{columnName}\" IS ''{comment}''';";
         }
         private String GenerateIndexScript(String schema, String tableName, String columnName, String indexName, String indentation = "")
         {
-            return $"EXECUTE IMMEDIATE 'CREATE INDEX {indexName} ON {schema}.{tableName}({columnName}) TABLESPACE INDX';";
+            return $"{indentation}EXECUTE IMMEDIATE 'CREATE INDEX {indexName} ON {schema}.{tableName}({columnName}) TABLESPACE INDX';";
         }
         private String GenerateTableCommentScript(String schema, String tableName, String comment, String indentation = "")
         {
-            return $"EXECUTE IMMEDIATE 'COMMENT ON TABLE {schema}.{tableName} IS ''{comment}''';";
+            return $"{indentation}EXECUTE IMMEDIATE 'COMMENT ON TABLE {schema}.{tableName} IS ''{comment}''';";
         }
         private Boolean GetBoolCellValue(DataGridViewRow row, String cell)
         {
@@ -131,6 +131,9 @@ namespace ScriptGenerator
                 String.Empty;
             String foreignKey = columnIsFkCheckBox.Checked ? GenerateForeignKeyScript(columnsSchemaTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text, columnFkNameTextBox.Text,
                 columnRefSchemaNameTextBox.Text, columnRefTableNameTextBox.Text, columnRefColumnNameTextBox.Text, "      ") + Environment.NewLine : String.Empty;
+            String fkIndex = String.IsNullOrWhiteSpace(columnIndexNameTextBox.Text) ?
+                String.Empty :
+                GenerateIndexScript(columnsSchemaTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text, columnIndexNameTextBox.Text, "      ") + Environment.NewLine;
             scriptTextBox.Text = $"DECLARE" + Environment.NewLine +
                 $"  ln_exist NUMBER;" + Environment.NewLine +
                 $"BEGIN" + Environment.NewLine +
@@ -327,7 +330,7 @@ namespace ScriptGenerator
                 $"  IF ln_exist = 0 THEN" + Environment.NewLine +
                 $"    EXECUTE IMMEDIATE 'CREATE SEQUENCE {seqSchemaTextBox.Text}.{seqSequenceNameTextBox.Text} START WITH {seqStartWithTextBox.Text} " +
                 $"INCREMENT BY {seqIncrementByTextBox.Text} NOCACHE';" + Environment.NewLine +
-                $"  END IFL" + Environment.NewLine +
+                $"  END IF;" + Environment.NewLine +
                 $"END;";
         }
         #endregion
