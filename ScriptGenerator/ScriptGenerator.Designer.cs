@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.scriptTextBox = new System.Windows.Forms.TextBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableSchemaTextBox = new System.Windows.Forms.TextBox();
             this.tableTableNameTextBox = new System.Windows.Forms.TextBox();
             this.tableSchemaLbl = new System.Windows.Forms.Label();
@@ -97,21 +96,29 @@
             this.auditTableNameLbl = new System.Windows.Forms.Label();
             this.auditSchemaLbl = new System.Windows.Forms.Label();
             this.SequenceTabPage = new System.Windows.Forms.TabPage();
-            this.seqSequenceNameTextBox = new System.Windows.Forms.TextBox();
-            this.seqSchemaTextBox = new System.Windows.Forms.TextBox();
-            this.seqSequenceNameLbl = new System.Windows.Forms.Label();
-            this.seqSchemaLbl = new System.Windows.Forms.Label();
+            this.seqBtn = new System.Windows.Forms.Button();
             this.seqIncrementByTextBox = new System.Windows.Forms.TextBox();
             this.seqStartWithTextBox = new System.Windows.Forms.TextBox();
             this.seqIncrementByLbl = new System.Windows.Forms.Label();
             this.seqStartWithLbl = new System.Windows.Forms.Label();
-            this.seqBtn = new System.Windows.Forms.Button();
+            this.seqSequenceNameTextBox = new System.Windows.Forms.TextBox();
+            this.seqSchemaTextBox = new System.Windows.Forms.TextBox();
+            this.seqSequenceNameLbl = new System.Windows.Forms.Label();
+            this.seqSchemaLbl = new System.Windows.Forms.Label();
+            this.nonVisualSettingTabPage = new System.Windows.Forms.TabPage();
+            this.nonVisualCodeTextBox = new System.Windows.Forms.TextBox();
+            this.nonVisualCodeLbl = new System.Windows.Forms.Label();
+            this.nonVisualClientsGrid = new System.Windows.Forms.DataGridView();
+            this.nonVisualClientsLbl = new System.Windows.Forms.Label();
+            this.nonVisualBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
             this.columnTabPage.SuspendLayout();
             this.auditTabPage.SuspendLayout();
             this.SequenceTabPage.SuspendLayout();
+            this.nonVisualSettingTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nonVisualClientsGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // scriptTextBox
@@ -174,6 +181,7 @@
             this.tabControl1.Controls.Add(this.columnTabPage);
             this.tabControl1.Controls.Add(this.auditTabPage);
             this.tabControl1.Controls.Add(this.SequenceTabPage);
+            this.tabControl1.Controls.Add(this.nonVisualSettingTabPage);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -750,39 +758,15 @@
             this.SequenceTabPage.Text = "Sequence creation";
             this.SequenceTabPage.UseVisualStyleBackColor = true;
             // 
-            // seqSequenceNameTextBox
+            // seqBtn
             // 
-            this.seqSequenceNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.seqSequenceNameTextBox.Location = new System.Drawing.Point(98, 29);
-            this.seqSequenceNameTextBox.Name = "seqSequenceNameTextBox";
-            this.seqSequenceNameTextBox.Size = new System.Drawing.Size(149, 20);
-            this.seqSequenceNameTextBox.TabIndex = 15;
-            // 
-            // seqSchemaTextBox
-            // 
-            this.seqSchemaTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.seqSchemaTextBox.Location = new System.Drawing.Point(98, 3);
-            this.seqSchemaTextBox.Name = "seqSchemaTextBox";
-            this.seqSchemaTextBox.Size = new System.Drawing.Size(149, 20);
-            this.seqSchemaTextBox.TabIndex = 14;
-            // 
-            // seqSequenceNameLbl
-            // 
-            this.seqSequenceNameLbl.AutoSize = true;
-            this.seqSequenceNameLbl.Location = new System.Drawing.Point(4, 32);
-            this.seqSequenceNameLbl.Name = "seqSequenceNameLbl";
-            this.seqSequenceNameLbl.Size = new System.Drawing.Size(88, 13);
-            this.seqSequenceNameLbl.TabIndex = 17;
-            this.seqSequenceNameLbl.Text = "Sequence name:";
-            // 
-            // seqSchemaLbl
-            // 
-            this.seqSchemaLbl.AutoSize = true;
-            this.seqSchemaLbl.Location = new System.Drawing.Point(21, 6);
-            this.seqSchemaLbl.Name = "seqSchemaLbl";
-            this.seqSchemaLbl.Size = new System.Drawing.Size(49, 13);
-            this.seqSchemaLbl.TabIndex = 16;
-            this.seqSchemaLbl.Text = "Schema:";
+            this.seqBtn.Location = new System.Drawing.Point(98, 55);
+            this.seqBtn.Name = "seqBtn";
+            this.seqBtn.Size = new System.Drawing.Size(75, 23);
+            this.seqBtn.TabIndex = 22;
+            this.seqBtn.Text = "Generate";
+            this.seqBtn.UseVisualStyleBackColor = true;
+            this.seqBtn.Click += new System.EventHandler(this.seqBtn_Click);
             // 
             // seqIncrementByTextBox
             // 
@@ -818,15 +802,100 @@
             this.seqStartWithLbl.TabIndex = 20;
             this.seqStartWithLbl.Text = "Start with:";
             // 
-            // seqBtn
+            // seqSequenceNameTextBox
             // 
-            this.seqBtn.Location = new System.Drawing.Point(98, 55);
-            this.seqBtn.Name = "seqBtn";
-            this.seqBtn.Size = new System.Drawing.Size(75, 23);
-            this.seqBtn.TabIndex = 22;
-            this.seqBtn.Text = "Generate";
-            this.seqBtn.UseVisualStyleBackColor = true;
-            this.seqBtn.Click += new System.EventHandler(this.seqBtn_Click);
+            this.seqSequenceNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.seqSequenceNameTextBox.Location = new System.Drawing.Point(98, 29);
+            this.seqSequenceNameTextBox.Name = "seqSequenceNameTextBox";
+            this.seqSequenceNameTextBox.Size = new System.Drawing.Size(149, 20);
+            this.seqSequenceNameTextBox.TabIndex = 15;
+            // 
+            // seqSchemaTextBox
+            // 
+            this.seqSchemaTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.seqSchemaTextBox.Location = new System.Drawing.Point(98, 3);
+            this.seqSchemaTextBox.Name = "seqSchemaTextBox";
+            this.seqSchemaTextBox.Size = new System.Drawing.Size(149, 20);
+            this.seqSchemaTextBox.TabIndex = 14;
+            // 
+            // seqSequenceNameLbl
+            // 
+            this.seqSequenceNameLbl.AutoSize = true;
+            this.seqSequenceNameLbl.Location = new System.Drawing.Point(4, 32);
+            this.seqSequenceNameLbl.Name = "seqSequenceNameLbl";
+            this.seqSequenceNameLbl.Size = new System.Drawing.Size(88, 13);
+            this.seqSequenceNameLbl.TabIndex = 17;
+            this.seqSequenceNameLbl.Text = "Sequence name:";
+            // 
+            // seqSchemaLbl
+            // 
+            this.seqSchemaLbl.AutoSize = true;
+            this.seqSchemaLbl.Location = new System.Drawing.Point(21, 6);
+            this.seqSchemaLbl.Name = "seqSchemaLbl";
+            this.seqSchemaLbl.Size = new System.Drawing.Size(49, 13);
+            this.seqSchemaLbl.TabIndex = 16;
+            this.seqSchemaLbl.Text = "Schema:";
+            // 
+            // nonVisualSettingTabPage
+            // 
+            this.nonVisualSettingTabPage.Controls.Add(this.nonVisualClientsGrid);
+            this.nonVisualSettingTabPage.Controls.Add(this.nonVisualClientsLbl);
+            this.nonVisualSettingTabPage.Controls.Add(this.nonVisualBtn);
+            this.nonVisualSettingTabPage.Controls.Add(this.nonVisualCodeTextBox);
+            this.nonVisualSettingTabPage.Controls.Add(this.nonVisualCodeLbl);
+            this.nonVisualSettingTabPage.Location = new System.Drawing.Point(4, 22);
+            this.nonVisualSettingTabPage.Name = "nonVisualSettingTabPage";
+            this.nonVisualSettingTabPage.Size = new System.Drawing.Size(1414, 348);
+            this.nonVisualSettingTabPage.TabIndex = 4;
+            this.nonVisualSettingTabPage.Text = "Non visual setting creation";
+            this.nonVisualSettingTabPage.UseVisualStyleBackColor = true;
+            // 
+            // nonVisualCodeTextBox
+            // 
+            this.nonVisualCodeTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.nonVisualCodeTextBox.Location = new System.Drawing.Point(51, 3);
+            this.nonVisualCodeTextBox.MaxLength = 30;
+            this.nonVisualCodeTextBox.Name = "nonVisualCodeTextBox";
+            this.nonVisualCodeTextBox.Size = new System.Drawing.Size(149, 20);
+            this.nonVisualCodeTextBox.TabIndex = 17;
+            // 
+            // nonVisualCodeLbl
+            // 
+            this.nonVisualCodeLbl.AutoSize = true;
+            this.nonVisualCodeLbl.Location = new System.Drawing.Point(10, 6);
+            this.nonVisualCodeLbl.Name = "nonVisualCodeLbl";
+            this.nonVisualCodeLbl.Size = new System.Drawing.Size(35, 13);
+            this.nonVisualCodeLbl.TabIndex = 18;
+            this.nonVisualCodeLbl.Text = "Code:";
+            // 
+            // nonVisualClientsGrid
+            // 
+            this.nonVisualClientsGrid.AllowUserToAddRows = false;
+            this.nonVisualClientsGrid.AllowUserToDeleteRows = false;
+            this.nonVisualClientsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.nonVisualClientsGrid.Location = new System.Drawing.Point(13, 45);
+            this.nonVisualClientsGrid.Name = "nonVisualClientsGrid";
+            this.nonVisualClientsGrid.Size = new System.Drawing.Size(1401, 220);
+            this.nonVisualClientsGrid.TabIndex = 21;
+            // 
+            // nonVisualClientsLbl
+            // 
+            this.nonVisualClientsLbl.AutoSize = true;
+            this.nonVisualClientsLbl.Location = new System.Drawing.Point(10, 29);
+            this.nonVisualClientsLbl.Name = "nonVisualClientsLbl";
+            this.nonVisualClientsLbl.Size = new System.Drawing.Size(70, 13);
+            this.nonVisualClientsLbl.TabIndex = 20;
+            this.nonVisualClientsLbl.Text = "Client values:";
+            // 
+            // nonVisualBtn
+            // 
+            this.nonVisualBtn.Location = new System.Drawing.Point(13, 271);
+            this.nonVisualBtn.Name = "nonVisualBtn";
+            this.nonVisualBtn.Size = new System.Drawing.Size(75, 23);
+            this.nonVisualBtn.TabIndex = 19;
+            this.nonVisualBtn.Text = "Generate";
+            this.nonVisualBtn.UseVisualStyleBackColor = true;
+            this.nonVisualBtn.Click += new System.EventHandler(this.nonVisualBtn_Click);
             // 
             // ScriptGenerator
             // 
@@ -847,6 +916,9 @@
             this.auditTabPage.PerformLayout();
             this.SequenceTabPage.ResumeLayout(false);
             this.SequenceTabPage.PerformLayout();
+            this.nonVisualSettingTabPage.ResumeLayout(false);
+            this.nonVisualSettingTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nonVisualClientsGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -855,7 +927,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox scriptTextBox;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TextBox tableSchemaTextBox;
         private System.Windows.Forms.TextBox tableTableNameTextBox;
         private System.Windows.Forms.Label tableSchemaLbl;
@@ -932,6 +1003,12 @@
         private System.Windows.Forms.Label seqSequenceNameLbl;
         private System.Windows.Forms.Label seqSchemaLbl;
         private System.Windows.Forms.Button seqBtn;
+        private System.Windows.Forms.TabPage nonVisualSettingTabPage;
+        private System.Windows.Forms.DataGridView nonVisualClientsGrid;
+        private System.Windows.Forms.Label nonVisualClientsLbl;
+        private System.Windows.Forms.Button nonVisualBtn;
+        private System.Windows.Forms.TextBox nonVisualCodeTextBox;
+        private System.Windows.Forms.Label nonVisualCodeLbl;
     }
 }
 

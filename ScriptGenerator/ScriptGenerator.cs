@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -37,6 +38,14 @@ namespace ScriptGenerator
             //Init sequence creation tab default values
             seqIncrementByTextBox.Text = "1";
             seqStartWithTextBox.Text = "1";
+
+            //Init non visual settings creation tab default values
+            List<String> clients = ConfigurationManager.AppSettings["clients"].Split(',').ToList();
+            foreach (String client in clients)
+            {
+                nonVisualClientsGrid.Columns.Add(client, client);
+            }
+            nonVisualClientsGrid.Rows.Add();
         }
 
         #region Generation methods
@@ -59,6 +68,10 @@ namespace ScriptGenerator
         private String GenerateTableCommentScript(String schema, String tableName, String comment, String indentation = "")
         {
             return $"{indentation}EXECUTE IMMEDIATE 'COMMENT ON TABLE {schema}.{tableName} IS ''{comment}''';";
+        }
+        private String GenerateNonVisualSettingScript(String code, String value)
+        {
+            return $"INSERT INTO SETTINGS.SYST_ATTRIBUTES_T (CODE, VALUE) VALUES ('{code}', '{value}');";
         }
         private Boolean GetBoolCellValue(DataGridViewRow row, String cell)
         {
@@ -95,7 +108,7 @@ namespace ScriptGenerator
 
         #region Events
         //Column creation tab events
-        private void columnIsFkCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void columnIsFkCheckBox_CheckedChanged(Object sender, EventArgs e)
         {
             if (!columnIsFkCheckBox.Checked)
             {
@@ -154,7 +167,7 @@ namespace ScriptGenerator
         }
 
         //Table creation tab events
-        private void tableColumnsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void tableColumnsGrid_CellContentClick(Object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 6 || e.ColumnIndex == 8)
                 tableColumnsGrid.CommitEdit(DataGridViewDataErrorContexts.Commit);
@@ -203,7 +216,7 @@ namespace ScriptGenerator
                 }
             }
         }
-        private void tableRemoveBtn_Click(object sender, EventArgs e)
+        private void tableRemoveBtn_Click(Object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in tableColumnsGrid.SelectedRows)
             {
@@ -212,14 +225,14 @@ namespace ScriptGenerator
             }
                 
         }
-        private void tableAuditBtn_Click(object sender, EventArgs e)
+        private void tableAuditBtn_Click(Object sender, EventArgs e)
         {
             AddUneditableRow("RECORD_DATE", "DATE", "Date of record creation");
             AddUneditableRow("EDIT_DATE", "DATE", "Date of record edit");
             AddUneditableRow("RECORD_USER", "VARCHAR2(250)", "User name of record creator");
             AddUneditableRow("EDIT_USER", "VARCHAR2(250)", "User name of last record editor");
         }
-        private void tableAddBtn_Click(object sender, EventArgs e)
+        private void tableAddBtn_Click(Object sender, EventArgs e)
         {
             Int32 index = tableColumnsGrid.Rows.Add(false, null, null, null, true, null, false, null, false, null, null, null, null, null);
             tableColumnsGrid.Rows[index].Cells["tableColumnsUniqueConstraintName"].ReadOnly = true;
@@ -290,7 +303,7 @@ namespace ScriptGenerator
         }
 
         //Audit trigger creation events
-        private void auditBtn_Click(object sender, EventArgs e)
+        private void auditBtn_Click(Object sender, EventArgs e)
         {
             scriptTextBox.Text = $"CREATE OR REPLACE TRIGGER {auditSchemaTextBox.Text}.{auditTableNameTextBox.Text}.{auditTriggerNameTextBox.Text}" + Environment.NewLine +
                 $"  BEFORE INSERT OR UPDATE ON {auditSchemaTextBox.Text}.{auditTableNameTextBox.Text}" + Environment.NewLine +
@@ -317,7 +330,7 @@ namespace ScriptGenerator
         }
 
         //Sequence creation events
-        private void seqBtn_Click(object sender, EventArgs e)
+        private void seqBtn_Click(Object sender, EventArgs e)
         {
             scriptTextBox.Text = $"DECLARE" + Environment.NewLine +
                 $"  ln_exist NUMBER;" + Environment.NewLine +
@@ -333,8 +346,39 @@ namespace ScriptGenerator
                 $"  END IF;" + Environment.NewLine +
                 $"END;";
         }
+
+        //Non visual setting creation events
+        private void nonVisualBtn_Click(Object sender, EventArgs e)
+        {
+            String insertScript = String.Empty;
+            Int32 index = 0;
+
+            foreach (DataGridViewColumn column in nonVisualClientsGrid.Columns)
+            {
+                if (index == 0)
+                    insertScript += $"    IF ls_client = '{column.HeaderText}' THEN" + Environment.NewLine;
+                else
+                    insertScript += $"    ELSIF ls_client = '{column.HeaderText}' THEN" + Environment.NewLine;
+
+                insertScript += $"      {GenerateNonVisualSettingScript(nonVisualCodeTextBox.Text, GetStrCellValue(nonVisualClientsGrid.Rows[0], column.HeaderText))}" + Environment.NewLine;
+
+                index++;
+            }
+            insertScript += $"    END IF;" + Environment.NewLine;
+
+            scriptTextBox.Text = $"DECLARE" + Environment.NewLine +
+                $"  ln_exist NUMBER;" + Environment.NewLine +
+                $"  ls_client VARCHAR2(250);" + Environment.NewLine +
+                $"BEGIN" + Environment.NewLine +
+                $"  SELECT COUNT(1) INTO ln_exist FROM SETTINGS.SYST_ATTRIBUTES_T WHERE CODE = '{nonVisualCodeTextBox.Text}';" + Environment.NewLine +
+                $"  ls_client := SETTINGS.GET_SYST_ATTR('APT_CLIENT');" + Environment.NewLine +
+                $"  IF ln_exist = 0 THEN" + Environment.NewLine +
+                $"{insertScript}" +
+                $"  END IF;" + Environment.NewLine +
+                $"END;" + Environment.NewLine +
+                $"/";
+        }
+
         #endregion
-
-
     }
 }
