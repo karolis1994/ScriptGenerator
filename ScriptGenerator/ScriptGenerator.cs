@@ -45,8 +45,11 @@ namespace ScriptGenerator
             {
                 nonVisualClientsGrid.Columns.Add(client, client);
             }
+            nonVisualClientsGrid.Columns.Add(Else, Else);
             nonVisualClientsGrid.Rows.Add();
         }
+
+        private static String Else = "Else";
 
         #region Generation methods
         private String GenerateForeignKeyScript(String schema, String tableName, String columnName, String fkName, String refSchema, String refTableName, String refColumnName, String indentation = "")
@@ -355,14 +358,24 @@ namespace ScriptGenerator
 
             foreach (DataGridViewColumn column in nonVisualClientsGrid.Columns)
             {
-                if (index == 0)
-                    insertScript += $"    IF ls_client = '{column.HeaderText}' THEN" + Environment.NewLine;
-                else
-                    insertScript += $"    ELSIF ls_client = '{column.HeaderText}' THEN" + Environment.NewLine;
+                if (!String.IsNullOrWhiteSpace(GetStrCellValue(nonVisualClientsGrid.Rows[0], column.HeaderText)))
+                {
+                    if (column.HeaderText != Else)
+                    {
+                        if (index == 0)
+                            insertScript += $"    IF ls_client = '{column.HeaderText}' THEN" + Environment.NewLine;
+                        else
+                            insertScript += $"    ELSIF ls_client = '{column.HeaderText}' THEN" + Environment.NewLine;
+                    }
+                    else
+                    {
+                        insertScript += $"    ELSE" + Environment.NewLine;
+                    }
 
-                insertScript += $"      {GenerateNonVisualSettingScript(nonVisualCodeTextBox.Text, GetStrCellValue(nonVisualClientsGrid.Rows[0], column.HeaderText))}" + Environment.NewLine;
+                    insertScript += $"      {GenerateNonVisualSettingScript(nonVisualCodeTextBox.Text, GetStrCellValue(nonVisualClientsGrid.Rows[0], column.HeaderText))}" + Environment.NewLine;
 
-                index++;
+                    index++;
+                }
             }
             insertScript += $"    END IF;" + Environment.NewLine;
 
