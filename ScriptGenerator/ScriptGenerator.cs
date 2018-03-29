@@ -89,7 +89,7 @@ namespace ScriptGenerator
             Int64 intOutput;
             DateTime dateOutput;
 
-            if (Int64.TryParse(input, out intOutput))
+            if (Int64.TryParse(input, out intOutput) || input.ToUpper() == "SYSDATE")
             {
                 return input;
             }
@@ -393,5 +393,10 @@ namespace ScriptGenerator
         }
 
         #endregion
+
+        private void ScriptGenerator_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
