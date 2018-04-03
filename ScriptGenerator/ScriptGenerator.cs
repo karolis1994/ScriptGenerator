@@ -259,6 +259,9 @@ namespace ScriptGenerator
             List<String> uniqueConstraintScripts = new List<String>();
             List<String> fkScripts = new List<String>();
 
+            if (!String.IsNullOrEmpty(tableTableCommentTextBox.Text))
+                commentScripts.Add(GenerateTableCommentScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, tableTableCommentTextBox.Text));
+
             //Loop through each row and form column, comment, foreign key script values.
             foreach (DataGridViewRow row in tableColumnsGrid.Rows)
             {
@@ -270,9 +273,6 @@ namespace ScriptGenerator
 
                 if (GetBoolCellValue(row, "tableColumnsIsUnique"))
                     uniqueConstraintScripts.Add($"CONSTRAINT {GetStrCellValue(row, "tableColumnsUniqueConstraintName")} UNIQUE ({GetStrCellValue(row, "tableColumnsName")})");
-
-                if (!String.IsNullOrEmpty(tableTableCommentTextBox.Text))
-                    commentScripts.Add(GenerateTableCommentScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, tableTableCommentTextBox.Text));
 
                 if (!String.IsNullOrEmpty(GetStrCellValue(row, "tableColumnsComment")))
                     commentScripts.Add(GenerateColumnCommentScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsComment")));
