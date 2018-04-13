@@ -111,6 +111,8 @@
             this.nonVisualBtn = new System.Windows.Forms.Button();
             this.nonVisualCodeTextBox = new System.Windows.Forms.TextBox();
             this.nonVisualCodeLbl = new System.Windows.Forms.Label();
+            this.tableTablespaceTextBox = new System.Windows.Forms.TextBox();
+            this.tableTablespaceLbl = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
@@ -192,6 +194,8 @@
             // 
             // tableTabPage
             // 
+            this.tableTabPage.Controls.Add(this.tableTablespaceTextBox);
+            this.tableTabPage.Controls.Add(this.tableTablespaceLbl);
             this.tableTabPage.Controls.Add(this.tableAuditBtn);
             this.tableTabPage.Controls.Add(this.tableTableCommentTextBox);
             this.tableTabPage.Controls.Add(this.tableTableCommentLbl);
@@ -919,6 +923,24 @@
             this.nonVisualCodeLbl.TabIndex = 18;
             this.nonVisualCodeLbl.Text = "Code:";
             // 
+            // tableTablespaceTextBox
+            // 
+            this.tableTablespaceTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tableTablespaceTextBox.Location = new System.Drawing.Point(330, 3);
+            this.tableTablespaceTextBox.MaxLength = 30;
+            this.tableTablespaceTextBox.Name = "tableTablespaceTextBox";
+            this.tableTablespaceTextBox.Size = new System.Drawing.Size(149, 20);
+            this.tableTablespaceTextBox.TabIndex = 19;
+            // 
+            // tableTablespaceLbl
+            // 
+            this.tableTablespaceLbl.AutoSize = true;
+            this.tableTablespaceLbl.Location = new System.Drawing.Point(258, 7);
+            this.tableTablespaceLbl.Name = "tableTablespaceLbl";
+            this.tableTablespaceLbl.Size = new System.Drawing.Size(66, 13);
+            this.tableTablespaceLbl.TabIndex = 20;
+            this.tableTablespaceLbl.Text = "Tablespace:";
+            // 
             // ScriptGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1032,6 +1054,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedSchema;
         private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedColumn;
+        private System.Windows.Forms.TextBox tableTablespaceTextBox;
+        private System.Windows.Forms.Label tableTablespaceLbl;
     }
 }
 

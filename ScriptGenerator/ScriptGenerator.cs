@@ -64,9 +64,9 @@ namespace ScriptGenerator
         {
             return $"{indentation}EXECUTE IMMEDIATE 'COMMENT ON COLUMN {schema}.{tableName}.\"{columnName}\" IS ''{comment}''';";
         }
-        private String GenerateIndexScript(String schema, String tableName, String columnName, String indexName, String indentation = "")
+        private String GenerateIndexScript(String schema, String tableName, String columnName, String indexName, String indentation = "", String tableSpace = null)
         {
-            return $"{indentation}EXECUTE IMMEDIATE 'CREATE INDEX {indexName} ON {schema}.{tableName}({columnName}) TABLESPACE INDX';";
+            return $"{indentation}EXECUTE IMMEDIATE 'CREATE INDEX {indexName} ON {schema}.{tableName}({columnName}) TABLESPACE {(String.IsNullOrWhiteSpace(tableSpace) ? "INDX" : tableSpace)}';";
         }
         private String GenerateTableCommentScript(String schema, String tableName, String comment, String indentation = "")
         {
@@ -280,8 +280,8 @@ namespace ScriptGenerator
                 if (GetBoolCellValue(row, "tableColumnsIsForeignKey"))
                 {
                     fkScripts.Add(GenerateForeignKeyScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsFKName"),
-                        GetStrCellValue(row, "tableColumnsReferencedSchema"), GetStrCellValue(row, "tableColumnsReferencedColumn"), GetStrCellValue(row, "tableColumnsReferencedTable")));
-                    fkScripts.Add(GenerateIndexScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsIndexName")));
+                        GetStrCellValue(row, "tableColumnsReferencedSchema"), GetStrCellValue(row, "tableColumnsReferencedTable"), GetStrCellValue(row, "tableColumnsReferencedColumn")));
+                    fkScripts.Add(GenerateIndexScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsIndexName"), tableSpace: tableTablespaceTextBox.Text));
                 }
             }
 
@@ -297,8 +297,8 @@ namespace ScriptGenerator
                 $"      EXECUTE IMMEDIATE 'CREATE TABLE {tableSchemaTextBox.Text}.{tableTableNameTextBox.Text}" + Environment.NewLine +
                 $"      (" + Environment.NewLine +
                 $"          {String.Join("," + Environment.NewLine + "          ", columns.Concat(uniqueConstraintScripts))}" + Environment.NewLine +
-                $"      )';" + Environment.NewLine +
-                $"      EXECUTE IMMEDIATE 'ALTER TABLE {tableSchemaTextBox.Text}.{tableTableNameTextBox.Text} ADD CONSTRAINT {tablePKTextBox.Text} PRIMARY KEY (ID) USING INDEX';" + Environment.NewLine +
+                $"      ){(String.IsNullOrWhiteSpace(tableTablespaceTextBox.Text) ? "" : " TABLESPACE " + tableTablespaceTextBox.Text)}';" + Environment.NewLine +
+                $"      EXECUTE IMMEDIATE 'ALTER TABLE {tableSchemaTextBox.Text}.{tableTableNameTextBox.Text} ADD CONSTRAINT {tablePKTextBox.Text} PRIMARY KEY (ID) USING INDEX{(String.IsNullOrWhiteSpace(tableTablespaceTextBox.Text) ? "" : " TABLESPACE " + tableTablespaceTextBox.Text)}';" + Environment.NewLine +
                 $"      {String.Join(Environment.NewLine + "      ", commentScripts.Concat(fkScripts))}" + Environment.NewLine +
                 $"  END IF;" + Environment.NewLine +
                 $"END;" + Environment.NewLine +
