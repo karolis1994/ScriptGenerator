@@ -161,7 +161,7 @@ namespace ScriptGenerator
                 $"     AND ATC.COLUMN_NAME = '{columnColumnTextBox.Text}';" + Environment.NewLine +
                 $"  IF ln_exist = 0 THEN" + Environment.NewLine +
                 $"      EXECUTE IMMEDIATE 'ALTER TABLE {columnsSchemaTextBox.Text}.{columnsTableNameTextBox.Text} ADD (" +
-                $"{GenerateColumnDefinition(columnColumnTextBox.Text, columnTypeTextBox.Text, columnDefaultTextBox.Text, columnIsNullableCheckBox.Checked)});" + Environment.NewLine +
+                $"{GenerateColumnDefinition(columnColumnTextBox.Text, columnTypeTextBox.Text, columnDefaultTextBox.Text, columnIsNullableCheckBox.Checked)})';" + Environment.NewLine +
                 comment +
                 foreignKey +
                 $"  END IF;" + Environment.NewLine +
