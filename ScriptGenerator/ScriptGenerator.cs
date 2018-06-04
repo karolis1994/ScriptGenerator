@@ -120,7 +120,7 @@ namespace ScriptGenerator
             tableColumnsGrid.Rows[index].ReadOnly = true;
             tableColumnsGrid.Rows[index].DefaultCellStyle.BackColor = Color.Gray;
         }
-        private String GenerateUpdateStatementForNonVisualSetting(String nonVisualSetting, Int32 value)
+        private String GenerateUpdateStatementForNonVisualSetting(String nonVisualSetting, String value)
         {
             return $"UPDATE SETTINGS.SYST_ATTRIBUTES_T SET VALUE = '{value}' WHERE CODE = '{nonVisualSetting}';{Environment.NewLine}";
         }
@@ -425,10 +425,11 @@ namespace ScriptGenerator
             if (nonVisLoadCheckedListBox.CheckedItems.Count > 0 && !String.IsNullOrWhiteSpace(nonVisualLoadPathLabel.Text))
             {
                 StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting("APT_CLIENT", nonVisLoadCheckedListBox.CheckedItems[0].ToString()));
 
                 foreach (KeyValuePair<String, Int32> entry in wordWorker.GetClientSettings(nonVisLoadCheckedListBox.CheckedItems[0].ToString(), nonVisualLoadPathLabel.Text))
                 {
-                    stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting(entry.Key, entry.Value));
+                    stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting(entry.Key, entry.Value.ToString()));
                 }
 
                 scriptTextBox.Text = stringBuilder.ToString();
