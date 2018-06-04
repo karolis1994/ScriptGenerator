@@ -966,7 +966,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nonVisualClientsGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

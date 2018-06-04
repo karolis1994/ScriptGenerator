@@ -14,6 +14,8 @@ namespace ScriptGenerator
         {
             InitializeComponent();
 
+            Icon = new Icon("Resources/generator_icon_01_a6a_icon.ico");
+
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             Text = Text + " " + version.Major + "." + version.Minor;
 
