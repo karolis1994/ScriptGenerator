@@ -1,16 +1,26 @@
-﻿using System;
+﻿using Services;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 
 namespace ScriptGenerator
 {
     public partial class ScriptGenerator : Form
     {
-        public ScriptGenerator()
+        private IWordWorks wordWorker;
+
+        public ScriptGenerator(IWordWorks wordWorker)
+        {
+            this.wordWorker = wordWorker;
+            InitializeWindow();
+        }
+
+        private void InitializeWindow()
         {
             InitializeComponent();
 
@@ -46,6 +56,7 @@ namespace ScriptGenerator
             foreach (String client in clients)
             {
                 nonVisualClientsGrid.Columns.Add(client, client);
+                nonVisLoadCheckedListBox.Items.Add(client, false);
             }
             nonVisualClientsGrid.Columns.Add(Else, Else);
             nonVisualClientsGrid.Rows.Add();
@@ -108,6 +119,10 @@ namespace ScriptGenerator
             Int32 index = tableColumnsGrid.Rows.Add(false, columnName, type, null, true, comment, false, null, false, null, null, null, null, null);
             tableColumnsGrid.Rows[index].ReadOnly = true;
             tableColumnsGrid.Rows[index].DefaultCellStyle.BackColor = Color.Gray;
+        }
+        private String GenerateUpdateStatementForNonVisualSetting(String nonVisualSetting, Int32 value)
+        {
+            return $"UPDATE SETTINGS.SYST_ATTRIBUTES_T SET VALUE = '{value}' WHERE CODE = '{nonVisualSetting}';{Environment.NewLine}";
         }
         #endregion
 
@@ -394,11 +409,46 @@ namespace ScriptGenerator
                 $"/";
         }
 
-        #endregion
-
-        private void ScriptGenerator_Load(object sender, EventArgs e)
+        //Non visual setting loading events
+        private void NonVisLoadCheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-
+            //Allow only one box to be checked
+            if (e.NewValue == CheckState.Checked)
+                for (int ix = 0; ix < nonVisLoadCheckedListBox.Items.Count; ++ix)
+                    if (e.Index != ix) nonVisLoadCheckedListBox.SetItemChecked(ix, false);
         }
+
+        private void NonVisLoadButton_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+
+            if (nonVisLoadCheckedListBox.CheckedItems.Count > 0 && !String.IsNullOrWhiteSpace(nonVisualLoadPathLabel.Text))
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+
+                foreach (KeyValuePair<String, Int32> entry in wordWorker.GetClientSettings(nonVisLoadCheckedListBox.CheckedItems[0].ToString(), nonVisualLoadPathLabel.Text))
+                {
+                    stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting(entry.Key, entry.Value));
+                }
+
+                scriptTextBox.Text = stringBuilder.ToString();
+            }
+
+            Cursor.Current = Cursors.Arrow;
+        }
+
+        private void nonVisualLoadFileButton_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+
+            if (nonVisualLoadFileDialog.ShowDialog() == DialogResult.OK)
+                nonVisualLoadPathLabel.Text = nonVisualLoadFileDialog.FileName;
+            else
+                nonVisualLoadPathLabel.Text = String.Empty;
+
+            Cursor.Current = Cursors.Arrow;
+        }
+
+        #endregion
     }
 }

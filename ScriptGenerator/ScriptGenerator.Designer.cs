@@ -36,6 +36,8 @@
             this.tableBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tableTabPage = new System.Windows.Forms.TabPage();
+            this.tableTablespaceTextBox = new System.Windows.Forms.TextBox();
+            this.tableTablespaceLbl = new System.Windows.Forms.Label();
             this.tableAuditBtn = new System.Windows.Forms.Button();
             this.tableTableCommentTextBox = new System.Windows.Forms.TextBox();
             this.tableTableCommentLbl = new System.Windows.Forms.Label();
@@ -111,8 +113,13 @@
             this.nonVisualBtn = new System.Windows.Forms.Button();
             this.nonVisualCodeTextBox = new System.Windows.Forms.TextBox();
             this.nonVisualCodeLbl = new System.Windows.Forms.Label();
-            this.tableTablespaceTextBox = new System.Windows.Forms.TextBox();
-            this.tableTablespaceLbl = new System.Windows.Forms.Label();
+            this.NonVisLoad = new System.Windows.Forms.TabPage();
+            this.nonVisLoadCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.nonVisLoadButton = new System.Windows.Forms.Button();
+            this.nonVisualLoadFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.nonVisualLoadFileButton = new System.Windows.Forms.Button();
+            this.nonVisualLoadLabel = new System.Windows.Forms.Label();
+            this.nonVisualLoadPathLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
@@ -121,6 +128,7 @@
             this.SequenceTabPage.SuspendLayout();
             this.nonVisualSettingTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nonVisualClientsGrid)).BeginInit();
+            this.NonVisLoad.SuspendLayout();
             this.SuspendLayout();
             // 
             // scriptTextBox
@@ -186,6 +194,7 @@
             this.tabControl1.Controls.Add(this.auditTabPage);
             this.tabControl1.Controls.Add(this.SequenceTabPage);
             this.tabControl1.Controls.Add(this.nonVisualSettingTabPage);
+            this.tabControl1.Controls.Add(this.NonVisLoad);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -217,6 +226,24 @@
             this.tableTabPage.TabIndex = 0;
             this.tableTabPage.Text = "Table creation";
             this.tableTabPage.UseVisualStyleBackColor = true;
+            // 
+            // tableTablespaceTextBox
+            // 
+            this.tableTablespaceTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tableTablespaceTextBox.Location = new System.Drawing.Point(330, 3);
+            this.tableTablespaceTextBox.MaxLength = 30;
+            this.tableTablespaceTextBox.Name = "tableTablespaceTextBox";
+            this.tableTablespaceTextBox.Size = new System.Drawing.Size(149, 20);
+            this.tableTablespaceTextBox.TabIndex = 19;
+            // 
+            // tableTablespaceLbl
+            // 
+            this.tableTablespaceLbl.AutoSize = true;
+            this.tableTablespaceLbl.Location = new System.Drawing.Point(258, 7);
+            this.tableTablespaceLbl.Name = "tableTablespaceLbl";
+            this.tableTablespaceLbl.Size = new System.Drawing.Size(66, 13);
+            this.tableTablespaceLbl.TabIndex = 20;
+            this.tableTablespaceLbl.Text = "Tablespace:";
             // 
             // tableAuditBtn
             // 
@@ -923,23 +950,70 @@
             this.nonVisualCodeLbl.TabIndex = 18;
             this.nonVisualCodeLbl.Text = "Code:";
             // 
-            // tableTablespaceTextBox
+            // NonVisLoad
             // 
-            this.tableTablespaceTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.tableTablespaceTextBox.Location = new System.Drawing.Point(330, 3);
-            this.tableTablespaceTextBox.MaxLength = 30;
-            this.tableTablespaceTextBox.Name = "tableTablespaceTextBox";
-            this.tableTablespaceTextBox.Size = new System.Drawing.Size(149, 20);
-            this.tableTablespaceTextBox.TabIndex = 19;
+            this.NonVisLoad.Controls.Add(this.nonVisualLoadPathLabel);
+            this.NonVisLoad.Controls.Add(this.nonVisualLoadLabel);
+            this.NonVisLoad.Controls.Add(this.nonVisualLoadFileButton);
+            this.NonVisLoad.Controls.Add(this.nonVisLoadButton);
+            this.NonVisLoad.Controls.Add(this.nonVisLoadCheckedListBox);
+            this.NonVisLoad.Location = new System.Drawing.Point(4, 22);
+            this.NonVisLoad.Name = "NonVisLoad";
+            this.NonVisLoad.Padding = new System.Windows.Forms.Padding(3);
+            this.NonVisLoad.Size = new System.Drawing.Size(1414, 348);
+            this.NonVisLoad.TabIndex = 5;
+            this.NonVisLoad.Text = "Non visual setting load";
+            this.NonVisLoad.UseVisualStyleBackColor = true;
             // 
-            // tableTablespaceLbl
+            // nonVisLoadCheckedListBox
             // 
-            this.tableTablespaceLbl.AutoSize = true;
-            this.tableTablespaceLbl.Location = new System.Drawing.Point(258, 7);
-            this.tableTablespaceLbl.Name = "tableTablespaceLbl";
-            this.tableTablespaceLbl.Size = new System.Drawing.Size(66, 13);
-            this.tableTablespaceLbl.TabIndex = 20;
-            this.tableTablespaceLbl.Text = "Tablespace:";
+            this.nonVisLoadCheckedListBox.FormattingEnabled = true;
+            this.nonVisLoadCheckedListBox.Location = new System.Drawing.Point(20, 20);
+            this.nonVisLoadCheckedListBox.Name = "nonVisLoadCheckedListBox";
+            this.nonVisLoadCheckedListBox.Size = new System.Drawing.Size(190, 274);
+            this.nonVisLoadCheckedListBox.TabIndex = 0;
+            this.nonVisLoadCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.NonVisLoadCheckedListBox_ItemCheck);
+            // 
+            // nonVisLoadButton
+            // 
+            this.nonVisLoadButton.Location = new System.Drawing.Point(135, 302);
+            this.nonVisLoadButton.Name = "nonVisLoadButton";
+            this.nonVisLoadButton.Size = new System.Drawing.Size(75, 23);
+            this.nonVisLoadButton.TabIndex = 20;
+            this.nonVisLoadButton.Text = "Generate";
+            this.nonVisLoadButton.UseVisualStyleBackColor = true;
+            this.nonVisLoadButton.Click += new System.EventHandler(this.NonVisLoadButton_Click);
+            // 
+            // nonVisualLoadFileDialog
+            // 
+            this.nonVisualLoadFileDialog.FileName = "Nevizualus_sistemos_nustatymai";
+            // 
+            // nonVisualLoadFileButton
+            // 
+            this.nonVisualLoadFileButton.Location = new System.Drawing.Point(20, 302);
+            this.nonVisualLoadFileButton.Name = "nonVisualLoadFileButton";
+            this.nonVisualLoadFileButton.Size = new System.Drawing.Size(109, 23);
+            this.nonVisualLoadFileButton.TabIndex = 21;
+            this.nonVisualLoadFileButton.Text = "Choose file path";
+            this.nonVisualLoadFileButton.UseVisualStyleBackColor = true;
+            this.nonVisualLoadFileButton.Click += new System.EventHandler(this.nonVisualLoadFileButton_Click);
+            // 
+            // nonVisualLoadLabel
+            // 
+            this.nonVisualLoadLabel.AutoSize = true;
+            this.nonVisualLoadLabel.Location = new System.Drawing.Point(21, 328);
+            this.nonVisualLoadLabel.Name = "nonVisualLoadLabel";
+            this.nonVisualLoadLabel.Size = new System.Drawing.Size(51, 13);
+            this.nonVisualLoadLabel.TabIndex = 22;
+            this.nonVisualLoadLabel.Text = "File Path:";
+            // 
+            // nonVisualLoadPathLabel
+            // 
+            this.nonVisualLoadPathLabel.AutoSize = true;
+            this.nonVisualLoadPathLabel.Location = new System.Drawing.Point(78, 328);
+            this.nonVisualLoadPathLabel.Name = "nonVisualLoadPathLabel";
+            this.nonVisualLoadPathLabel.Size = new System.Drawing.Size(0, 13);
+            this.nonVisualLoadPathLabel.TabIndex = 23;
             // 
             // ScriptGenerator
             // 
@@ -950,7 +1024,6 @@
             this.Controls.Add(this.scriptTextBox);
             this.Name = "ScriptGenerator";
             this.Text = "Script generator";
-            this.Load += new System.EventHandler(this.ScriptGenerator_Load);
             this.tabControl1.ResumeLayout(false);
             this.tableTabPage.ResumeLayout(false);
             this.tableTabPage.PerformLayout();
@@ -964,8 +1037,11 @@
             this.nonVisualSettingTabPage.ResumeLayout(false);
             this.nonVisualSettingTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nonVisualClientsGrid)).EndInit();
+            this.NonVisLoad.ResumeLayout(false);
+            this.NonVisLoad.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -1055,6 +1131,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedColumn;
         private System.Windows.Forms.TextBox tableTablespaceTextBox;
         private System.Windows.Forms.Label tableTablespaceLbl;
+        private System.Windows.Forms.TabPage NonVisLoad;
+        private System.Windows.Forms.CheckedListBox nonVisLoadCheckedListBox;
+        private System.Windows.Forms.Button nonVisLoadButton;
+        private System.Windows.Forms.Label nonVisualLoadPathLabel;
+        private System.Windows.Forms.Label nonVisualLoadLabel;
+        private System.Windows.Forms.Button nonVisualLoadFileButton;
+        private System.Windows.Forms.OpenFileDialog nonVisualLoadFileDialog;
     }
 }
 
