@@ -57,41 +57,41 @@ namespace Services
 
         private Int32 GetColumnBySuppliedClientName(String clientName)
         {
-            Int32 clientRow;
+            Client clientRow;
 
             switch (clientName) {
                 case "ERGO_LT":
-                    clientRow = (Int32) Client.ErgoLt;
+                    clientRow = Client.ErgoLt;
                     break;
                 case "ERGO_LV":
-                    clientRow = (Int32)Client.ErgoLv;
+                    clientRow = Client.ErgoLv;
                     break;
                 case "ERGO_EE":
-                    clientRow = (Int32)Client.ErgoEe;
+                    clientRow = Client.ErgoEe;
                     break;
                 case "PZU":
-                    clientRow = (Int32)Client.Pzu;
+                    clientRow = Client.Pzu;
                     break;
                 case "PAREX":
-                    clientRow = (Int32)Client.Parex;
+                    clientRow = Client.Parex;
                     break;
                 case "HALYK":
-                    clientRow = (Int32)Client.Halyk;
+                    clientRow = Client.Halyk;
                     break;
                 case "NOMAD":
-                    clientRow = (Int32)Client.Nomad;
+                    clientRow = Client.Nomad;
                     break;
                 case "QALA":
-                    clientRow = (Int32)Client.Qala;
+                    clientRow = Client.Qala;
                     break;
                 case "ATESHGAX":
-                    clientRow = (Int32)Client.Ateshgax;
+                    clientRow = Client.Ateshgax;
                     break;
                 default:
                     throw new NotImplementedException("No such client exists in the system.");  
             }
 
-            return clientRow;
+            return (Int32)clientRow;
         }
     }
 }
