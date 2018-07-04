@@ -114,12 +114,18 @@
             this.nonVisualCodeTextBox = new System.Windows.Forms.TextBox();
             this.nonVisualCodeLbl = new System.Windows.Forms.Label();
             this.NonVisLoad = new System.Windows.Forms.TabPage();
-            this.nonVisLoadCheckedListBox = new System.Windows.Forms.CheckedListBox();
-            this.nonVisLoadButton = new System.Windows.Forms.Button();
-            this.nonVisualLoadFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.nonVisualLoadFileButton = new System.Windows.Forms.Button();
-            this.nonVisualLoadLabel = new System.Windows.Forms.Label();
             this.nonVisualLoadPathLabel = new System.Windows.Forms.Label();
+            this.nonVisualLoadLabel = new System.Windows.Forms.Label();
+            this.nonVisualLoadFileButton = new System.Windows.Forms.Button();
+            this.nonVisLoadButton = new System.Windows.Forms.Button();
+            this.nonVisLoadCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.nonVisualLoadFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.charConverterTabPage = new System.Windows.Forms.TabPage();
+            this.charConvTextBox = new System.Windows.Forms.TextBox();
+            this.charConvLabel = new System.Windows.Forms.Label();
+            this.charConvButton = new System.Windows.Forms.Button();
+            this.charConvCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
@@ -129,6 +135,7 @@
             this.nonVisualSettingTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nonVisualClientsGrid)).BeginInit();
             this.NonVisLoad.SuspendLayout();
+            this.charConverterTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // scriptTextBox
@@ -195,6 +202,7 @@
             this.tabControl1.Controls.Add(this.SequenceTabPage);
             this.tabControl1.Controls.Add(this.nonVisualSettingTabPage);
             this.tabControl1.Controls.Add(this.NonVisLoad);
+            this.tabControl1.Controls.Add(this.charConverterTabPage);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -965,28 +973,22 @@
             this.NonVisLoad.Text = "Non visual setting load";
             this.NonVisLoad.UseVisualStyleBackColor = true;
             // 
-            // nonVisLoadCheckedListBox
+            // nonVisualLoadPathLabel
             // 
-            this.nonVisLoadCheckedListBox.FormattingEnabled = true;
-            this.nonVisLoadCheckedListBox.Location = new System.Drawing.Point(20, 20);
-            this.nonVisLoadCheckedListBox.Name = "nonVisLoadCheckedListBox";
-            this.nonVisLoadCheckedListBox.Size = new System.Drawing.Size(190, 274);
-            this.nonVisLoadCheckedListBox.TabIndex = 0;
-            this.nonVisLoadCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.NonVisLoadCheckedListBox_ItemCheck);
+            this.nonVisualLoadPathLabel.AutoSize = true;
+            this.nonVisualLoadPathLabel.Location = new System.Drawing.Point(78, 328);
+            this.nonVisualLoadPathLabel.Name = "nonVisualLoadPathLabel";
+            this.nonVisualLoadPathLabel.Size = new System.Drawing.Size(0, 13);
+            this.nonVisualLoadPathLabel.TabIndex = 23;
             // 
-            // nonVisLoadButton
+            // nonVisualLoadLabel
             // 
-            this.nonVisLoadButton.Location = new System.Drawing.Point(135, 302);
-            this.nonVisLoadButton.Name = "nonVisLoadButton";
-            this.nonVisLoadButton.Size = new System.Drawing.Size(75, 23);
-            this.nonVisLoadButton.TabIndex = 20;
-            this.nonVisLoadButton.Text = "Generate";
-            this.nonVisLoadButton.UseVisualStyleBackColor = true;
-            this.nonVisLoadButton.Click += new System.EventHandler(this.NonVisLoadButton_Click);
-            // 
-            // nonVisualLoadFileDialog
-            // 
-            this.nonVisualLoadFileDialog.FileName = "Nevizualus_sistemos_nustatymai";
+            this.nonVisualLoadLabel.AutoSize = true;
+            this.nonVisualLoadLabel.Location = new System.Drawing.Point(21, 328);
+            this.nonVisualLoadLabel.Name = "nonVisualLoadLabel";
+            this.nonVisualLoadLabel.Size = new System.Drawing.Size(51, 13);
+            this.nonVisualLoadLabel.TabIndex = 22;
+            this.nonVisualLoadLabel.Text = "File Path:";
             // 
             // nonVisualLoadFileButton
             // 
@@ -998,22 +1000,92 @@
             this.nonVisualLoadFileButton.UseVisualStyleBackColor = true;
             this.nonVisualLoadFileButton.Click += new System.EventHandler(this.nonVisualLoadFileButton_Click);
             // 
-            // nonVisualLoadLabel
+            // nonVisLoadButton
             // 
-            this.nonVisualLoadLabel.AutoSize = true;
-            this.nonVisualLoadLabel.Location = new System.Drawing.Point(21, 328);
-            this.nonVisualLoadLabel.Name = "nonVisualLoadLabel";
-            this.nonVisualLoadLabel.Size = new System.Drawing.Size(51, 13);
-            this.nonVisualLoadLabel.TabIndex = 22;
-            this.nonVisualLoadLabel.Text = "File Path:";
+            this.nonVisLoadButton.Location = new System.Drawing.Point(135, 302);
+            this.nonVisLoadButton.Name = "nonVisLoadButton";
+            this.nonVisLoadButton.Size = new System.Drawing.Size(75, 23);
+            this.nonVisLoadButton.TabIndex = 20;
+            this.nonVisLoadButton.Text = "Generate";
+            this.nonVisLoadButton.UseVisualStyleBackColor = true;
+            this.nonVisLoadButton.Click += new System.EventHandler(this.NonVisLoadButton_Click);
             // 
-            // nonVisualLoadPathLabel
+            // nonVisLoadCheckedListBox
             // 
-            this.nonVisualLoadPathLabel.AutoSize = true;
-            this.nonVisualLoadPathLabel.Location = new System.Drawing.Point(78, 328);
-            this.nonVisualLoadPathLabel.Name = "nonVisualLoadPathLabel";
-            this.nonVisualLoadPathLabel.Size = new System.Drawing.Size(0, 13);
-            this.nonVisualLoadPathLabel.TabIndex = 23;
+            this.nonVisLoadCheckedListBox.FormattingEnabled = true;
+            this.nonVisLoadCheckedListBox.Location = new System.Drawing.Point(20, 20);
+            this.nonVisLoadCheckedListBox.Name = "nonVisLoadCheckedListBox";
+            this.nonVisLoadCheckedListBox.Size = new System.Drawing.Size(190, 274);
+            this.nonVisLoadCheckedListBox.TabIndex = 0;
+            this.nonVisLoadCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.NonVisLoadCheckedListBox_ItemCheck);
+            // 
+            // nonVisualLoadFileDialog
+            // 
+            this.nonVisualLoadFileDialog.FileName = "Nevizualus_sistemos_nustatymai";
+            // 
+            // charConverterTabPage
+            // 
+            this.charConverterTabPage.Controls.Add(this.label1);
+            this.charConverterTabPage.Controls.Add(this.charConvCheckedListBox);
+            this.charConverterTabPage.Controls.Add(this.charConvButton);
+            this.charConverterTabPage.Controls.Add(this.charConvLabel);
+            this.charConverterTabPage.Controls.Add(this.charConvTextBox);
+            this.charConverterTabPage.Location = new System.Drawing.Point(4, 22);
+            this.charConverterTabPage.Name = "charConverterTabPage";
+            this.charConverterTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.charConverterTabPage.Size = new System.Drawing.Size(1414, 348);
+            this.charConverterTabPage.TabIndex = 6;
+            this.charConverterTabPage.Text = "Char converter";
+            this.charConverterTabPage.UseVisualStyleBackColor = true;
+            // 
+            // charConvTextBox
+            // 
+            this.charConvTextBox.Location = new System.Drawing.Point(261, 20);
+            this.charConvTextBox.Multiline = true;
+            this.charConvTextBox.Name = "charConvTextBox";
+            this.charConvTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.charConvTextBox.Size = new System.Drawing.Size(998, 199);
+            this.charConvTextBox.TabIndex = 1;
+            // 
+            // charConvLabel
+            // 
+            this.charConvLabel.AutoSize = true;
+            this.charConvLabel.Location = new System.Drawing.Point(258, 4);
+            this.charConvLabel.Name = "charConvLabel";
+            this.charConvLabel.Size = new System.Drawing.Size(121, 13);
+            this.charConvLabel.TabIndex = 19;
+            this.charConvLabel.Text = "Text box for conversion:";
+            // 
+            // charConvButton
+            // 
+            this.charConvButton.Location = new System.Drawing.Point(9, 228);
+            this.charConvButton.Name = "charConvButton";
+            this.charConvButton.Size = new System.Drawing.Size(75, 23);
+            this.charConvButton.TabIndex = 20;
+            this.charConvButton.Text = "Generate";
+            this.charConvButton.UseVisualStyleBackColor = true;
+            this.charConvButton.Click += new System.EventHandler(this.charConvButton_Click);
+            // 
+            // charConvCheckedListBox
+            // 
+            this.charConvCheckedListBox.FormattingEnabled = true;
+            this.charConvCheckedListBox.Items.AddRange(new object[] {
+            "Russian",
+            "Lithuanian"});
+            this.charConvCheckedListBox.Location = new System.Drawing.Point(9, 20);
+            this.charConvCheckedListBox.Name = "charConvCheckedListBox";
+            this.charConvCheckedListBox.Size = new System.Drawing.Size(246, 199);
+            this.charConvCheckedListBox.TabIndex = 21;
+            this.charConvCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.charConvCheckedListBox_ItemCheck);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Convert for language:";
             // 
             // ScriptGenerator
             // 
@@ -1039,6 +1111,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nonVisualClientsGrid)).EndInit();
             this.NonVisLoad.ResumeLayout(false);
             this.NonVisLoad.PerformLayout();
+            this.charConverterTabPage.ResumeLayout(false);
+            this.charConverterTabPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1138,6 +1212,12 @@
         private System.Windows.Forms.Label nonVisualLoadLabel;
         private System.Windows.Forms.Button nonVisualLoadFileButton;
         private System.Windows.Forms.OpenFileDialog nonVisualLoadFileDialog;
+        private System.Windows.Forms.TabPage charConverterTabPage;
+        private System.Windows.Forms.Button charConvButton;
+        private System.Windows.Forms.Label charConvLabel;
+        private System.Windows.Forms.TextBox charConvTextBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckedListBox charConvCheckedListBox;
     }
 }
 
