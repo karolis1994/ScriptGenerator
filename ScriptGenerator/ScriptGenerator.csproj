@@ -57,6 +57,27 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptGenerator\CharConverter\ScriptGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScriptGenerator\ColumnCreation\ScriptGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScriptGenerator\NonVisualSettingCreation\ScriptGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScriptGenerator\NonVisualSettingLoad\ScriptGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScriptGenerator\AuditTriggerCreation\ScriptGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScriptGenerator\SequenceCreation\ScriptGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScriptGenerator\TableCreation\ScriptGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="ScriptGenerator.resx">
       <DependentUpon>ScriptGenerator.cs</DependentUpon>
     </EmbeddedResource>
@@ -93,5 +114,6 @@
       <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
