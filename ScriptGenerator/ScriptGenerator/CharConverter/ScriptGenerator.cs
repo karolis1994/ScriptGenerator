@@ -40,7 +40,6 @@ namespace ScriptGenerator
         {
             Dictionary<Int32, String> charset = new Dictionary<Int32, String>();
             charset.Add(128, "€");
-            charset.Add(129, "�");
             charset.Add(130, "‚");
             charset.Add(131, "ƒ");
             charset.Add(132, "„");
@@ -49,13 +48,8 @@ namespace ScriptGenerator
             charset.Add(135, "‡");
             charset.Add(136, "ˆ");
             charset.Add(137, "‰");
-            charset.Add(138, "Š");
             charset.Add(139, "‹");
             charset.Add(140, "Œ");
-            charset.Add(141, "�");
-            charset.Add(142, "Ž");
-            charset.Add(143, "�");
-            charset.Add(144, "�");
             charset.Add(145, "‘");
             charset.Add(146, "’");
             charset.Add(147, "“");
@@ -65,11 +59,9 @@ namespace ScriptGenerator
             charset.Add(151, "—");
             charset.Add(152, "˜");
             charset.Add(153, "™");
-            charset.Add(154, "š");
             charset.Add(155, "›");
             charset.Add(156, "œ");
             charset.Add(157, "�");
-            charset.Add(158, "ž");
             charset.Add(159, "Ÿ");
             charset.Add(162, "¢");
             charset.Add(163, "£");
@@ -172,7 +164,6 @@ namespace ScriptGenerator
         {
             Dictionary<Int32, String> charset = new Dictionary<Int32, String>();
             charset.Add(128, "€");
-            charset.Add(129, "�");
             charset.Add(130, "‚");
             charset.Add(131, "ƒ");
             charset.Add(132, "„");
@@ -181,13 +172,8 @@ namespace ScriptGenerator
             charset.Add(135, "‡");
             charset.Add(136, "ˆ");
             charset.Add(137, "‰");
-            charset.Add(138, "Š");
             charset.Add(139, "‹");
             charset.Add(140, "Œ");
-            charset.Add(141, "�");
-            charset.Add(142, "Ž");
-            charset.Add(143, "�");
-            charset.Add(144, "�");
             charset.Add(145, "‘");
             charset.Add(146, "’");
             charset.Add(147, "“");
@@ -197,11 +183,9 @@ namespace ScriptGenerator
             charset.Add(151, "—");
             charset.Add(152, "˜");
             charset.Add(153, "™");
-            charset.Add(154, "š");
             charset.Add(155, "›");
             charset.Add(156, "œ");
             charset.Add(157, "�");
-            charset.Add(158, "ž");
             charset.Add(159, "Ÿ");
             charset.Add(161, "Ў");
             charset.Add(162, "ў");
