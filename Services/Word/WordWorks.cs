@@ -6,9 +6,10 @@ namespace Services
 {
     public class WordWorks : IWordWorks
     {
-        /*
-         * Enumeration detailing the column index for each client
-         */
+        /// <summary>
+        /// Enumeration for specific client, matches client columns in
+        /// the non visual setting  definitions document
+        /// </summary>
         public enum Client
         {
             ErgoLt = 2,

@@ -119,13 +119,13 @@
             this.nonVisualLoadFileButton = new System.Windows.Forms.Button();
             this.nonVisLoadButton = new System.Windows.Forms.Button();
             this.nonVisLoadCheckedListBox = new System.Windows.Forms.CheckedListBox();
-            this.nonVisualLoadFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.charConverterTabPage = new System.Windows.Forms.TabPage();
-            this.charConvTextBox = new System.Windows.Forms.TextBox();
-            this.charConvLabel = new System.Windows.Forms.Label();
-            this.charConvButton = new System.Windows.Forms.Button();
-            this.charConvCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.charConvCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.charConvButton = new System.Windows.Forms.Button();
+            this.charConvLabel = new System.Windows.Forms.Label();
+            this.charConvTextBox = new System.Windows.Forms.TextBox();
+            this.nonVisualLoadFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
@@ -1019,10 +1019,6 @@
             this.nonVisLoadCheckedListBox.TabIndex = 0;
             this.nonVisLoadCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.NonVisLoadCheckedListBox_ItemCheck);
             // 
-            // nonVisualLoadFileDialog
-            // 
-            this.nonVisualLoadFileDialog.FileName = "Nevizualus_sistemos_nustatymai";
-            // 
             // charConverterTabPage
             // 
             this.charConverterTabPage.Controls.Add(this.label1);
@@ -1038,23 +1034,23 @@
             this.charConverterTabPage.Text = "Char converter";
             this.charConverterTabPage.UseVisualStyleBackColor = true;
             // 
-            // charConvTextBox
+            // label1
             // 
-            this.charConvTextBox.Location = new System.Drawing.Point(261, 20);
-            this.charConvTextBox.Multiline = true;
-            this.charConvTextBox.Name = "charConvTextBox";
-            this.charConvTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.charConvTextBox.Size = new System.Drawing.Size(998, 199);
-            this.charConvTextBox.TabIndex = 1;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Convert for language:";
             // 
-            // charConvLabel
+            // charConvCheckedListBox
             // 
-            this.charConvLabel.AutoSize = true;
-            this.charConvLabel.Location = new System.Drawing.Point(258, 4);
-            this.charConvLabel.Name = "charConvLabel";
-            this.charConvLabel.Size = new System.Drawing.Size(121, 13);
-            this.charConvLabel.TabIndex = 19;
-            this.charConvLabel.Text = "Text box for conversion:";
+            this.charConvCheckedListBox.FormattingEnabled = true;
+            this.charConvCheckedListBox.Location = new System.Drawing.Point(9, 20);
+            this.charConvCheckedListBox.Name = "charConvCheckedListBox";
+            this.charConvCheckedListBox.Size = new System.Drawing.Size(246, 199);
+            this.charConvCheckedListBox.TabIndex = 21;
+            this.charConvCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.charConvCheckedListBox_ItemCheck);
             // 
             // charConvButton
             // 
@@ -1066,26 +1062,27 @@
             this.charConvButton.UseVisualStyleBackColor = true;
             this.charConvButton.Click += new System.EventHandler(this.charConvButton_Click);
             // 
-            // charConvCheckedListBox
+            // charConvLabel
             // 
-            this.charConvCheckedListBox.FormattingEnabled = true;
-            this.charConvCheckedListBox.Items.AddRange(new object[] {
-            "Russian",
-            "Lithuanian"});
-            this.charConvCheckedListBox.Location = new System.Drawing.Point(9, 20);
-            this.charConvCheckedListBox.Name = "charConvCheckedListBox";
-            this.charConvCheckedListBox.Size = new System.Drawing.Size(246, 199);
-            this.charConvCheckedListBox.TabIndex = 21;
-            this.charConvCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.charConvCheckedListBox_ItemCheck);
+            this.charConvLabel.AutoSize = true;
+            this.charConvLabel.Location = new System.Drawing.Point(258, 4);
+            this.charConvLabel.Name = "charConvLabel";
+            this.charConvLabel.Size = new System.Drawing.Size(121, 13);
+            this.charConvLabel.TabIndex = 19;
+            this.charConvLabel.Text = "Text box for conversion:";
             // 
-            // label1
+            // charConvTextBox
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Convert for language:";
+            this.charConvTextBox.Location = new System.Drawing.Point(261, 20);
+            this.charConvTextBox.Multiline = true;
+            this.charConvTextBox.Name = "charConvTextBox";
+            this.charConvTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.charConvTextBox.Size = new System.Drawing.Size(998, 199);
+            this.charConvTextBox.TabIndex = 1;
+            // 
+            // nonVisualLoadFileDialog
+            // 
+            this.nonVisualLoadFileDialog.FileName = "Nevizualus_sistemos_nustatymai";
             // 
             // ScriptGenerator
             // 

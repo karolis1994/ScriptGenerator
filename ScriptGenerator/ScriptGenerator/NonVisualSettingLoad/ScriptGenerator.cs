@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Services;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
@@ -7,6 +8,14 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
+        private IWordWorks wordWorker;
+
+        public ScriptGenerator(IWordWorks wordWorker)
+        {
+            this.wordWorker = wordWorker;
+            InitializeWindow();
+        }
+
         //Non visual setting loading events
         private void NonVisLoadCheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
@@ -24,6 +33,11 @@ namespace ScriptGenerator
             if (nonVisLoadCheckedListBox.CheckedItems.Count > 0 && !String.IsNullOrWhiteSpace(nonVisualLoadPathLabel.Text))
             {
                 StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.Append($"DECLARE{Environment.NewLine}");
+                stringBuilder.Append($"  PROCEDURE update_non_visual_setting(ps_code IN VALUE, ps_value IN VARCHAR2) AS{Environment.NewLine}");
+                stringBuilder.Append($"  BEGIN{Environment.NewLine}");
+                stringBuilder.Append($"    UPDATE SETTINGS.SYST_ATTRIBUTES_T SET VALUE = ps_value WHERE CODE = ps_code;{Environment.NewLine}");
+                stringBuilder.Append($"  END;{Environment.NewLine}");
                 stringBuilder.Append($"BEGIN{Environment.NewLine}");
                 stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting("APT_CLIENT", nonVisLoadCheckedListBox.CheckedItems[0].ToString()));
 
@@ -55,7 +69,7 @@ namespace ScriptGenerator
 
         private String GenerateUpdateStatementForNonVisualSetting(String nonVisualSetting, String value)
         {
-            return $"  UPDATE SETTINGS.SYST_ATTRIBUTES_T SET VALUE = '{value}' WHERE CODE = '{nonVisualSetting}';{Environment.NewLine}";
+            return $"  update_non_visual_setting('{nonVisualSetting}', '{value}');{Environment.NewLine}";
         }
     }
 }

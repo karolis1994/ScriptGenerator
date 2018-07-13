@@ -1,25 +1,15 @@
-﻿using Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ScriptGenerator
 {
     public partial class ScriptGenerator : Form
     {
-        private IWordWorks wordWorker;
-
-        public ScriptGenerator(IWordWorks wordWorker)
-        {
-            this.wordWorker = wordWorker;
-            InitializeWindow();
-        }
-
         private void InitializeWindow()
         {
             InitializeComponent();
@@ -60,6 +50,13 @@ namespace ScriptGenerator
             }
             nonVisualClientsGrid.Columns.Add(Else, Else);
             nonVisualClientsGrid.Rows.Add();
+
+            //Init available charsets for character conversions
+            List<String> charsets = ConfigurationManager.AppSettings["charsets"].Split(',').ToList();
+            foreach (String charset in charsets)
+            {
+                charConvCheckedListBox.Items.Add(charset);
+            }
         }
 
         private static String Else = "Else";
