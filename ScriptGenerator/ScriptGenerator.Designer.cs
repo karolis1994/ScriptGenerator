@@ -125,7 +125,21 @@
             this.charConvButton = new System.Windows.Forms.Button();
             this.charConvLabel = new System.Windows.Forms.Label();
             this.charConvTextBox = new System.Windows.Forms.TextBox();
+            this.versioning = new System.Windows.Forms.TabPage();
+            this.versioningDirectory = new System.Windows.Forms.Label();
+            this.versioningButton = new System.Windows.Forms.Button();
+            this.versioningCustomVersionTextBox = new System.Windows.Forms.TextBox();
+            this.versioningCustomVersionLabel = new System.Windows.Forms.Label();
+            this.versioningUseCustomLabel = new System.Windows.Forms.Label();
+            this.versioningUseCustomCheckBox = new System.Windows.Forms.CheckBox();
+            this.versioningIncreaseMinorLabel = new System.Windows.Forms.Label();
+            this.versioningIncreaseMinorCheckBox = new System.Windows.Forms.CheckBox();
+            this.versioningIncreaseMajorLabel = new System.Windows.Forms.Label();
+            this.versioningIncreaseMajorCheckBox = new System.Windows.Forms.CheckBox();
+            this.versioningFilePathLabel = new System.Windows.Forms.Label();
+            this.versioningDirectoryButton = new System.Windows.Forms.Button();
             this.nonVisualLoadFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.versioningFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
@@ -136,6 +150,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nonVisualClientsGrid)).BeginInit();
             this.NonVisLoad.SuspendLayout();
             this.charConverterTabPage.SuspendLayout();
+            this.versioning.SuspendLayout();
             this.SuspendLayout();
             // 
             // scriptTextBox
@@ -203,6 +218,7 @@
             this.tabControl1.Controls.Add(this.nonVisualSettingTabPage);
             this.tabControl1.Controls.Add(this.NonVisLoad);
             this.tabControl1.Controls.Add(this.charConverterTabPage);
+            this.tabControl1.Controls.Add(this.versioning);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1080,6 +1096,139 @@
             this.charConvTextBox.Size = new System.Drawing.Size(998, 199);
             this.charConvTextBox.TabIndex = 1;
             // 
+            // versioning
+            // 
+            this.versioning.Controls.Add(this.versioningDirectory);
+            this.versioning.Controls.Add(this.versioningButton);
+            this.versioning.Controls.Add(this.versioningCustomVersionTextBox);
+            this.versioning.Controls.Add(this.versioningCustomVersionLabel);
+            this.versioning.Controls.Add(this.versioningUseCustomLabel);
+            this.versioning.Controls.Add(this.versioningUseCustomCheckBox);
+            this.versioning.Controls.Add(this.versioningIncreaseMinorLabel);
+            this.versioning.Controls.Add(this.versioningIncreaseMinorCheckBox);
+            this.versioning.Controls.Add(this.versioningIncreaseMajorLabel);
+            this.versioning.Controls.Add(this.versioningIncreaseMajorCheckBox);
+            this.versioning.Controls.Add(this.versioningFilePathLabel);
+            this.versioning.Controls.Add(this.versioningDirectoryButton);
+            this.versioning.Location = new System.Drawing.Point(4, 22);
+            this.versioning.Name = "versioning";
+            this.versioning.Size = new System.Drawing.Size(1414, 348);
+            this.versioning.TabIndex = 7;
+            this.versioning.Text = "Version Increase";
+            this.versioning.UseVisualStyleBackColor = true;
+            // 
+            // versioningDirectory
+            // 
+            this.versioningDirectory.AutoSize = true;
+            this.versioningDirectory.Location = new System.Drawing.Point(63, 101);
+            this.versioningDirectory.Name = "versioningDirectory";
+            this.versioningDirectory.Size = new System.Drawing.Size(0, 13);
+            this.versioningDirectory.TabIndex = 33;
+            // 
+            // versioningButton
+            // 
+            this.versioningButton.Location = new System.Drawing.Point(6, 117);
+            this.versioningButton.Name = "versioningButton";
+            this.versioningButton.Size = new System.Drawing.Size(109, 23);
+            this.versioningButton.TabIndex = 32;
+            this.versioningButton.Text = "Increase versions";
+            this.versioningButton.UseVisualStyleBackColor = true;
+            this.versioningButton.Click += new System.EventHandler(this.versioningButton_Click);
+            // 
+            // versioningCustomVersionTextBox
+            // 
+            this.versioningCustomVersionTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.versioningCustomVersionTextBox.Location = new System.Drawing.Point(274, 47);
+            this.versioningCustomVersionTextBox.MaxLength = 30;
+            this.versioningCustomVersionTextBox.Name = "versioningCustomVersionTextBox";
+            this.versioningCustomVersionTextBox.Size = new System.Drawing.Size(149, 20);
+            this.versioningCustomVersionTextBox.TabIndex = 30;
+            this.versioningCustomVersionTextBox.Text = "1.0.0.0";
+            // 
+            // versioningCustomVersionLabel
+            // 
+            this.versioningCustomVersionLabel.AutoSize = true;
+            this.versioningCustomVersionLabel.Location = new System.Drawing.Point(186, 50);
+            this.versioningCustomVersionLabel.Name = "versioningCustomVersionLabel";
+            this.versioningCustomVersionLabel.Size = new System.Drawing.Size(82, 13);
+            this.versioningCustomVersionLabel.TabIndex = 31;
+            this.versioningCustomVersionLabel.Text = "Custom version:";
+            // 
+            // versioningUseCustomLabel
+            // 
+            this.versioningUseCustomLabel.AutoSize = true;
+            this.versioningUseCustomLabel.Location = new System.Drawing.Point(3, 50);
+            this.versioningUseCustomLabel.Name = "versioningUseCustomLabel";
+            this.versioningUseCustomLabel.Size = new System.Drawing.Size(103, 13);
+            this.versioningUseCustomLabel.TabIndex = 29;
+            this.versioningUseCustomLabel.Text = "Use custom version:";
+            // 
+            // versioningUseCustomCheckBox
+            // 
+            this.versioningUseCustomCheckBox.AutoSize = true;
+            this.versioningUseCustomCheckBox.Location = new System.Drawing.Point(165, 50);
+            this.versioningUseCustomCheckBox.Name = "versioningUseCustomCheckBox";
+            this.versioningUseCustomCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.versioningUseCustomCheckBox.TabIndex = 28;
+            this.versioningUseCustomCheckBox.UseVisualStyleBackColor = true;
+            this.versioningUseCustomCheckBox.CheckedChanged += new System.EventHandler(this.versioningUseCustomCheckBox_CheckedChanged);
+            // 
+            // versioningIncreaseMinorLabel
+            // 
+            this.versioningIncreaseMinorLabel.AutoSize = true;
+            this.versioningIncreaseMinorLabel.Location = new System.Drawing.Point(3, 30);
+            this.versioningIncreaseMinorLabel.Name = "versioningIncreaseMinorLabel";
+            this.versioningIncreaseMinorLabel.Size = new System.Drawing.Size(114, 13);
+            this.versioningIncreaseMinorLabel.TabIndex = 27;
+            this.versioningIncreaseMinorLabel.Text = "Increase minor by one:";
+            // 
+            // versioningIncreaseMinorCheckBox
+            // 
+            this.versioningIncreaseMinorCheckBox.AutoSize = true;
+            this.versioningIncreaseMinorCheckBox.Location = new System.Drawing.Point(165, 30);
+            this.versioningIncreaseMinorCheckBox.Name = "versioningIncreaseMinorCheckBox";
+            this.versioningIncreaseMinorCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.versioningIncreaseMinorCheckBox.TabIndex = 26;
+            this.versioningIncreaseMinorCheckBox.UseVisualStyleBackColor = true;
+            this.versioningIncreaseMinorCheckBox.CheckedChanged += new System.EventHandler(this.versioningIncreaseMinorCheckBox_CheckedChanged);
+            // 
+            // versioningIncreaseMajorLabel
+            // 
+            this.versioningIncreaseMajorLabel.AutoSize = true;
+            this.versioningIncreaseMajorLabel.Location = new System.Drawing.Point(3, 10);
+            this.versioningIncreaseMajorLabel.Name = "versioningIncreaseMajorLabel";
+            this.versioningIncreaseMajorLabel.Size = new System.Drawing.Size(114, 13);
+            this.versioningIncreaseMajorLabel.TabIndex = 25;
+            this.versioningIncreaseMajorLabel.Text = "Increase major by one:";
+            // 
+            // versioningIncreaseMajorCheckBox
+            // 
+            this.versioningIncreaseMajorCheckBox.Location = new System.Drawing.Point(165, 10);
+            this.versioningIncreaseMajorCheckBox.Name = "versioningIncreaseMajorCheckBox";
+            this.versioningIncreaseMajorCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.versioningIncreaseMajorCheckBox.TabIndex = 24;
+            this.versioningIncreaseMajorCheckBox.UseVisualStyleBackColor = true;
+            this.versioningIncreaseMajorCheckBox.CheckedChanged += new System.EventHandler(this.versioningIncreaseMajorCheckBox_CheckedChanged);
+            // 
+            // versioningFilePathLabel
+            // 
+            this.versioningFilePathLabel.AutoSize = true;
+            this.versioningFilePathLabel.Location = new System.Drawing.Point(6, 101);
+            this.versioningFilePathLabel.Name = "versioningFilePathLabel";
+            this.versioningFilePathLabel.Size = new System.Drawing.Size(51, 13);
+            this.versioningFilePathLabel.TabIndex = 23;
+            this.versioningFilePathLabel.Text = "File Path:";
+            // 
+            // versioningDirectoryButton
+            // 
+            this.versioningDirectoryButton.Location = new System.Drawing.Point(6, 75);
+            this.versioningDirectoryButton.Name = "versioningDirectoryButton";
+            this.versioningDirectoryButton.Size = new System.Drawing.Size(109, 23);
+            this.versioningDirectoryButton.TabIndex = 22;
+            this.versioningDirectoryButton.Text = "Choose file path";
+            this.versioningDirectoryButton.UseVisualStyleBackColor = true;
+            this.versioningDirectoryButton.Click += new System.EventHandler(this.versioningDirectoryButton_Click);
+            // 
             // nonVisualLoadFileDialog
             // 
             this.nonVisualLoadFileDialog.FileName = "Nevizualus_sistemos_nustatymai";
@@ -1110,6 +1259,8 @@
             this.NonVisLoad.PerformLayout();
             this.charConverterTabPage.ResumeLayout(false);
             this.charConverterTabPage.PerformLayout();
+            this.versioning.ResumeLayout(false);
+            this.versioning.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1215,6 +1366,20 @@
         private System.Windows.Forms.TextBox charConvTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckedListBox charConvCheckedListBox;
+        private System.Windows.Forms.TabPage versioning;
+        private System.Windows.Forms.TextBox versioningCustomVersionTextBox;
+        private System.Windows.Forms.Label versioningCustomVersionLabel;
+        private System.Windows.Forms.Label versioningUseCustomLabel;
+        private System.Windows.Forms.CheckBox versioningUseCustomCheckBox;
+        private System.Windows.Forms.Label versioningIncreaseMinorLabel;
+        private System.Windows.Forms.CheckBox versioningIncreaseMinorCheckBox;
+        private System.Windows.Forms.Label versioningIncreaseMajorLabel;
+        private System.Windows.Forms.CheckBox versioningIncreaseMajorCheckBox;
+        private System.Windows.Forms.Label versioningFilePathLabel;
+        private System.Windows.Forms.Button versioningDirectoryButton;
+        private System.Windows.Forms.Button versioningButton;
+        private System.Windows.Forms.Label versioningDirectory;
+        private System.Windows.Forms.FolderBrowserDialog versioningFolderBrowserDialog;
     }
 }
 
