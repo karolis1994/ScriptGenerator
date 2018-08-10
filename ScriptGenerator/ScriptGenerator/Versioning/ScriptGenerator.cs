@@ -18,7 +18,9 @@ namespace ScriptGenerator
 
             if (result == DialogResult.OK && !String.IsNullOrWhiteSpace(versioningFolderBrowserDialog.SelectedPath))
             {
+                scriptTextBox.Text = "Files that will be updated:" + Environment.NewLine;
                 versioningDirectory.Text = versioningFolderBrowserDialog.SelectedPath;
+                scriptTextBox.Text += String.Join(Environment.NewLine, Directory.GetFiles(versioningDirectory.Text, "AssemblyInfo.cs", SearchOption.AllDirectories));
             }
             Cursor.Current = Cursors.Arrow;
         }
