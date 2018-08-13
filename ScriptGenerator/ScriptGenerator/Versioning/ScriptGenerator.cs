@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -35,6 +31,8 @@ namespace ScriptGenerator
                 String newVersion = String.Empty;
                 String[] version = new String[4];
 
+                scriptTextBox.Text = "Files that will be updated and were updated:" + Environment.NewLine;
+
                 foreach (String file in files)
                 {
                     fileText = File.ReadAllText(file);
@@ -62,6 +60,8 @@ namespace ScriptGenerator
                     }
                     fileText = regex.Replace(fileText, newVersion);
                     File.WriteAllText(file, fileText);
+
+                    scriptTextBox.Text += $"{file} updated to version {newVersion}{Environment.NewLine}"; 
                 }
             }
         }
