@@ -148,10 +148,6 @@ namespace ScriptGenerator
         {
             return $"{indentation}EXECUTE IMMEDIATE 'COMMENT ON COLUMN {schema}.{tableName}.\"{columnName}\" IS ''{comment}''';";
         }
-        private String GenerateIndexScript(String schema, String tableName, String columnName, String indexName, String indentation = "", String tableSpace = null)
-        {
-            return $"{indentation}EXECUTE IMMEDIATE 'CREATE INDEX {indexName} ON {schema}.{tableName}({columnName}) TABLESPACE {(String.IsNullOrWhiteSpace(tableSpace) ? "INDX" : tableSpace)}';";
-        }
         private String GenerateTableCommentScript(String schema, String tableName, String comment, String indentation = "")
         {
             return $"{indentation}EXECUTE IMMEDIATE 'COMMENT ON TABLE {schema}.{tableName} IS ''{comment}''';";

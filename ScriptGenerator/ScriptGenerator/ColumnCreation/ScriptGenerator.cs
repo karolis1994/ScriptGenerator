@@ -44,9 +44,9 @@ namespace ScriptGenerator
                 String.Empty;
             String foreignKey = columnIsFkCheckBox.Checked ? GenerateForeignKeyScript(columnsSchemaTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text, columnFkNameTextBox.Text,
                 columnRefSchemaNameTextBox.Text, columnRefTableNameTextBox.Text, columnRefColumnNameTextBox.Text, "      ") + Environment.NewLine : String.Empty;
-            /*String fkIndex = String.IsNullOrWhiteSpace(columnIndexNameTextBox.Text) ?
+            String fkIndex = String.IsNullOrWhiteSpace(columnIndexNameTextBox.Text) ?
                 String.Empty :
-                GenerateIndexScript(columnsSchemaTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text, columnIndexNameTextBox.Text, "      ") + Environment.NewLine;*/
+                GenerateIndexScript(columnsSchemaTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text, columnIndexNameTextBox.Text, "      ") + Environment.NewLine;
 
             scriptBuilder.Append($"DECLARE{Environment.NewLine}");
             scriptBuilder.Append($"  ln_exist NUMBER;{Environment.NewLine}");
@@ -62,6 +62,7 @@ namespace ScriptGenerator
             scriptBuilder.Append($"{GenerateColumnDefinition(columnColumnTextBox.Text, columnTypeTextBox.Text, columnDefaultTextBox.Text, columnIsNullableCheckBox.Checked)})';{Environment.NewLine}");
             scriptBuilder.Append(comment);
             scriptBuilder.Append(foreignKey);
+            scriptBuilder.Append(fkIndex);
             scriptBuilder.Append($"  END IF;{Environment.NewLine}");
             scriptBuilder.Append($"END;{Environment.NewLine}");
             scriptBuilder.Append($"/");
@@ -72,6 +73,10 @@ namespace ScriptGenerator
         private String GenerateForeignKeyScript(String schema, String tableName, String columnName, String fkName, String refSchema, String refTableName, String refColumnName, String indentation = "")
         {
             return $"{indentation}EXECUTE IMMEDIATE 'ALTER TABLE {schema}.{tableName} ADD CONSTRAINT {fkName} FOREIGN KEY ({columnName}) REFERENCES {refSchema}.{refTableName}({refColumnName})';";
+        }
+        private String GenerateIndexScript(String schema, String tableName, String columnName, String indexName, String indentation = "", String tableSpace = null)
+        {
+            return $"{indentation}EXECUTE IMMEDIATE 'CREATE INDEX {schema}.{indexName} ON {schema}.{tableName}({columnName}) TABLESPACE {(String.IsNullOrWhiteSpace(tableSpace) ? "INDX" : tableSpace)}';";
         }
         private String GenerateColumnDefinition(String columnName, String columnType, String defaultValue, Boolean isNullable, String indentation = "")
         {
