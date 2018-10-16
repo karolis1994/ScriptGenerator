@@ -58,6 +58,11 @@ namespace ScriptGenerator
                 }
             }
         }
+        private void tableColumnsGrid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.V)
+                PasteInData(ref tableColumnsGrid);
+        }
         private void tableRemoveBtn_Click(Object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in tableColumnsGrid.SelectedRows)
@@ -76,20 +81,7 @@ namespace ScriptGenerator
         }
         private void tableAddBtn_Click(Object sender, EventArgs e)
         {
-            Int32 index = tableColumnsGrid.Rows.Add(false, null, null, null, true, null, false, null, false, null, null, null, null, null);
-            tableColumnsGrid.Rows[index].Cells["tableColumnsUniqueConstraintName"].ReadOnly = true;
-            tableColumnsGrid.Rows[index].Cells["tableColumnsFKName"].ReadOnly = true;
-            tableColumnsGrid.Rows[index].Cells["tableColumnsIndexName"].ReadOnly = true;
-            tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedSchema"].ReadOnly = true;
-            tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedTable"].ReadOnly = true;
-            tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedColumn"].ReadOnly = true;
-
-            tableColumnsGrid.Rows[index].Cells["tableColumnsUniqueConstraintName"].Style.BackColor = Color.Gray;
-            tableColumnsGrid.Rows[index].Cells["tableColumnsFKName"].Style.BackColor = Color.Gray;
-            tableColumnsGrid.Rows[index].Cells["tableColumnsIndexName"].Style.BackColor = Color.Gray;
-            tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedSchema"].Style.BackColor = Color.Gray;
-            tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedTable"].Style.BackColor = Color.Gray;
-            tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedColumn"].Style.BackColor = Color.Gray;
+            AddNewRow();
         }
         private void tableBtn_Click(Object sender, EventArgs e)
         {
@@ -183,5 +175,72 @@ namespace ScriptGenerator
             tableColumnsGrid.Rows[index].ReadOnly = true;
             tableColumnsGrid.Rows[index].DefaultCellStyle.BackColor = Color.Gray;
         }
+        private void AddNewRow(Int32 size = 1)
+        {
+            for (Int32 i = 0; i < size; i++)
+            {
+                Int32 index = tableColumnsGrid.Rows.Add(false, null, null, null, true, null, false, null, false, null, null, null, null, null);
+                tableColumnsGrid.Rows[index].Cells["tableColumnsUniqueConstraintName"].ReadOnly = true;
+                tableColumnsGrid.Rows[index].Cells["tableColumnsFKName"].ReadOnly = true;
+                tableColumnsGrid.Rows[index].Cells["tableColumnsIndexName"].ReadOnly = true;
+                tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedSchema"].ReadOnly = true;
+                tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedTable"].ReadOnly = true;
+                tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedColumn"].ReadOnly = true;
+
+                tableColumnsGrid.Rows[index].Cells["tableColumnsUniqueConstraintName"].Style.BackColor = Color.Gray;
+                tableColumnsGrid.Rows[index].Cells["tableColumnsFKName"].Style.BackColor = Color.Gray;
+                tableColumnsGrid.Rows[index].Cells["tableColumnsIndexName"].Style.BackColor = Color.Gray;
+                tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedSchema"].Style.BackColor = Color.Gray;
+                tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedTable"].Style.BackColor = Color.Gray;
+                tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedColumn"].Style.BackColor = Color.Gray;
+            }
+        }
+
+        // PasteInData pastes clipboard data into the grid passed to it.
+        private void PasteInData(ref DataGridView dgv)
+        {
+            char[] rowSplitter = { '\n', '\r' };  // Cr and Lf.
+            char columnSplitter = '\t';         // Tab.
+
+            IDataObject dataInClipboard = Clipboard.GetDataObject();
+
+            string stringInClipboard =
+                dataInClipboard.GetData(DataFormats.Text).ToString();
+
+            string[] rowsInClipboard = stringInClipboard.Split(rowSplitter,
+                StringSplitOptions.RemoveEmptyEntries);
+
+            int r = dgv.SelectedCells[0].RowIndex;
+            int c = dgv.SelectedCells[0].ColumnIndex;
+
+            if (dgv.Rows.Count < (r + rowsInClipboard.Length))
+                AddNewRow(r + rowsInClipboard.Length - dgv.Rows.Count);
+
+            // Loop through lines:
+
+            int iRow = 0;
+            while (iRow < rowsInClipboard.Length)
+            {
+                // Split up rows to get individual cells:
+
+                string[] valuesInRow =
+                    rowsInClipboard[iRow].Split(columnSplitter);
+
+                // Cycle through cells.
+                // Assign cell value only if within columns of grid:
+
+                int jCol = 0;
+                while (jCol < valuesInRow.Length)
+                {
+                    if ((dgv.ColumnCount - 1) >= (c + jCol))
+                        dgv.Rows[r + iRow].Cells[c + jCol].Value =
+                        valuesInRow[jCol];
+
+                    jCol += 1;
+                } // end while
+
+                iRow += 1;
+            } // end while
+        } // PasteInData
     }
 }

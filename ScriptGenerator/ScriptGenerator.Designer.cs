@@ -340,6 +340,7 @@
             this.tableColumnsGrid.Size = new System.Drawing.Size(1401, 220);
             this.tableColumnsGrid.TabIndex = 13;
             this.tableColumnsGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tableColumnsGrid_CellContentClick);
+            this.tableColumnsGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tableColumnsGrid_KeyDown);
             // 
             // tableColumnsIsPK
             // 
