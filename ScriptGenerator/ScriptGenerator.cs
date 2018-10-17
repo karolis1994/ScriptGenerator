@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -14,7 +15,8 @@ namespace ScriptGenerator
         {
             InitializeComponent();
 
-            Icon = new Icon("Resources/generator_icon_01_a6a_icon.ico");
+            if (File.Exists("Resources/generator_icon_01_a6a_icon.ico"))
+                Icon = new Icon("Resources/generator_icon_01_a6a_icon.ico");
 
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             Text = Text + " " + version.Major + "." + version.Minor;
