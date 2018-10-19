@@ -34,16 +34,23 @@ namespace ScriptGenerator
             {
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.Append($"DECLARE{Environment.NewLine}");
-                stringBuilder.Append($"  PROCEDURE update_non_visual_setting(ps_code IN VALUE, ps_value IN VARCHAR2) AS{Environment.NewLine}");
+                stringBuilder.Append($"  PROCEDURE update_non_visual_setting(ps_code IN VARCHAR2, ps_value IN VARCHAR2) AS{Environment.NewLine}");
+                stringBuilder.Append($"    ln_exist NUMBER;{Environment.NewLine}");
                 stringBuilder.Append($"  BEGIN{Environment.NewLine}");
-                stringBuilder.Append($"    UPDATE SETTINGS.SYST_ATTRIBUTES_T SET VALUE = ps_value WHERE CODE = ps_code;{Environment.NewLine}");
+                stringBuilder.Append($"    SELECT COUNT(1) INTO ln_exist FROM dual WHERE EXISTS (SELECT sa.value FROM SETTINGS.SYST_ATTRIBUTES_T sa WHERE sa.code = ps_code);{Environment.NewLine}");
+                stringBuilder.Append($"    IF ln_exist = 1 THEN{Environment.NewLine}");
+                stringBuilder.Append($"      UPDATE SETTINGS.SYST_ATTRIBUTES_T SET VALUE = ps_value WHERE CODE = ps_code;{Environment.NewLine}");
+                stringBuilder.Append($"    ELSE{Environment.NewLine}");
+                stringBuilder.Append($"      INSERT INTO SETTINGS.SYST_ATTRIBUTES_T (CODE, VALUE) VALUES (ps_code, ps_value);{Environment.NewLine}");
+                stringBuilder.Append($"    END IF;{Environment.NewLine}");
                 stringBuilder.Append($"  END;{Environment.NewLine}");
                 stringBuilder.Append($"BEGIN{Environment.NewLine}");
                 stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting("APT_CLIENT", nonVisLoadCheckedListBox.CheckedItems[0].ToString()));
 
                 foreach (KeyValuePair<String, Int32> entry in wordWorker.GetClientSettings(nonVisLoadCheckedListBox.CheckedItems[0].ToString(), nonVisualLoadPathLabel.Text))
                 {
-                    stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting(entry.Key, entry.Value.ToString()));
+                    if (entry.Key.Length <= 30)
+                        stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting(entry.Key, entry.Value.ToString()));
                 }
 
                 stringBuilder.Append($"END;");

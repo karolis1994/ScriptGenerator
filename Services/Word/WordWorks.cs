@@ -10,7 +10,7 @@ namespace Services
         /// Enumeration for specific client, matches client columns in
         /// the non visual setting  definitions document
         /// </summary>
-        public enum Client
+        enum Client
         {
             ErgoLt = 2,
             ErgoLv = 3,
@@ -23,6 +23,14 @@ namespace Services
             Ateshgax = 10
         };
 
+        /// <summary>
+        /// Takes in client name and file path of non visual settings word document.
+        /// Runs through the table defining the client's non visual settings values and collects
+        /// those that parse into an integer.
+        /// </summary>
+        /// <param name="clientName"></param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public Dictionary<String, Int32> GetClientSettings(String clientName, String filePath)
         {
             Dictionary<String, Int32> map = new Dictionary<String, Int32>();
