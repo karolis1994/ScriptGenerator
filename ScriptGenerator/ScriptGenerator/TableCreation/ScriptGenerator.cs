@@ -233,8 +233,14 @@ namespace ScriptGenerator
                 while (jCol < valuesInRow.Length)
                 {
                     if ((dgv.ColumnCount - 1) >= (c + jCol))
-                        dgv.Rows[r + iRow].Cells[c + jCol].Value =
-                        valuesInRow[jCol];
+                        if (dgv.Rows[r + iRow].Cells[c + jCol].ValueType == Type.GetType("System.Boolean"))
+                            if (valuesInRow[jCol].Equals("true", StringComparison.InvariantCultureIgnoreCase))
+                                dgv.Rows[r + iRow].Cells[c + jCol].Value = true;
+                            else
+                                dgv.Rows[r + iRow].Cells[c + jCol].Value = false;
+                        else
+                            dgv.Rows[r + iRow].Cells[c + jCol].Value =
+                            valuesInRow[jCol];
 
                     jCol += 1;
                 } // end while
