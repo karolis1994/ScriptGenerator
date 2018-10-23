@@ -140,6 +140,7 @@
             this.versioningDirectoryButton = new System.Windows.Forms.Button();
             this.nonVisualLoadFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.versioningFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.charConvCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
@@ -1038,6 +1039,7 @@
             // 
             // charConverterTabPage
             // 
+            this.charConverterTabPage.Controls.Add(this.charConvCheckBox);
             this.charConverterTabPage.Controls.Add(this.label1);
             this.charConverterTabPage.Controls.Add(this.charConvCheckedListBox);
             this.charConverterTabPage.Controls.Add(this.charConvButton);
@@ -1234,6 +1236,16 @@
             // 
             this.nonVisualLoadFileDialog.FileName = "Nevizualus_sistemos_nustatymai";
             // 
+            // charConvCheckBox
+            // 
+            this.charConvCheckBox.AutoSize = true;
+            this.charConvCheckBox.Location = new System.Drawing.Point(90, 232);
+            this.charConvCheckBox.Name = "charConvCheckBox";
+            this.charConvCheckBox.Size = new System.Drawing.Size(122, 17);
+            this.charConvCheckBox.TabIndex = 23;
+            this.charConvCheckBox.Text = "Replace apostrophe";
+            this.charConvCheckBox.UseVisualStyleBackColor = true;
+            // 
             // ScriptGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1381,6 +1393,7 @@
         private System.Windows.Forms.Button versioningButton;
         private System.Windows.Forms.Label versioningDirectory;
         private System.Windows.Forms.FolderBrowserDialog versioningFolderBrowserDialog;
+        private System.Windows.Forms.CheckBox charConvCheckBox;
     }
 }
 

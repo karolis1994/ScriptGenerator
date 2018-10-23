@@ -30,13 +30,13 @@ namespace ScriptGenerator
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(original);
 
-            foreach (Char c in original)
+            foreach (KeyValuePair<Int32, String> pair in charset)
             {
-                foreach (KeyValuePair<Int32, String> pair in charset)
-                {
-                    stringBuilder.Replace(pair.Value, $"' || chr({pair.Key}) || '");
-                }
+                stringBuilder.Replace(pair.Value, $"' || chr({pair.Key}) || '");
             }
+
+            if (charConvCheckBox.Checked)
+                stringBuilder.Replace("'", $"' || chr(39) || '");
 
             return stringBuilder.ToString();
         }
