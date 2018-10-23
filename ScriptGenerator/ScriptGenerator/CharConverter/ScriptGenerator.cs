@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace ScriptGenerator
@@ -26,14 +27,18 @@ namespace ScriptGenerator
         //Replaces each character from a string with an oracle chr function passing the key from the charset as parameter
         private String ReplaceWithCharset(String original, Dictionary<Int32, String> charset)
         {
-            String result = original;
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(original);
 
-            foreach (KeyValuePair<Int32, String> pair in charset)
+            foreach (Char c in original)
             {
-                result = result.Replace(pair.Value, $"' || chr({pair.Key}) || '");
+                foreach (KeyValuePair<Int32, String> pair in charset)
+                {
+                    stringBuilder.Replace(pair.Value, $"' || chr({pair.Key}) || '");
+                }
             }
 
-            return result;
+            return stringBuilder.ToString();
         }
         
         //Reads charset from a file, each row must contain a number and a symbol separated by a space
