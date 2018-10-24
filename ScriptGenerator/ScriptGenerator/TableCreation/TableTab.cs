@@ -9,6 +9,32 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
+        //Init table creation tab default values
+        private void InitializeTableTab()
+        {
+            tableColumnsGrid.Rows.Add(true, "ID", "NUMBER", null, false, "Identificator", false, null, false, null, null, null, null, null);
+            tableColumnsGrid.Rows[0].ReadOnly = true;
+            tableColumnsGrid.Columns["tableColumnsIsPK"].DefaultCellStyle.BackColor = Color.Gray;
+            tableColumnsGrid.Rows[0].DefaultCellStyle.BackColor = Color.Gray;
+        }
+
+        private void ResetTableTab()
+        {
+            tableTableCommentTextBox.Text = String.Empty;
+            tableTablespaceTextBox.Text = String.Empty;
+            tableTableNameTextBox.Text = String.Empty;
+            tableSchemaTextBox.Text = String.Empty;
+            tablePKTextBox.Text = String.Empty;
+
+            tableColumnsGrid.Rows.Clear();
+        }
+
+        private void tableResetBtn_Click(object sender, EventArgs e)
+        {
+            ResetTableTab();
+            InitializeTableTab();
+        }
+
         private void tableColumnsGrid_CellContentClick(Object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 6 || e.ColumnIndex == 8)

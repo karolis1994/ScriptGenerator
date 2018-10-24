@@ -58,28 +58,28 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScriptGenerator\CharConverter\ScriptGenerator.cs">
+    <Compile Include="ScriptGenerator\CharConverter\CharConverterTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScriptGenerator\ColumnCreation\ScriptGenerator.cs">
+    <Compile Include="ScriptGenerator\ColumnCreation\ColumnTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScriptGenerator\NonVisualSettingCreation\ScriptGenerator.cs">
+    <Compile Include="ScriptGenerator\NonVisualSettingCreation\NonVisualSettingsCreationTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScriptGenerator\NonVisualSettingLoad\ScriptGenerator.cs">
+    <Compile Include="ScriptGenerator\NonVisualSettingLoad\NonVisualSettingsLoadTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScriptGenerator\AuditTriggerCreation\ScriptGenerator.cs">
+    <Compile Include="ScriptGenerator\AuditTriggerCreation\AuditTriggerTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScriptGenerator\SequenceCreation\ScriptGenerator.cs">
+    <Compile Include="ScriptGenerator\SequenceCreation\SequenceTab.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ScriptGenerator\Versioning\ScriptGenerator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScriptGenerator\TableCreation\ScriptGenerator.cs">
+    <Compile Include="ScriptGenerator\TableCreation\TableTab.cs">
       <SubType>Form</SubType>
     </Compile>
     <EmbeddedResource Include="ScriptGenerator.resx">

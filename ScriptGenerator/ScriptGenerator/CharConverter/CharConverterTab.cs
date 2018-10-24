@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -8,6 +10,27 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
+        private void InitializeCharacterConversionTab()
+        {
+            //Init available charsets for character conversions
+            List<String> charsets = ConfigurationManager.AppSettings["charsets"].Split(',').ToList();
+            foreach (String charset in charsets)
+            {
+                charConvCheckedListBox.Items.Add(charset);
+            }
+        }
+
+        private void ResetCharacterConversionTab()
+        {
+            charConvCheckedListBox.Items.Clear();
+        }
+
+        private void charConvResetBtn_Click(object sender, EventArgs e)
+        {
+            ResetCharacterConversionTab();
+            InitializeCharacterConversionTab();
+        }
+
         //char conversion script generator button
         private void charConvButton_Click(object sender, EventArgs e)
         {

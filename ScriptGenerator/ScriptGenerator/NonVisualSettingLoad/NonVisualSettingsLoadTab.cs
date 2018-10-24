@@ -1,6 +1,8 @@
 ﻿using Services;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -14,6 +16,27 @@ namespace ScriptGenerator
         {
             this.wordWorker = wordWorker;
             InitializeWindow();
+        }
+
+        private void InitializeNonVisualSettingLoadTab()
+        {
+            //Init non visual settings creation tab default values
+            List<String> clients = ConfigurationManager.AppSettings["clients"].Split(',').ToList();
+            foreach (String client in clients)
+            {
+                nonVisLoadCheckedListBox.Items.Add(client, false);
+            }
+        }
+
+        private void ResetNonVisualSettingsLoadTab()
+        {
+            nonVisLoadCheckedListBox.Items.Clear();
+        }
+
+        private void nonVisLoadResetBtn_Click(object sender, EventArgs e)
+        {
+            ResetNonVisualSettingsLoadTab();
+            InitializeNonVisualSettingLoadTab();
         }
 
         //Non visual setting loading events

@@ -6,6 +6,45 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
+        //Init column creation tab default values
+        private void InitializeColumnTab()
+        {
+            columnFkNameTextBox.BackColor = Color.Gray;
+            columnFkNameTextBox.ReadOnly = true;
+            columnIndexNameTextBox.BackColor = Color.Gray;
+            columnIndexNameTextBox.ReadOnly = true;
+            columnRefSchemaNameTextBox.BackColor = Color.Gray;
+            columnRefSchemaNameTextBox.ReadOnly = true;
+            columnRefTableNameTextBox.BackColor = Color.Gray;
+            columnRefTableNameTextBox.ReadOnly = true;
+            columnRefColumnNameTextBox.BackColor = Color.Gray;
+            columnRefColumnNameTextBox.ReadOnly = true;
+        }
+
+        private void ResetColumnTab()
+        {
+            columnRefColumnNameTextBox.Text = String.Empty;
+            columnRefSchemaNameTextBox.Text = String.Empty;
+            columnRefTableNameTextBox.Text = String.Empty;
+            columnsTableNameTextBox.Text = String.Empty;
+            columnIndexNameTextBox.Text = String.Empty;
+            columnsSchemaTextBox.Text = String.Empty;
+            columnCommentTextBox.Text = String.Empty;
+            columnDefaultTextBox.Text = String.Empty;
+            columnColumnTextBox.Text = String.Empty;
+            columnFkNameTextBox.Text = String.Empty;
+            columnTypeTextBox.Text = String.Empty;
+
+            columnIsNullableCheckBox.Checked = true;
+            columnIsFkCheckBox.Checked = false;
+        }
+
+        private void columnResetBtn_Click(object sender, EventArgs e)
+        {
+            ResetColumnTab();
+            InitializeColumnTab();
+        }
+
         //Column creation tab events
         private void columnIsFkCheckBox_CheckedChanged(Object sender, EventArgs e)
         {

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -6,6 +9,32 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
+        //Init non visual settings creation tab default values
+        private void InitializeNonVisualSettingsTabs()
+        {
+            List<String> clients = ConfigurationManager.AppSettings["clients"].Split(',').ToList();
+            foreach (String client in clients)
+            {
+                nonVisualClientsGrid.Columns.Add(client, client);
+            }
+            nonVisualClientsGrid.Columns.Add(Else, Else);
+            nonVisualClientsGrid.Rows.Add();
+        }
+
+        private void ResetNonVisualSettingsTab()
+        {
+            nonVisualCodeTextBox.Text = String.Empty;
+
+            nonVisualClientsGrid.Columns.Clear();
+            nonVisualClientsGrid.Rows.Clear();
+        }
+
+        private void nonVisualResetBtn_Click(object sender, EventArgs e)
+        {
+            ResetNonVisualSettingsTab();
+            InitializeNonVisualSettingsTabs();
+        }
+
         private void nonVisualBtn_Click(Object sender, EventArgs e)
         {
             StringBuilder insertsBuilder = new StringBuilder();

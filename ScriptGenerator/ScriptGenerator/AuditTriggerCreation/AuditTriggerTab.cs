@@ -5,6 +5,18 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
+        private void ResetAuditTriggerTab()
+        {
+            auditTriggerNameTextBox.Text = String.Empty;
+            auditTableNameTextBox.Text = String.Empty;
+            auditSchemaTextBox.Text = String.Empty;
+        }
+
+        private void auditResetBtn_Click(object sender, EventArgs e)
+        {
+            ResetAuditTriggerTab();
+        }
+
         private void auditBtn_Click(Object sender, EventArgs e)
         {
             StringBuilder scriptBuilder = new StringBuilder();

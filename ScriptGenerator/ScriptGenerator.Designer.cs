@@ -36,6 +36,7 @@
             this.tableBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tableTabPage = new System.Windows.Forms.TabPage();
+            this.tableResetBtn = new System.Windows.Forms.Button();
             this.tableTablespaceTextBox = new System.Windows.Forms.TextBox();
             this.tableTablespaceLbl = new System.Windows.Forms.Label();
             this.tableAuditBtn = new System.Windows.Forms.Button();
@@ -62,6 +63,7 @@
             this.tablePKLbl = new System.Windows.Forms.Label();
             this.tableColumnsLbl = new System.Windows.Forms.Label();
             this.columnTabPage = new System.Windows.Forms.TabPage();
+            this.columnResetBtn = new System.Windows.Forms.Button();
             this.columnRefColumnNameTextBox = new System.Windows.Forms.TextBox();
             this.columnRefColumnNameLbl = new System.Windows.Forms.Label();
             this.columnRefTableNameTextBox = new System.Windows.Forms.TextBox();
@@ -90,6 +92,7 @@
             this.columnsTableNameLbl = new System.Windows.Forms.Label();
             this.columnsSchemaLbl = new System.Windows.Forms.Label();
             this.auditTabPage = new System.Windows.Forms.TabPage();
+            this.auditResetBtn = new System.Windows.Forms.Button();
             this.auditTriggerNameTextBox = new System.Windows.Forms.TextBox();
             this.auditTriggerNameLbl = new System.Windows.Forms.Label();
             this.auditBtn = new System.Windows.Forms.Button();
@@ -98,6 +101,7 @@
             this.auditTableNameLbl = new System.Windows.Forms.Label();
             this.auditSchemaLbl = new System.Windows.Forms.Label();
             this.SequenceTabPage = new System.Windows.Forms.TabPage();
+            this.seqResetBtn = new System.Windows.Forms.Button();
             this.seqBtn = new System.Windows.Forms.Button();
             this.seqIncrementByTextBox = new System.Windows.Forms.TextBox();
             this.seqStartWithTextBox = new System.Windows.Forms.TextBox();
@@ -108,18 +112,22 @@
             this.seqSequenceNameLbl = new System.Windows.Forms.Label();
             this.seqSchemaLbl = new System.Windows.Forms.Label();
             this.nonVisualSettingTabPage = new System.Windows.Forms.TabPage();
+            this.nonVisualResetBtn = new System.Windows.Forms.Button();
             this.nonVisualClientsGrid = new System.Windows.Forms.DataGridView();
             this.nonVisualClientsLbl = new System.Windows.Forms.Label();
             this.nonVisualBtn = new System.Windows.Forms.Button();
             this.nonVisualCodeTextBox = new System.Windows.Forms.TextBox();
             this.nonVisualCodeLbl = new System.Windows.Forms.Label();
             this.NonVisLoad = new System.Windows.Forms.TabPage();
+            this.nonVisLoadResetBtn = new System.Windows.Forms.Button();
             this.nonVisualLoadPathLabel = new System.Windows.Forms.Label();
             this.nonVisualLoadLabel = new System.Windows.Forms.Label();
             this.nonVisualLoadFileButton = new System.Windows.Forms.Button();
             this.nonVisLoadButton = new System.Windows.Forms.Button();
             this.nonVisLoadCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.charConverterTabPage = new System.Windows.Forms.TabPage();
+            this.charConvResetBtn = new System.Windows.Forms.Button();
+            this.charConvCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.charConvCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.charConvButton = new System.Windows.Forms.Button();
@@ -140,7 +148,6 @@
             this.versioningDirectoryButton = new System.Windows.Forms.Button();
             this.nonVisualLoadFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.versioningFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.charConvCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
@@ -228,6 +235,7 @@
             // 
             // tableTabPage
             // 
+            this.tableTabPage.Controls.Add(this.tableResetBtn);
             this.tableTabPage.Controls.Add(this.tableTablespaceTextBox);
             this.tableTabPage.Controls.Add(this.tableTablespaceLbl);
             this.tableTabPage.Controls.Add(this.tableAuditBtn);
@@ -251,6 +259,16 @@
             this.tableTabPage.TabIndex = 0;
             this.tableTabPage.Text = "Table creation";
             this.tableTabPage.UseVisualStyleBackColor = true;
+            // 
+            // tableResetBtn
+            // 
+            this.tableResetBtn.Location = new System.Drawing.Point(91, 307);
+            this.tableResetBtn.Name = "tableResetBtn";
+            this.tableResetBtn.Size = new System.Drawing.Size(75, 23);
+            this.tableResetBtn.TabIndex = 21;
+            this.tableResetBtn.Text = "Reset tab";
+            this.tableResetBtn.UseVisualStyleBackColor = true;
+            this.tableResetBtn.Click += new System.EventHandler(this.tableResetBtn_Click);
             // 
             // tableTablespaceTextBox
             // 
@@ -459,6 +477,7 @@
             // 
             // columnTabPage
             // 
+            this.columnTabPage.Controls.Add(this.columnResetBtn);
             this.columnTabPage.Controls.Add(this.columnRefColumnNameTextBox);
             this.columnTabPage.Controls.Add(this.columnRefColumnNameLbl);
             this.columnTabPage.Controls.Add(this.columnRefTableNameTextBox);
@@ -493,6 +512,16 @@
             this.columnTabPage.TabIndex = 1;
             this.columnTabPage.Text = "Column creation";
             this.columnTabPage.UseVisualStyleBackColor = true;
+            // 
+            // columnResetBtn
+            // 
+            this.columnResetBtn.Location = new System.Drawing.Point(84, 110);
+            this.columnResetBtn.Name = "columnResetBtn";
+            this.columnResetBtn.Size = new System.Drawing.Size(75, 23);
+            this.columnResetBtn.TabIndex = 33;
+            this.columnResetBtn.Text = "Reset tab";
+            this.columnResetBtn.UseVisualStyleBackColor = true;
+            this.columnResetBtn.Click += new System.EventHandler(this.columnResetBtn_Click);
             // 
             // columnRefColumnNameTextBox
             // 
@@ -738,6 +767,7 @@
             // 
             // auditTabPage
             // 
+            this.auditTabPage.Controls.Add(this.auditResetBtn);
             this.auditTabPage.Controls.Add(this.auditTriggerNameTextBox);
             this.auditTabPage.Controls.Add(this.auditTriggerNameLbl);
             this.auditTabPage.Controls.Add(this.auditBtn);
@@ -752,6 +782,16 @@
             this.auditTabPage.TabIndex = 2;
             this.auditTabPage.Text = "Audit trigger creation";
             this.auditTabPage.UseVisualStyleBackColor = true;
+            // 
+            // auditResetBtn
+            // 
+            this.auditResetBtn.Location = new System.Drawing.Point(77, 113);
+            this.auditResetBtn.Name = "auditResetBtn";
+            this.auditResetBtn.Size = new System.Drawing.Size(75, 23);
+            this.auditResetBtn.TabIndex = 22;
+            this.auditResetBtn.Text = "Reset tab";
+            this.auditResetBtn.UseVisualStyleBackColor = true;
+            this.auditResetBtn.Click += new System.EventHandler(this.auditResetBtn_Click);
             // 
             // auditTriggerNameTextBox
             // 
@@ -819,6 +859,7 @@
             // 
             // SequenceTabPage
             // 
+            this.SequenceTabPage.Controls.Add(this.seqResetBtn);
             this.SequenceTabPage.Controls.Add(this.seqBtn);
             this.SequenceTabPage.Controls.Add(this.seqIncrementByTextBox);
             this.SequenceTabPage.Controls.Add(this.seqStartWithTextBox);
@@ -834,6 +875,16 @@
             this.SequenceTabPage.TabIndex = 3;
             this.SequenceTabPage.Text = "Sequence creation";
             this.SequenceTabPage.UseVisualStyleBackColor = true;
+            // 
+            // seqResetBtn
+            // 
+            this.seqResetBtn.Location = new System.Drawing.Point(98, 84);
+            this.seqResetBtn.Name = "seqResetBtn";
+            this.seqResetBtn.Size = new System.Drawing.Size(75, 23);
+            this.seqResetBtn.TabIndex = 23;
+            this.seqResetBtn.Text = "Reset tab";
+            this.seqResetBtn.UseVisualStyleBackColor = true;
+            this.seqResetBtn.Click += new System.EventHandler(this.seqResetBtn_Click);
             // 
             // seqBtn
             // 
@@ -917,6 +968,7 @@
             // 
             // nonVisualSettingTabPage
             // 
+            this.nonVisualSettingTabPage.Controls.Add(this.nonVisualResetBtn);
             this.nonVisualSettingTabPage.Controls.Add(this.nonVisualClientsGrid);
             this.nonVisualSettingTabPage.Controls.Add(this.nonVisualClientsLbl);
             this.nonVisualSettingTabPage.Controls.Add(this.nonVisualBtn);
@@ -928,6 +980,16 @@
             this.nonVisualSettingTabPage.TabIndex = 4;
             this.nonVisualSettingTabPage.Text = "Non visual setting creation";
             this.nonVisualSettingTabPage.UseVisualStyleBackColor = true;
+            // 
+            // nonVisualResetBtn
+            // 
+            this.nonVisualResetBtn.Location = new System.Drawing.Point(13, 300);
+            this.nonVisualResetBtn.Name = "nonVisualResetBtn";
+            this.nonVisualResetBtn.Size = new System.Drawing.Size(75, 23);
+            this.nonVisualResetBtn.TabIndex = 22;
+            this.nonVisualResetBtn.Text = "Reset tab";
+            this.nonVisualResetBtn.UseVisualStyleBackColor = true;
+            this.nonVisualResetBtn.Click += new System.EventHandler(this.nonVisualResetBtn_Click);
             // 
             // nonVisualClientsGrid
             // 
@@ -978,6 +1040,7 @@
             // 
             // NonVisLoad
             // 
+            this.NonVisLoad.Controls.Add(this.nonVisLoadResetBtn);
             this.NonVisLoad.Controls.Add(this.nonVisualLoadPathLabel);
             this.NonVisLoad.Controls.Add(this.nonVisualLoadLabel);
             this.NonVisLoad.Controls.Add(this.nonVisualLoadFileButton);
@@ -990,6 +1053,16 @@
             this.NonVisLoad.TabIndex = 5;
             this.NonVisLoad.Text = "Non visual setting load";
             this.NonVisLoad.UseVisualStyleBackColor = true;
+            // 
+            // nonVisLoadResetBtn
+            // 
+            this.nonVisLoadResetBtn.Location = new System.Drawing.Point(216, 302);
+            this.nonVisLoadResetBtn.Name = "nonVisLoadResetBtn";
+            this.nonVisLoadResetBtn.Size = new System.Drawing.Size(75, 23);
+            this.nonVisLoadResetBtn.TabIndex = 24;
+            this.nonVisLoadResetBtn.Text = "Reset tab";
+            this.nonVisLoadResetBtn.UseVisualStyleBackColor = true;
+            this.nonVisLoadResetBtn.Click += new System.EventHandler(this.nonVisLoadResetBtn_Click);
             // 
             // nonVisualLoadPathLabel
             // 
@@ -1039,6 +1112,7 @@
             // 
             // charConverterTabPage
             // 
+            this.charConverterTabPage.Controls.Add(this.charConvResetBtn);
             this.charConverterTabPage.Controls.Add(this.charConvCheckBox);
             this.charConverterTabPage.Controls.Add(this.label1);
             this.charConverterTabPage.Controls.Add(this.charConvCheckedListBox);
@@ -1052,6 +1126,26 @@
             this.charConverterTabPage.TabIndex = 6;
             this.charConverterTabPage.Text = "Char converter";
             this.charConverterTabPage.UseVisualStyleBackColor = true;
+            // 
+            // charConvResetBtn
+            // 
+            this.charConvResetBtn.Location = new System.Drawing.Point(9, 257);
+            this.charConvResetBtn.Name = "charConvResetBtn";
+            this.charConvResetBtn.Size = new System.Drawing.Size(75, 23);
+            this.charConvResetBtn.TabIndex = 24;
+            this.charConvResetBtn.Text = "Reset tab";
+            this.charConvResetBtn.UseVisualStyleBackColor = true;
+            this.charConvResetBtn.Click += new System.EventHandler(this.charConvResetBtn_Click);
+            // 
+            // charConvCheckBox
+            // 
+            this.charConvCheckBox.AutoSize = true;
+            this.charConvCheckBox.Location = new System.Drawing.Point(90, 232);
+            this.charConvCheckBox.Name = "charConvCheckBox";
+            this.charConvCheckBox.Size = new System.Drawing.Size(122, 17);
+            this.charConvCheckBox.TabIndex = 23;
+            this.charConvCheckBox.Text = "Replace apostrophe";
+            this.charConvCheckBox.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -1236,16 +1330,6 @@
             // 
             this.nonVisualLoadFileDialog.FileName = "Nevizualus_sistemos_nustatymai";
             // 
-            // charConvCheckBox
-            // 
-            this.charConvCheckBox.AutoSize = true;
-            this.charConvCheckBox.Location = new System.Drawing.Point(90, 232);
-            this.charConvCheckBox.Name = "charConvCheckBox";
-            this.charConvCheckBox.Size = new System.Drawing.Size(122, 17);
-            this.charConvCheckBox.TabIndex = 23;
-            this.charConvCheckBox.Text = "Replace apostrophe";
-            this.charConvCheckBox.UseVisualStyleBackColor = true;
-            // 
             // ScriptGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1394,6 +1478,13 @@
         private System.Windows.Forms.Label versioningDirectory;
         private System.Windows.Forms.FolderBrowserDialog versioningFolderBrowserDialog;
         private System.Windows.Forms.CheckBox charConvCheckBox;
+        private System.Windows.Forms.Button tableResetBtn;
+        private System.Windows.Forms.Button columnResetBtn;
+        private System.Windows.Forms.Button auditResetBtn;
+        private System.Windows.Forms.Button seqResetBtn;
+        private System.Windows.Forms.Button nonVisualResetBtn;
+        private System.Windows.Forms.Button nonVisLoadResetBtn;
+        private System.Windows.Forms.Button charConvResetBtn;
     }
 }
 

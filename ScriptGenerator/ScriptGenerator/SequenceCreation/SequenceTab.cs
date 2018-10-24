@@ -5,6 +5,27 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
+        //Init sequence creation tab default values
+        private void InitializeSequenceTab()
+        {
+            seqIncrementByTextBox.Text = "1";
+            seqStartWithTextBox.Text = "1";
+        }
+
+        private void ResetSequenceTab()
+        {
+            seqSequenceNameTextBox.Text = String.Empty;
+            seqIncrementByTextBox.Text = String.Empty;
+            seqStartWithTextBox.Text = String.Empty;
+            seqSchemaTextBox.Text = String.Empty;
+        }
+
+        private void seqResetBtn_Click(object sender, EventArgs e)
+        {
+            ResetSequenceTab();
+            InitializeSequenceTab();
+        }
+
         private void seqBtn_Click(Object sender, EventArgs e)
         {
             StringBuilder scriptBuilder = new StringBuilder();
