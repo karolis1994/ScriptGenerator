@@ -146,8 +146,23 @@
             this.versioningIncreaseMajorCheckBox = new System.Windows.Forms.CheckBox();
             this.versioningFilePathLabel = new System.Windows.Forms.Label();
             this.versioningDirectoryButton = new System.Windows.Forms.Button();
+            this.domainModels = new System.Windows.Forms.TabPage();
+            this.domainRemoveBtn = new System.Windows.Forms.Button();
+            this.domainAddBtn = new System.Windows.Forms.Button();
+            this.domainResetBtn = new System.Windows.Forms.Button();
+            this.domainGenerateBtn = new System.Windows.Forms.Button();
+            this.domainClassNameTextBox = new System.Windows.Forms.TextBox();
+            this.domainClassName = new System.Windows.Forms.Label();
+            this.domainPropertiesGrid = new System.Windows.Forms.DataGridView();
+            this.PropertyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PropertyType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsNullable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.IsUsedInCreation = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.IsUsedInUpdating = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.nonVisualLoadFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.versioningFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.domainNameSpaceTextBox = new System.Windows.Forms.TextBox();
+            this.domainNamespaceLbl = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
@@ -159,6 +174,8 @@
             this.NonVisLoad.SuspendLayout();
             this.charConverterTabPage.SuspendLayout();
             this.versioning.SuspendLayout();
+            this.domainModels.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.domainPropertiesGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // scriptTextBox
@@ -227,6 +244,7 @@
             this.tabControl1.Controls.Add(this.NonVisLoad);
             this.tabControl1.Controls.Add(this.charConverterTabPage);
             this.tabControl1.Controls.Add(this.versioning);
+            this.tabControl1.Controls.Add(this.domainModels);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1326,9 +1344,145 @@
             this.versioningDirectoryButton.UseVisualStyleBackColor = true;
             this.versioningDirectoryButton.Click += new System.EventHandler(this.versioningDirectoryButton_Click);
             // 
+            // domainModels
+            // 
+            this.domainModels.Controls.Add(this.domainNameSpaceTextBox);
+            this.domainModels.Controls.Add(this.domainNamespaceLbl);
+            this.domainModels.Controls.Add(this.domainRemoveBtn);
+            this.domainModels.Controls.Add(this.domainAddBtn);
+            this.domainModels.Controls.Add(this.domainResetBtn);
+            this.domainModels.Controls.Add(this.domainGenerateBtn);
+            this.domainModels.Controls.Add(this.domainClassNameTextBox);
+            this.domainModels.Controls.Add(this.domainClassName);
+            this.domainModels.Controls.Add(this.domainPropertiesGrid);
+            this.domainModels.Location = new System.Drawing.Point(4, 22);
+            this.domainModels.Name = "domainModels";
+            this.domainModels.Padding = new System.Windows.Forms.Padding(3);
+            this.domainModels.Size = new System.Drawing.Size(1414, 348);
+            this.domainModels.TabIndex = 8;
+            this.domainModels.Text = "Domain models";
+            this.domainModels.UseVisualStyleBackColor = true;
+            // 
+            // domainRemoveBtn
+            // 
+            this.domainRemoveBtn.Location = new System.Drawing.Point(84, 43);
+            this.domainRemoveBtn.Name = "domainRemoveBtn";
+            this.domainRemoveBtn.Size = new System.Drawing.Size(107, 23);
+            this.domainRemoveBtn.TabIndex = 17;
+            this.domainRemoveBtn.Text = "Remove Selected";
+            this.domainRemoveBtn.UseVisualStyleBackColor = true;
+            this.domainRemoveBtn.Click += new System.EventHandler(this.DomainRemoveBtn_Click);
+            // 
+            // domainAddBtn
+            // 
+            this.domainAddBtn.Location = new System.Drawing.Point(3, 43);
+            this.domainAddBtn.Name = "domainAddBtn";
+            this.domainAddBtn.Size = new System.Drawing.Size(75, 23);
+            this.domainAddBtn.TabIndex = 16;
+            this.domainAddBtn.Text = "Add Column";
+            this.domainAddBtn.UseVisualStyleBackColor = true;
+            this.domainAddBtn.Click += new System.EventHandler(this.DomainAddBtn_Click);
+            // 
+            // domainResetBtn
+            // 
+            this.domainResetBtn.Location = new System.Drawing.Point(84, 258);
+            this.domainResetBtn.Name = "domainResetBtn";
+            this.domainResetBtn.Size = new System.Drawing.Size(75, 23);
+            this.domainResetBtn.TabIndex = 4;
+            this.domainResetBtn.Text = "Reset";
+            this.domainResetBtn.UseVisualStyleBackColor = true;
+            this.domainResetBtn.Click += new System.EventHandler(this.DomainResetBtn_Click);
+            // 
+            // domainGenerateBtn
+            // 
+            this.domainGenerateBtn.Location = new System.Drawing.Point(3, 258);
+            this.domainGenerateBtn.Name = "domainGenerateBtn";
+            this.domainGenerateBtn.Size = new System.Drawing.Size(75, 23);
+            this.domainGenerateBtn.TabIndex = 3;
+            this.domainGenerateBtn.Text = "Generate";
+            this.domainGenerateBtn.UseVisualStyleBackColor = true;
+            this.domainGenerateBtn.Click += new System.EventHandler(this.DomainGenerateBtn_Click);
+            // 
+            // domainClassNameTextBox
+            // 
+            this.domainClassNameTextBox.Location = new System.Drawing.Point(76, 16);
+            this.domainClassNameTextBox.Name = "domainClassNameTextBox";
+            this.domainClassNameTextBox.Size = new System.Drawing.Size(299, 20);
+            this.domainClassNameTextBox.TabIndex = 2;
+            // 
+            // domainClassName
+            // 
+            this.domainClassName.AutoSize = true;
+            this.domainClassName.Location = new System.Drawing.Point(6, 16);
+            this.domainClassName.Name = "domainClassName";
+            this.domainClassName.Size = new System.Drawing.Size(64, 13);
+            this.domainClassName.TabIndex = 1;
+            this.domainClassName.Text = "Class name:";
+            // 
+            // domainPropertiesGrid
+            // 
+            this.domainPropertiesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.domainPropertiesGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.PropertyName,
+            this.PropertyType,
+            this.IsNullable,
+            this.IsUsedInCreation,
+            this.IsUsedInUpdating});
+            this.domainPropertiesGrid.Location = new System.Drawing.Point(3, 72);
+            this.domainPropertiesGrid.Name = "domainPropertiesGrid";
+            this.domainPropertiesGrid.Size = new System.Drawing.Size(992, 180);
+            this.domainPropertiesGrid.TabIndex = 0;
+            // 
+            // PropertyName
+            // 
+            this.PropertyName.HeaderText = "Property name";
+            this.PropertyName.Name = "PropertyName";
+            this.PropertyName.Width = 300;
+            // 
+            // PropertyType
+            // 
+            this.PropertyType.HeaderText = "Property type";
+            this.PropertyType.Name = "PropertyType";
+            this.PropertyType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.PropertyType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.PropertyType.Width = 200;
+            // 
+            // IsNullable
+            // 
+            this.IsNullable.HeaderText = "Is nullable";
+            this.IsNullable.Name = "IsNullable";
+            // 
+            // IsUsedInCreation
+            // 
+            this.IsUsedInCreation.HeaderText = "Is used in creation";
+            this.IsUsedInCreation.Name = "IsUsedInCreation";
+            this.IsUsedInCreation.Width = 150;
+            // 
+            // IsUsedInUpdating
+            // 
+            this.IsUsedInUpdating.HeaderText = "Is used in updating";
+            this.IsUsedInUpdating.Name = "IsUsedInUpdating";
+            this.IsUsedInUpdating.Width = 150;
+            // 
             // nonVisualLoadFileDialog
             // 
             this.nonVisualLoadFileDialog.FileName = "Nevizualus_sistemos_nustatymai";
+            // 
+            // domainNameSpaceTextBox
+            // 
+            this.domainNameSpaceTextBox.Location = new System.Drawing.Point(455, 16);
+            this.domainNameSpaceTextBox.Name = "domainNameSpaceTextBox";
+            this.domainNameSpaceTextBox.Size = new System.Drawing.Size(299, 20);
+            this.domainNameSpaceTextBox.TabIndex = 19;
+            // 
+            // domainNamespaceLbl
+            // 
+            this.domainNamespaceLbl.AutoSize = true;
+            this.domainNamespaceLbl.Location = new System.Drawing.Point(385, 16);
+            this.domainNamespaceLbl.Name = "domainNamespaceLbl";
+            this.domainNamespaceLbl.Size = new System.Drawing.Size(67, 13);
+            this.domainNamespaceLbl.TabIndex = 18;
+            this.domainNamespaceLbl.Text = "Namespace:";
             // 
             // ScriptGenerator
             // 
@@ -1358,6 +1512,9 @@
             this.charConverterTabPage.PerformLayout();
             this.versioning.ResumeLayout(false);
             this.versioning.PerformLayout();
+            this.domainModels.ResumeLayout(false);
+            this.domainModels.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.domainPropertiesGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1485,6 +1642,21 @@
         private System.Windows.Forms.Button nonVisualResetBtn;
         private System.Windows.Forms.Button nonVisLoadResetBtn;
         private System.Windows.Forms.Button charConvResetBtn;
+        private System.Windows.Forms.TabPage domainModels;
+        private System.Windows.Forms.DataGridView domainPropertiesGrid;
+        private System.Windows.Forms.TextBox domainClassNameTextBox;
+        private System.Windows.Forms.Label domainClassName;
+        private System.Windows.Forms.Button domainResetBtn;
+        private System.Windows.Forms.Button domainGenerateBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PropertyName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PropertyType;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsNullable;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsUsedInCreation;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsUsedInUpdating;
+        private System.Windows.Forms.Button domainRemoveBtn;
+        private System.Windows.Forms.Button domainAddBtn;
+        private System.Windows.Forms.TextBox domainNameSpaceTextBox;
+        private System.Windows.Forms.Label domainNamespaceLbl;
     }
 }
 

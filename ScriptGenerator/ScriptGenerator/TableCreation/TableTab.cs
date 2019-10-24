@@ -96,7 +96,6 @@ namespace ScriptGenerator
                 if (row.Index != 0)
                     tableColumnsGrid.Rows.Remove(row);
             }
-
         }
         private void tableAuditBtn_Click(Object sender, EventArgs e)
         {

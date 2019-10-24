@@ -64,6 +64,9 @@
     <Compile Include="ScriptGenerator\ColumnCreation\ColumnTab.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ScriptGenerator\DomainModel\DomainModelCreationTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ScriptGenerator\NonVisualSettingCreation\NonVisualSettingsCreationTab.cs">
       <SubType>Form</SubType>
     </Compile>
