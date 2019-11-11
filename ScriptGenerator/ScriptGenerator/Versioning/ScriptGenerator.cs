@@ -10,12 +10,11 @@ namespace ScriptGenerator
         private void versioningDirectoryButton_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            DialogResult result = versioningFolderBrowserDialog.ShowDialog();
-
-            if (result == DialogResult.OK && !String.IsNullOrWhiteSpace(versioningFolderBrowserDialog.SelectedPath))
+            FolderSelectDialog folderSelectorDialog = new FolderSelectDialog() { Title = "Select a folder", InitialDirectory = @"c:\" };
+            if (folderSelectorDialog.ShowDialog(IntPtr.Zero) && !String.IsNullOrWhiteSpace(folderSelectorDialog.FileName))
             {
                 scriptTextBox.Text = "Files that will be updated:" + Environment.NewLine;
-                versioningDirectory.Text = versioningFolderBrowserDialog.SelectedPath;
+                versioningDirectory.Text = folderSelectorDialog.FileName;
                 scriptTextBox.Text += String.Join(Environment.NewLine, Directory.GetFiles(versioningDirectory.Text, "AssemblyInfo.cs", SearchOption.AllDirectories));
             }
             Cursor.Current = Cursors.Arrow;
@@ -61,7 +60,7 @@ namespace ScriptGenerator
                     fileText = regex.Replace(fileText, newVersion);
                     File.WriteAllText(file, fileText);
 
-                    scriptTextBox.Text += $"{file} updated to version {newVersion}{Environment.NewLine}"; 
+                    scriptTextBox.Text += $"{file} updated to version {newVersion}{Environment.NewLine}";
                 }
             }
         }

@@ -1,4 +1,4 @@
-﻿using Services;
+﻿using ScriptGenerator.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,11 +10,11 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
-        private IWordWorks wordWorker;
+        private IWordService wordService;
 
-        public ScriptGenerator(IWordWorks wordWorker)
+        public ScriptGenerator(IWordService wordWorker)
         {
-            this.wordWorker = wordWorker;
+            this.wordService = wordWorker;
             InitializeWindow();
         }
 
@@ -70,7 +70,7 @@ namespace ScriptGenerator
                 stringBuilder.Append($"BEGIN{Environment.NewLine}");
                 stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting("APT_CLIENT", nonVisLoadCheckedListBox.CheckedItems[0].ToString()));
 
-                foreach (KeyValuePair<String, Int32> entry in wordWorker.GetClientSettings(nonVisLoadCheckedListBox.CheckedItems[0].ToString(), nonVisualLoadPathLabel.Text))
+                foreach (KeyValuePair<String, Int32> entry in wordService.GetClientSettings(nonVisLoadCheckedListBox.CheckedItems[0].ToString(), nonVisualLoadPathLabel.Text))
                 {
                     if (entry.Key.Length <= 30)
                         stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting(entry.Key, entry.Value.ToString()));

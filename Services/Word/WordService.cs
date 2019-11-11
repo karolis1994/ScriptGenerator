@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.Office.Interop.Word;
 
-namespace Services
+namespace ScriptGenerator.Services
 {
-    public class WordWorks : IWordWorks
+    public class WordService : IWordService
     {
         /// <summary>
         /// Enumeration for specific client, matches client columns in

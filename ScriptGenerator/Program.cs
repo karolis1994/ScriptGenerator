@@ -1,4 +1,4 @@
-﻿using Services;
+﻿using ScriptGenerator.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace ScriptGenerator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ScriptGenerator(new WordWorks()));
+            Application.Run(new ScriptGenerator(new WordService()));
         }
     }
 }

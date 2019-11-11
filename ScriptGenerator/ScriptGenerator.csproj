@@ -8,9 +8,10 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ScriptGenerator</RootNamespace>
     <AssemblyName>ScriptGenerator</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FolderSelector\FolderSelectDialog.cs" />
+    <Compile Include="FolderSelector\Reflector.cs" />
     <Compile Include="ScriptGenerator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,9 +101,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Services\Services.csproj">
+    <ProjectReference Include="..\Services\ScriptGenerator.Services.csproj">
       <Project>{ead4197f-f8c8-4864-960d-25a840e82e33}</Project>
-      <Name>Services</Name>
+      <Name>ScriptGenerator.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -111,5 +114,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Services
+namespace ScriptGenerator.Services
 {
     /// <summary>
     /// Interface to do various functions with a word document
     /// </summary>
-    public interface IWordWorks
+    public interface IWordService
     {
         /// <summary>
         /// Retrieves a dictionary from non visual setting definitions document

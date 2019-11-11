@@ -8,9 +8,10 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Services</RootNamespace>
     <AssemblyName>Services</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,9 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Word\IWordWorks.cs" />
+    <Compile Include="CharConverter\OracleCharConverterService.cs" />
+    <Compile Include="CharConverter\ICharConverterService.cs" />
+    <Compile Include="Oracle\IScriptGenerationService.cs" />
+    <Compile Include="Versioning\IVersioningService.cs" />
+    <Compile Include="Versioning\VersioningMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VersioningMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Versioning\VersioningService.cs" />
+    <Compile Include="Word\IWordService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Word\WordWorks.cs" />
+    <Compile Include="Word\WordService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -80,6 +91,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Versioning\VersioningMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>VersioningMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
