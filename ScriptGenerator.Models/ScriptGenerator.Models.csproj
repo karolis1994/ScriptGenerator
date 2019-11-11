@@ -46,10 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Oracle\Column.cs" />
-    <Compile Include="Oracle\DataType.cs" />
-    <Compile Include="Oracle\Sequence.cs" />
-    <Compile Include="Oracle\Table.cs" />
+    <Compile Include="Models\Column.cs" />
+    <Compile Include="Models\Constraint.cs" />
+    <Compile Include="Models\ConstraintForeignKey.cs" />
+    <Compile Include="Models\ConstraintIndex.cs" />
+    <Compile Include="Models\DataType.cs" />
+    <Compile Include="Models\Sequence.cs" />
+    <Compile Include="Models\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

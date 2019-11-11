@@ -1,4 +1,4 @@
-﻿namespace ScriptGenerator.Models.Oracle
+﻿namespace ScriptGenerator.Models
 {
     /// <summary>
     /// Application supported oracle data types

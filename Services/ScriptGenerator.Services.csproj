@@ -49,6 +49,7 @@
     <Compile Include="CharConverter\OracleCharConverterService.cs" />
     <Compile Include="CharConverter\ICharConverterService.cs" />
     <Compile Include="Oracle\IScriptGenerationService.cs" />
+    <Compile Include="Oracle\ScriptGenerationService.cs" />
     <Compile Include="Versioning\IVersioningService.cs" />
     <Compile Include="Versioning\VersioningMessages.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -97,6 +98,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>VersioningMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScriptGenerator.Models\ScriptGenerator.Models.csproj">
+      <Project>{0E82C788-81E6-42F7-AC31-3115A4B5B7AD}</Project>
+      <Name>ScriptGenerator.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

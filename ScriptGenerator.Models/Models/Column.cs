@@ -1,10 +1,20 @@
-﻿namespace ScriptGenerator.Models.Oracle
+﻿namespace ScriptGenerator.Models
 {
     /// <summary>
     /// Column model
     /// </summary>
     public class Column
     {
+        /// <summary>
+        /// Table schema
+        /// </summary>
+        public string TableSchema { get; private set; }
+
+        /// <summary>
+        /// Table name
+        /// </summary>
+        public string TableName { get; private set; }
+
         /// <summary>
         /// Column name
         /// </summary>
