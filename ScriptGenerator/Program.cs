@@ -17,7 +17,7 @@ namespace ScriptGenerator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ScriptGenerator(new WordService()));
+            Application.Run(new ScriptGenerator(new WordService(), new OracleCharConverterService(), new VersioningService(), new ScriptGenerationService()));
         }
     }
 }

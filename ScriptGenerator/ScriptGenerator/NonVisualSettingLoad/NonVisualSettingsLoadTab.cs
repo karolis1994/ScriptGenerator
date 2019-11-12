@@ -1,5 +1,4 @@
-﻿using ScriptGenerator.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -10,14 +9,6 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
-        private IWordService wordService;
-
-        public ScriptGenerator(IWordService wordWorker)
-        {
-            this.wordService = wordWorker;
-            InitializeWindow();
-        }
-
         private void InitializeNonVisualSettingLoadTab()
         {
             //Init non visual settings creation tab default values

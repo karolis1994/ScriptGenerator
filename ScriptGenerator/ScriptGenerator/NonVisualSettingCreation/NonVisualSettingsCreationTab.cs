@@ -10,7 +10,7 @@ namespace ScriptGenerator
     public partial class ScriptGenerator
     {
         //Init non visual settings creation tab default values
-        private void InitializeNonVisualSettingsTabs()
+        private void InitializeNonVisualSettingsTab()
         {
             List<String> clients = ConfigurationManager.AppSettings["clients"].Split(',').ToList();
             foreach (String client in clients)
@@ -32,7 +32,7 @@ namespace ScriptGenerator
         private void nonVisualResetBtn_Click(object sender, EventArgs e)
         {
             ResetNonVisualSettingsTab();
-            InitializeNonVisualSettingsTabs();
+            InitializeNonVisualSettingsTab();
         }
 
         private void nonVisualBtn_Click(Object sender, EventArgs e)

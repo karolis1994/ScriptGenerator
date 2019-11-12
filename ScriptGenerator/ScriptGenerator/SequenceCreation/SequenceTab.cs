@@ -1,10 +1,16 @@
-﻿using System;
-using System.Text;
+﻿using ScriptGenerator.Models;
+using System;
+using System.Windows.Forms;
 
 namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
+        /// <summary>
+        /// The last generated model for sequence
+        /// </summary>
+        private Sequence tabSequence;
+
         //Init sequence creation tab default values
         private void InitializeSequenceTab()
         {
@@ -26,25 +32,30 @@ namespace ScriptGenerator
             InitializeSequenceTab();
         }
 
-        private void seqBtn_Click(Object sender, EventArgs e)
+        private async void seqBtn_Click(Object sender, EventArgs e)
         {
-            StringBuilder scriptBuilder = new StringBuilder();
+            Cursor.Current = Cursors.WaitCursor;
+            seqBtn.Enabled = false;
 
-            scriptBuilder.Append($"DECLARE" + Environment.NewLine);
-            scriptBuilder.Append($"  ln_exist NUMBER;" + Environment.NewLine);
-            scriptBuilder.Append($"BEGIN" + Environment.NewLine);
-            scriptBuilder.Append($"  SELECT COUNT(1)" + Environment.NewLine);
-            scriptBuilder.Append($"    INTO ln_exist" + Environment.NewLine);
-            scriptBuilder.Append($"    FROM ALL_SEQUENCES A" + Environment.NewLine);
-            scriptBuilder.Append($"   WHERE A.SEQUENCE_NAME = '{seqSequenceNameTextBox.Text}'" + Environment.NewLine);
-            scriptBuilder.Append($"     AND A.SEQUENCE_OWNER = '{seqSchemaTextBox.Text}';" + Environment.NewLine);
-            scriptBuilder.Append($"  IF ln_exist = 0 THEN" + Environment.NewLine);
-            scriptBuilder.Append($"    EXECUTE IMMEDIATE 'CREATE SEQUENCE {seqSchemaTextBox.Text}.{seqSequenceNameTextBox.Text} START WITH {seqStartWithTextBox.Text} ");
-            scriptBuilder.Append($"INCREMENT BY {seqIncrementByTextBox.Text} NOCACHE';" + Environment.NewLine);
-            scriptBuilder.Append($"  END IF;" + Environment.NewLine);
-            scriptBuilder.Append($"END;");
+            var result = await scriptGenerationService.GenerateCreationScript(TabToModelSequence()).ConfigureAwait(false);
 
-            scriptTextBox.Text = scriptBuilder.ToString();
+            this.Invoke(new Action(() =>
+            {
+                scriptTextBox.Text = result;
+
+                Cursor.Current = Cursors.Arrow;
+                seqBtn.Enabled = true;
+            }));
+        }
+
+        private Sequence TabToModelSequence()
+        {
+            int.TryParse(seqStartWithTextBox.Text, out var startWith);
+            int.TryParse(seqIncrementByTextBox.Text, out var incrementBy);
+
+            tabSequence = Sequence.CreateNew(seqSequenceNameTextBox.Text, seqSchemaTextBox.Text, startWith, incrementBy);
+
+            return tabSequence;
         }
     }
 }

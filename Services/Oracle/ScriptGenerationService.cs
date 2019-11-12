@@ -175,7 +175,7 @@ namespace ScriptGenerator.Services
             if (c == null)
                 return string.Empty;
 
-            return $"{c.Name} {GenerateTypeDefinition(c)}{GenerateDefaultValueDefinition(c)}";
+            return $"{c.Name} {GenerateTypeDefinition(c)} {GenerateDefaultValueDefinition(c)}";
         }
         private string GenerateDefaultValueDefinition(Column c)
         {

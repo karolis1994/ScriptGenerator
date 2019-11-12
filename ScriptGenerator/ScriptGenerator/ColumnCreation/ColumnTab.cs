@@ -1,11 +1,15 @@
-﻿using System;
+﻿using ScriptGenerator.Models;
+using ScriptGenerator.Extensions;
+using System;
 using System.Drawing;
-using System.Text;
+using System.Windows.Forms;
 
 namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
+        private Column tabColumn;
+
         /// <summary>
         /// Set default values of column tab
         /// </summary>
@@ -21,6 +25,12 @@ namespace ScriptGenerator
             columnRefTableNameTextBox.ReadOnly = true;
             columnRefColumnNameTextBox.BackColor = Color.Gray;
             columnRefColumnNameTextBox.ReadOnly = true;
+
+            this.columnTypeComboBox.DataSource = DataTypeDropDown.GetAllDropDownOptions();
+            this.columnTypeComboBox.DisplayMember = "Value";
+            this.columnTypeComboBox.ValueMember = "Key";
+
+            this.columnTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         /// <summary>
@@ -28,17 +38,18 @@ namespace ScriptGenerator
         /// </summary>
         private void ResetColumnTab()
         {
-            columnRefColumnNameTextBox.Text = String.Empty;
-            columnRefSchemaNameTextBox.Text = String.Empty;
-            columnRefTableNameTextBox.Text = String.Empty;
-            columnsTableNameTextBox.Text = String.Empty;
-            columnIndexNameTextBox.Text = String.Empty;
-            columnsSchemaTextBox.Text = String.Empty;
-            columnCommentTextBox.Text = String.Empty;
-            columnDefaultTextBox.Text = String.Empty;
-            columnColumnTextBox.Text = String.Empty;
-            columnFkNameTextBox.Text = String.Empty;
-            columnTypeTextBox.Text = String.Empty;
+            columnRefColumnNameTextBox.Text = string.Empty;
+            columnRefSchemaNameTextBox.Text = string.Empty;
+            columnRefTableNameTextBox.Text = string.Empty;
+            columnsTableNameTextBox.Text = string.Empty;
+            columnIndexNameTextBox.Text = string.Empty;
+            columnsSchemaTextBox.Text = string.Empty;
+            columnCommentTextBox.Text = string.Empty;
+            columnDefaultTextBox.Text = string.Empty;
+            columnColumnTextBox.Text = string.Empty;
+            columnFkNameTextBox.Text = string.Empty;
+            columnTypeComboBox.SelectedIndex = 0;
+            columnDataLengthTextBox.Text = string.Empty;
 
             columnIsNullableCheckBox.Checked = true;
             columnIsFkCheckBox.Checked = false;
@@ -80,51 +91,40 @@ namespace ScriptGenerator
                 columnRefColumnNameTextBox.ReadOnly = false;
             }
         }
-        private void columnBtn_Click(Object sender, EventArgs e)
+        private async void columnBtn_Click(Object sender, EventArgs e)
         {
-            StringBuilder scriptBuilder = new StringBuilder();
-            String comment = columnCommentTextBox.Text.Length > 0 ?
-                GenerateColumnCommentScript(columnsSchemaTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text, columnCommentTextBox.Text, "      ") + Environment.NewLine :
-                String.Empty;
-            String foreignKey = columnIsFkCheckBox.Checked ? GenerateForeignKeyScript(columnsSchemaTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text, columnFkNameTextBox.Text,
-                columnRefSchemaNameTextBox.Text, columnRefTableNameTextBox.Text, columnRefColumnNameTextBox.Text, "      ") + Environment.NewLine : String.Empty;
-            String fkIndex = String.IsNullOrWhiteSpace(columnIndexNameTextBox.Text) ?
-                String.Empty :
-                GenerateIndexScript(columnsSchemaTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text, columnIndexNameTextBox.Text, "      ") + Environment.NewLine;
+            Cursor.Current = Cursors.WaitCursor;
+            versioningButton.Enabled = false;
 
-            scriptBuilder.Append($"DECLARE{Environment.NewLine}");
-            scriptBuilder.Append($"  ln_exist NUMBER;{Environment.NewLine}");
-            scriptBuilder.Append($"BEGIN{Environment.NewLine}");
-            scriptBuilder.Append($"  SELECT COUNT(1){Environment.NewLine}");
-            scriptBuilder.Append($"    INTO ln_exist{Environment.NewLine}");
-            scriptBuilder.Append($"    FROM ALL_TAB_COLS ATC{Environment.NewLine}");
-            scriptBuilder.Append($"   WHERE ATC.OWNER = '{columnsSchemaTextBox.Text}'{Environment.NewLine}");
-            scriptBuilder.Append($"     AND ATC.TABLE_NAME = '{columnsTableNameTextBox.Text}'{Environment.NewLine}");
-            scriptBuilder.Append($"     AND ATC.COLUMN_NAME = '{columnColumnTextBox.Text}';{Environment.NewLine}");
-            scriptBuilder.Append($"  IF ln_exist = 0 THEN{Environment.NewLine}");
-            scriptBuilder.Append($"      EXECUTE IMMEDIATE 'ALTER TABLE {columnsSchemaTextBox.Text}.{columnsTableNameTextBox.Text} ADD (");
-            scriptBuilder.Append($"{GenerateColumnDefinition(columnColumnTextBox.Text, columnTypeTextBox.Text, columnDefaultTextBox.Text, columnIsNullableCheckBox.Checked)})';{Environment.NewLine}");
-            scriptBuilder.Append(comment);
-            scriptBuilder.Append(foreignKey);
-            scriptBuilder.Append(fkIndex);
-            scriptBuilder.Append($"  END IF;{Environment.NewLine}");
-            scriptBuilder.Append($"END;{Environment.NewLine}");
-            scriptBuilder.Append($"/");
+            var result = await scriptGenerationService.GenerateCreationScript(TabToModelColumn()).ConfigureAwait(false);
 
-            scriptTextBox.Text = scriptBuilder.ToString();
+            this.Invoke(new Action(() =>
+            {
+                scriptTextBox.Text = result;
+
+                Cursor.Current = Cursors.Arrow;
+                versioningButton.Enabled = true;
+            }));
         }
 
-        private String GenerateForeignKeyScript(String schema, String tableName, String columnName, String fkName, String refSchema, String refTableName, String refColumnName, String indentation = "")
+        private Column TabToModelColumn()
         {
-            return $"{indentation}EXECUTE IMMEDIATE 'ALTER TABLE {schema}.{tableName} ADD CONSTRAINT {fkName} FOREIGN KEY ({columnName}) REFERENCES {refSchema}.{refTableName}({refColumnName})';";
-        }
-        private String GenerateIndexScript(String schema, String tableName, String columnName, String indexName, String indentation = "", String tableSpace = null)
-        {
-            return $"{indentation}EXECUTE IMMEDIATE 'CREATE INDEX {schema}.{indexName} ON {schema}.{tableName}({columnName}) TABLESPACE {(String.IsNullOrWhiteSpace(tableSpace) ? "INDX" : tableSpace)}';";
-        }
-        private String GenerateColumnDefinition(String columnName, String columnType, String defaultValue, Boolean isNullable, String indentation = "")
-        {
-            return $"{indentation}{columnName} {columnType}{(String.IsNullOrEmpty(defaultValue) ? "" : " DEFAULT " + GetDefaultValue(defaultValue))}{(isNullable ? "" : " NOT NULL")}";
+            columnDataLengthTextBox.Text.ParseNullable(out var dataLength);
+
+            ConstraintForeignKey foreignKey = null;
+            if (columnIsFkCheckBox.Checked)
+            {
+                var index = Constraint.CreateNew(columnsSchemaTextBox.Text, columnIndexNameTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text);
+
+                foreignKey = ConstraintForeignKey.CreateNew(columnsSchemaTextBox.Text, columnFkNameTextBox.Text, columnsTableNameTextBox.Text,
+                    columnColumnTextBox.Text, columnRefSchemaNameTextBox.Text, columnRefTableNameTextBox.Text, columnRefColumnNameTextBox.Text, index);
+            }
+
+            tabColumn = Column.CreateNew(columnsSchemaTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text,
+                (DataType)columnTypeComboBox.SelectedValue, dataLength, columnDefaultTextBox.Text, columnIsNullableCheckBox.Checked,
+                columnCommentTextBox.Text, false, null, false, null, columnIsFkCheckBox.Checked, foreignKey);
+
+            return tabColumn;
         }
     }
 }

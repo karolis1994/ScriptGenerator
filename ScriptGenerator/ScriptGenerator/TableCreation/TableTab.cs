@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ScriptGenerator
@@ -12,7 +9,7 @@ namespace ScriptGenerator
         //Init table creation tab default values
         private void InitializeTableTab()
         {
-            tableColumnsGrid.Rows.Add(true, "ID", "NUMBER", null, false, "Identificator", false, null, false, null, null, null, null, null);
+            tableColumnsGrid.Rows.Add(true, "ID", "NUMBER", null, null, false, "Identificator", false, null, false, null, null, null, null, null);
             tableColumnsGrid.Rows[0].ReadOnly = true;
             tableColumnsGrid.Columns["tableColumnsIsPK"].DefaultCellStyle.BackColor = Color.Gray;
             tableColumnsGrid.Rows[0].DefaultCellStyle.BackColor = Color.Gray;
@@ -37,20 +34,20 @@ namespace ScriptGenerator
 
         private void tableColumnsGrid_CellContentClick(Object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 6 || e.ColumnIndex == 8)
+            if (e.ColumnIndex == 7 || e.ColumnIndex == 9)
                 tableColumnsGrid.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
-            if (e.ColumnIndex == 6)
+            if (e.ColumnIndex == 7)
             {
                 if ((Boolean)tableColumnsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
                 {
-                    tableColumnsGrid.Rows[e.RowIndex].Cells[7].ReadOnly = false;
-                    tableColumnsGrid.Rows[e.RowIndex].Cells[7].Style.BackColor = Color.White;
+                    tableColumnsGrid.Rows[e.RowIndex].Cells[8].ReadOnly = false;
+                    tableColumnsGrid.Rows[e.RowIndex].Cells[8].Style.BackColor = Color.White;
                 }
                 else
                 {
-                    tableColumnsGrid.Rows[e.RowIndex].Cells[7].ReadOnly = true;
-                    tableColumnsGrid.Rows[e.RowIndex].Cells[7].Style.BackColor = Color.Gray;
+                    tableColumnsGrid.Rows[e.RowIndex].Cells[8].ReadOnly = true;
+                    tableColumnsGrid.Rows[e.RowIndex].Cells[8].Style.BackColor = Color.Gray;
                 }
             }
 
@@ -58,8 +55,6 @@ namespace ScriptGenerator
             {
                 if ((Boolean)tableColumnsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
                 {
-                    tableColumnsGrid.Rows[e.RowIndex].Cells[9].ReadOnly = false;
-                    tableColumnsGrid.Rows[e.RowIndex].Cells[9].Style.BackColor = Color.White;
                     tableColumnsGrid.Rows[e.RowIndex].Cells[10].ReadOnly = false;
                     tableColumnsGrid.Rows[e.RowIndex].Cells[10].Style.BackColor = Color.White;
                     tableColumnsGrid.Rows[e.RowIndex].Cells[11].ReadOnly = false;
@@ -68,11 +63,11 @@ namespace ScriptGenerator
                     tableColumnsGrid.Rows[e.RowIndex].Cells[12].Style.BackColor = Color.White;
                     tableColumnsGrid.Rows[e.RowIndex].Cells[13].ReadOnly = false;
                     tableColumnsGrid.Rows[e.RowIndex].Cells[13].Style.BackColor = Color.White;
+                    tableColumnsGrid.Rows[e.RowIndex].Cells[14].ReadOnly = false;
+                    tableColumnsGrid.Rows[e.RowIndex].Cells[14].Style.BackColor = Color.White;
                 }
                 else
                 {
-                    tableColumnsGrid.Rows[e.RowIndex].Cells[9].ReadOnly = true;
-                    tableColumnsGrid.Rows[e.RowIndex].Cells[9].Style.BackColor = Color.Gray;
                     tableColumnsGrid.Rows[e.RowIndex].Cells[10].ReadOnly = true;
                     tableColumnsGrid.Rows[e.RowIndex].Cells[10].Style.BackColor = Color.Gray;
                     tableColumnsGrid.Rows[e.RowIndex].Cells[11].ReadOnly = true;
@@ -81,6 +76,8 @@ namespace ScriptGenerator
                     tableColumnsGrid.Rows[e.RowIndex].Cells[12].Style.BackColor = Color.Gray;
                     tableColumnsGrid.Rows[e.RowIndex].Cells[13].ReadOnly = true;
                     tableColumnsGrid.Rows[e.RowIndex].Cells[13].Style.BackColor = Color.Gray;
+                    tableColumnsGrid.Rows[e.RowIndex].Cells[14].ReadOnly = true;
+                    tableColumnsGrid.Rows[e.RowIndex].Cells[14].Style.BackColor = Color.Gray;
                 }
             }
         }
@@ -110,55 +107,55 @@ namespace ScriptGenerator
         }
         private void tableBtn_Click(Object sender, EventArgs e)
         {
-            StringBuilder scriptBuilder = new StringBuilder();
+            //StringBuilder scriptBuilder = new StringBuilder();
 
-            List<String> columns = new List<String>();
-            List<String> commentScripts = new List<String>();
-            List<String> uniqueConstraintScripts = new List<String>();
-            List<String> fkScripts = new List<String>();
+            //List<String> columns = new List<String>();
+            //List<String> commentScripts = new List<String>();
+            //List<String> uniqueConstraintScripts = new List<String>();
+            //List<String> fkScripts = new List<String>();
 
-            if (!String.IsNullOrEmpty(tableTableCommentTextBox.Text))
-                commentScripts.Add(GenerateTableCommentScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, tableTableCommentTextBox.Text));
+            //if (!String.IsNullOrEmpty(tableTableCommentTextBox.Text))
+            //    commentScripts.Add(GenerateTableCommentScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, tableTableCommentTextBox.Text));
 
-            //Loop through each row and form column, comment, foreign key script values.
-            foreach (DataGridViewRow row in tableColumnsGrid.Rows)
-            {
-                columns.Add(GenerateColumnDefinition(GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsType"), GetStrCellValue(row, "tableColumnsDefault"), GetBoolCellValue(row, "tableColumnsIsNullable")));
+            ////Loop through each row and form column, comment, foreign key script values.
+            //foreach (DataGridViewRow row in tableColumnsGrid.Rows)
+            //{
+            //    columns.Add(GenerateColumnDefinition(GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsType"), GetStrCellValue(row, "tableColumnsDefault"), GetBoolCellValue(row, "tableColumnsIsNullable")));
 
-                if (GetBoolCellValue(row, "tableColumnsIsUnique"))
-                    uniqueConstraintScripts.Add($"CONSTRAINT {GetStrCellValue(row, "tableColumnsUniqueConstraintName")} UNIQUE ({GetStrCellValue(row, "tableColumnsName")})");
+            //    if (GetBoolCellValue(row, "tableColumnsIsUnique"))
+            //        uniqueConstraintScripts.Add($"CONSTRAINT {GetStrCellValue(row, "tableColumnsUniqueConstraintName")} UNIQUE ({GetStrCellValue(row, "tableColumnsName")})");
 
-                if (!String.IsNullOrEmpty(GetStrCellValue(row, "tableColumnsComment")))
-                    commentScripts.Add(GenerateColumnCommentScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsComment")));
+            //    if (!String.IsNullOrEmpty(GetStrCellValue(row, "tableColumnsComment")))
+            //        commentScripts.Add(GenerateColumnCommentScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsComment")));
 
-                if (GetBoolCellValue(row, "tableColumnsIsForeignKey"))
-                {
-                    fkScripts.Add(GenerateForeignKeyScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsFKName"),
-                        GetStrCellValue(row, "tableColumnsReferencedSchema"), GetStrCellValue(row, "tableColumnsReferencedTable"), GetStrCellValue(row, "tableColumnsReferencedColumn")));
-                    fkScripts.Add(GenerateIndexScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsIndexName"), tableSpace: tableTablespaceTextBox.Text));
-                }
-            }
+            //    if (GetBoolCellValue(row, "tableColumnsIsForeignKey"))
+            //    {
+            //        fkScripts.Add(GenerateForeignKeyScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsFKName"),
+            //            GetStrCellValue(row, "tableColumnsReferencedSchema"), GetStrCellValue(row, "tableColumnsReferencedTable"), GetStrCellValue(row, "tableColumnsReferencedColumn")));
+            //        fkScripts.Add(GenerateIndexScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsIndexName"), tableSpace: tableTablespaceTextBox.Text));
+            //    }
+            //}
 
-            scriptBuilder.Append($"DECLARE{Environment.NewLine}");
-            scriptBuilder.Append($"  ln_exist NUMBER;{Environment.NewLine}");
-            scriptBuilder.Append($"BEGIN{Environment.NewLine}");
-            scriptBuilder.Append($"  SELECT COUNT(1){Environment.NewLine}");
-            scriptBuilder.Append($"    INTO ln_exist{Environment.NewLine}");
-            scriptBuilder.Append($"    FROM ALL_TABLES AT{Environment.NewLine}");
-            scriptBuilder.Append($"   WHERE AT.OWNER = '{tableSchemaTextBox.Text}'{Environment.NewLine}");
-            scriptBuilder.Append($"     AND AT.TABLE_NAME = '{tableTableNameTextBox.Text}';{Environment.NewLine}");
-            scriptBuilder.Append($"  IF ln_exist = 0 THEN{Environment.NewLine}");
-            scriptBuilder.Append($"      EXECUTE IMMEDIATE 'CREATE TABLE {tableSchemaTextBox.Text}.{tableTableNameTextBox.Text}{Environment.NewLine}");
-            scriptBuilder.Append($"      ({Environment.NewLine}");
-            scriptBuilder.Append($"          {String.Join($",{Environment.NewLine}" + "          ", columns.Concat(uniqueConstraintScripts))}{Environment.NewLine}");
-            scriptBuilder.Append($"      ){(String.IsNullOrWhiteSpace(tableTablespaceTextBox.Text) ? "" : " TABLESPACE " + tableTablespaceTextBox.Text)}';{Environment.NewLine}");
-            scriptBuilder.Append($"      EXECUTE IMMEDIATE 'ALTER TABLE {tableSchemaTextBox.Text}.{tableTableNameTextBox.Text} ADD CONSTRAINT {tablePKTextBox.Text} PRIMARY KEY (ID) USING INDEX{(String.IsNullOrWhiteSpace(tableTablespaceTextBox.Text) ? "" : " TABLESPACE " + tableTablespaceTextBox.Text)}';{Environment.NewLine}");
-            scriptBuilder.Append($"      {String.Join(Environment.NewLine + "      ", commentScripts.Concat(fkScripts))}{Environment.NewLine}");
-            scriptBuilder.Append($"  END IF;{Environment.NewLine}");
-            scriptBuilder.Append($"END;{Environment.NewLine}");
-            scriptBuilder.Append($"/");
+            //scriptBuilder.Append($"DECLARE{Environment.NewLine}");
+            //scriptBuilder.Append($"  ln_exist NUMBER;{Environment.NewLine}");
+            //scriptBuilder.Append($"BEGIN{Environment.NewLine}");
+            //scriptBuilder.Append($"  SELECT COUNT(1){Environment.NewLine}");
+            //scriptBuilder.Append($"    INTO ln_exist{Environment.NewLine}");
+            //scriptBuilder.Append($"    FROM ALL_TABLES AT{Environment.NewLine}");
+            //scriptBuilder.Append($"   WHERE AT.OWNER = '{tableSchemaTextBox.Text}'{Environment.NewLine}");
+            //scriptBuilder.Append($"     AND AT.TABLE_NAME = '{tableTableNameTextBox.Text}';{Environment.NewLine}");
+            //scriptBuilder.Append($"  IF ln_exist = 0 THEN{Environment.NewLine}");
+            //scriptBuilder.Append($"      EXECUTE IMMEDIATE 'CREATE TABLE {tableSchemaTextBox.Text}.{tableTableNameTextBox.Text}{Environment.NewLine}");
+            //scriptBuilder.Append($"      ({Environment.NewLine}");
+            //scriptBuilder.Append($"          {String.Join($",{Environment.NewLine}" + "          ", columns.Concat(uniqueConstraintScripts))}{Environment.NewLine}");
+            //scriptBuilder.Append($"      ){(String.IsNullOrWhiteSpace(tableTablespaceTextBox.Text) ? "" : " TABLESPACE " + tableTablespaceTextBox.Text)}';{Environment.NewLine}");
+            //scriptBuilder.Append($"      EXECUTE IMMEDIATE 'ALTER TABLE {tableSchemaTextBox.Text}.{tableTableNameTextBox.Text} ADD CONSTRAINT {tablePKTextBox.Text} PRIMARY KEY (ID) USING INDEX{(String.IsNullOrWhiteSpace(tableTablespaceTextBox.Text) ? "" : " TABLESPACE " + tableTablespaceTextBox.Text)}';{Environment.NewLine}");
+            //scriptBuilder.Append($"      {String.Join(Environment.NewLine + "      ", commentScripts.Concat(fkScripts))}{Environment.NewLine}");
+            //scriptBuilder.Append($"  END IF;{Environment.NewLine}");
+            //scriptBuilder.Append($"END;{Environment.NewLine}");
+            //scriptBuilder.Append($"/");
 
-            scriptTextBox.Text = scriptBuilder.ToString();
+            //scriptTextBox.Text = scriptBuilder.ToString();
         }
 
         private String GenerateColumnCommentScript(String schema, String tableName, String columnName, String comment, String indentation = "")
@@ -196,7 +193,7 @@ namespace ScriptGenerator
         }
         private void AddUneditableRow(String columnName, String type, String comment)
         {
-            Int32 index = tableColumnsGrid.Rows.Add(false, columnName, type, null, true, comment, false, null, false, null, null, null, null, null);
+            Int32 index = tableColumnsGrid.Rows.Add(false, columnName, type, null, null, true, comment, false, null, false, null, null, null, null, null);
             tableColumnsGrid.Rows[index].ReadOnly = true;
             tableColumnsGrid.Rows[index].DefaultCellStyle.BackColor = Color.Gray;
         }
@@ -204,7 +201,7 @@ namespace ScriptGenerator
         {
             for (Int32 i = 0; i < size; i++)
             {
-                Int32 index = tableColumnsGrid.Rows.Add(false, null, null, null, true, null, false, null, false, null, null, null, null, null);
+                Int32 index = tableColumnsGrid.Rows.Add(false, null, null, null, null, true, null, false, null, false, null, null, null, null, null);
                 tableColumnsGrid.Rows[index].Cells["tableColumnsUniqueConstraintName"].ReadOnly = true;
                 tableColumnsGrid.Rows[index].Cells["tableColumnsFKName"].ReadOnly = true;
                 tableColumnsGrid.Rows[index].Cells["tableColumnsIndexName"].ReadOnly = true;

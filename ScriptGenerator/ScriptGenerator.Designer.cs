@@ -48,6 +48,7 @@
             this.tableColumnsIsPK = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tableColumnsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableColumnsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableColumnsDataLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableColumnsDefault = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableColumnsIsNullable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tableColumnsComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,6 +64,8 @@
             this.tablePKLbl = new System.Windows.Forms.Label();
             this.tableColumnsLbl = new System.Windows.Forms.Label();
             this.columnTabPage = new System.Windows.Forms.TabPage();
+            this.columnDataLengthTextBox = new System.Windows.Forms.TextBox();
+            this.columnDataLengthLbl = new System.Windows.Forms.Label();
             this.columnResetBtn = new System.Windows.Forms.Button();
             this.columnRefColumnNameTextBox = new System.Windows.Forms.TextBox();
             this.columnRefColumnNameLbl = new System.Windows.Forms.Label();
@@ -83,7 +86,6 @@
             this.columnNullableLbl = new System.Windows.Forms.Label();
             this.columnIsNullableCheckBox = new System.Windows.Forms.CheckBox();
             this.columnBtn = new System.Windows.Forms.Button();
-            this.columnTypeTextBox = new System.Windows.Forms.TextBox();
             this.columnTypeLbl = new System.Windows.Forms.Label();
             this.columnColumnTextBox = new System.Windows.Forms.TextBox();
             this.columnColumnLbl = new System.Windows.Forms.Label();
@@ -147,6 +149,8 @@
             this.versioningFilePathLabel = new System.Windows.Forms.Label();
             this.versioningDirectoryButton = new System.Windows.Forms.Button();
             this.domainModels = new System.Windows.Forms.TabPage();
+            this.domainNameSpaceTextBox = new System.Windows.Forms.TextBox();
+            this.domainNamespaceLbl = new System.Windows.Forms.Label();
             this.domainRemoveBtn = new System.Windows.Forms.Button();
             this.domainAddBtn = new System.Windows.Forms.Button();
             this.domainResetBtn = new System.Windows.Forms.Button();
@@ -161,8 +165,7 @@
             this.IsUsedInUpdating = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.nonVisualLoadFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.versioningFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.domainNameSpaceTextBox = new System.Windows.Forms.TextBox();
-            this.domainNamespaceLbl = new System.Windows.Forms.Label();
+            this.columnTypeComboBox = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
@@ -361,6 +364,7 @@
             this.tableColumnsIsPK,
             this.tableColumnsName,
             this.tableColumnsType,
+            this.tableColumnsDataLength,
             this.tableColumnsDefault,
             this.tableColumnsIsNullable,
             this.tableColumnsComment,
@@ -396,6 +400,11 @@
             // 
             this.tableColumnsType.HeaderText = "Type";
             this.tableColumnsType.Name = "tableColumnsType";
+            // 
+            // tableColumnsDataLength
+            // 
+            this.tableColumnsDataLength.HeaderText = "Data length";
+            this.tableColumnsDataLength.Name = "tableColumnsDataLength";
             // 
             // tableColumnsDefault
             // 
@@ -495,6 +504,9 @@
             // 
             // columnTabPage
             // 
+            this.columnTabPage.Controls.Add(this.columnTypeComboBox);
+            this.columnTabPage.Controls.Add(this.columnDataLengthTextBox);
+            this.columnTabPage.Controls.Add(this.columnDataLengthLbl);
             this.columnTabPage.Controls.Add(this.columnResetBtn);
             this.columnTabPage.Controls.Add(this.columnRefColumnNameTextBox);
             this.columnTabPage.Controls.Add(this.columnRefColumnNameLbl);
@@ -515,7 +527,6 @@
             this.columnTabPage.Controls.Add(this.columnNullableLbl);
             this.columnTabPage.Controls.Add(this.columnIsNullableCheckBox);
             this.columnTabPage.Controls.Add(this.columnBtn);
-            this.columnTabPage.Controls.Add(this.columnTypeTextBox);
             this.columnTabPage.Controls.Add(this.columnTypeLbl);
             this.columnTabPage.Controls.Add(this.columnColumnTextBox);
             this.columnTabPage.Controls.Add(this.columnColumnLbl);
@@ -531,6 +542,23 @@
             this.columnTabPage.Text = "Column creation";
             this.columnTabPage.UseVisualStyleBackColor = true;
             // 
+            // columnDataLengthTextBox
+            // 
+            this.columnDataLengthTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.columnDataLengthTextBox.Location = new System.Drawing.Point(326, 29);
+            this.columnDataLengthTextBox.Name = "columnDataLengthTextBox";
+            this.columnDataLengthTextBox.Size = new System.Drawing.Size(149, 20);
+            this.columnDataLengthTextBox.TabIndex = 34;
+            // 
+            // columnDataLengthLbl
+            // 
+            this.columnDataLengthLbl.AutoSize = true;
+            this.columnDataLengthLbl.Location = new System.Drawing.Point(255, 32);
+            this.columnDataLengthLbl.Name = "columnDataLengthLbl";
+            this.columnDataLengthLbl.Size = new System.Drawing.Size(65, 13);
+            this.columnDataLengthLbl.TabIndex = 35;
+            this.columnDataLengthLbl.Text = "Data length:";
+            // 
             // columnResetBtn
             // 
             this.columnResetBtn.Location = new System.Drawing.Point(84, 110);
@@ -544,7 +572,7 @@
             // columnRefColumnNameTextBox
             // 
             this.columnRefColumnNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.columnRefColumnNameTextBox.Location = new System.Drawing.Point(406, 133);
+            this.columnRefColumnNameTextBox.Location = new System.Drawing.Point(406, 162);
             this.columnRefColumnNameTextBox.MaxLength = 30;
             this.columnRefColumnNameTextBox.Name = "columnRefColumnNameTextBox";
             this.columnRefColumnNameTextBox.Size = new System.Drawing.Size(149, 20);
@@ -553,7 +581,7 @@
             // columnRefColumnNameLbl
             // 
             this.columnRefColumnNameLbl.AutoSize = true;
-            this.columnRefColumnNameLbl.Location = new System.Drawing.Point(268, 136);
+            this.columnRefColumnNameLbl.Location = new System.Drawing.Point(268, 165);
             this.columnRefColumnNameLbl.Name = "columnRefColumnNameLbl";
             this.columnRefColumnNameLbl.Size = new System.Drawing.Size(132, 13);
             this.columnRefColumnNameLbl.TabIndex = 32;
@@ -562,7 +590,7 @@
             // columnRefTableNameTextBox
             // 
             this.columnRefTableNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.columnRefTableNameTextBox.Location = new System.Drawing.Point(406, 107);
+            this.columnRefTableNameTextBox.Location = new System.Drawing.Point(406, 136);
             this.columnRefTableNameTextBox.MaxLength = 30;
             this.columnRefTableNameTextBox.Name = "columnRefTableNameTextBox";
             this.columnRefTableNameTextBox.Size = new System.Drawing.Size(149, 20);
@@ -571,7 +599,7 @@
             // columnRefTableNameLbl
             // 
             this.columnRefTableNameLbl.AutoSize = true;
-            this.columnRefTableNameLbl.Location = new System.Drawing.Point(279, 110);
+            this.columnRefTableNameLbl.Location = new System.Drawing.Point(279, 139);
             this.columnRefTableNameLbl.Name = "columnRefTableNameLbl";
             this.columnRefTableNameLbl.Size = new System.Drawing.Size(121, 13);
             this.columnRefTableNameLbl.TabIndex = 30;
@@ -580,7 +608,7 @@
             // columnRefSchemaNameTextBox
             // 
             this.columnRefSchemaNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.columnRefSchemaNameTextBox.Location = new System.Drawing.Point(406, 81);
+            this.columnRefSchemaNameTextBox.Location = new System.Drawing.Point(406, 110);
             this.columnRefSchemaNameTextBox.MaxLength = 30;
             this.columnRefSchemaNameTextBox.Name = "columnRefSchemaNameTextBox";
             this.columnRefSchemaNameTextBox.Size = new System.Drawing.Size(149, 20);
@@ -589,7 +617,7 @@
             // columnRefSchemaNameLbl
             // 
             this.columnRefSchemaNameLbl.AutoSize = true;
-            this.columnRefSchemaNameLbl.Location = new System.Drawing.Point(265, 84);
+            this.columnRefSchemaNameLbl.Location = new System.Drawing.Point(265, 113);
             this.columnRefSchemaNameLbl.Name = "columnRefSchemaNameLbl";
             this.columnRefSchemaNameLbl.Size = new System.Drawing.Size(135, 13);
             this.columnRefSchemaNameLbl.TabIndex = 28;
@@ -598,7 +626,7 @@
             // columnIndexNameTextBox
             // 
             this.columnIndexNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.columnIndexNameTextBox.Location = new System.Drawing.Point(634, 55);
+            this.columnIndexNameTextBox.Location = new System.Drawing.Point(634, 84);
             this.columnIndexNameTextBox.MaxLength = 30;
             this.columnIndexNameTextBox.Name = "columnIndexNameTextBox";
             this.columnIndexNameTextBox.Size = new System.Drawing.Size(149, 20);
@@ -607,7 +635,7 @@
             // columnIndexNameLbl
             // 
             this.columnIndexNameLbl.AutoSize = true;
-            this.columnIndexNameLbl.Location = new System.Drawing.Point(563, 58);
+            this.columnIndexNameLbl.Location = new System.Drawing.Point(563, 87);
             this.columnIndexNameLbl.Name = "columnIndexNameLbl";
             this.columnIndexNameLbl.Size = new System.Drawing.Size(65, 13);
             this.columnIndexNameLbl.TabIndex = 26;
@@ -616,7 +644,7 @@
             // columnFkNameTextBox
             // 
             this.columnFkNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.columnFkNameTextBox.Location = new System.Drawing.Point(406, 55);
+            this.columnFkNameTextBox.Location = new System.Drawing.Point(406, 84);
             this.columnFkNameTextBox.MaxLength = 30;
             this.columnFkNameTextBox.Name = "columnFkNameTextBox";
             this.columnFkNameTextBox.Size = new System.Drawing.Size(149, 20);
@@ -625,7 +653,7 @@
             // columnFkNameLbl
             // 
             this.columnFkNameLbl.AutoSize = true;
-            this.columnFkNameLbl.Location = new System.Drawing.Point(348, 58);
+            this.columnFkNameLbl.Location = new System.Drawing.Point(348, 87);
             this.columnFkNameLbl.Name = "columnFkNameLbl";
             this.columnFkNameLbl.Size = new System.Drawing.Size(52, 13);
             this.columnFkNameLbl.TabIndex = 24;
@@ -634,7 +662,7 @@
             // columnIsFkLbl
             // 
             this.columnIsFkLbl.AutoSize = true;
-            this.columnIsFkLbl.Location = new System.Drawing.Point(247, 58);
+            this.columnIsFkLbl.Location = new System.Drawing.Point(247, 87);
             this.columnIsFkLbl.Name = "columnIsFkLbl";
             this.columnIsFkLbl.Size = new System.Drawing.Size(73, 13);
             this.columnIsFkLbl.TabIndex = 22;
@@ -643,7 +671,7 @@
             // columnIsFkCheckBox
             // 
             this.columnIsFkCheckBox.AutoSize = true;
-            this.columnIsFkCheckBox.Location = new System.Drawing.Point(326, 58);
+            this.columnIsFkCheckBox.Location = new System.Drawing.Point(326, 87);
             this.columnIsFkCheckBox.Name = "columnIsFkCheckBox";
             this.columnIsFkCheckBox.Size = new System.Drawing.Size(15, 14);
             this.columnIsFkCheckBox.TabIndex = 21;
@@ -652,7 +680,7 @@
             // 
             // columnCommentTextBox
             // 
-            this.columnCommentTextBox.Location = new System.Drawing.Point(299, 29);
+            this.columnCommentTextBox.Location = new System.Drawing.Point(299, 58);
             this.columnCommentTextBox.Name = "columnCommentTextBox";
             this.columnCommentTextBox.Size = new System.Drawing.Size(440, 20);
             this.columnCommentTextBox.TabIndex = 19;
@@ -660,7 +688,7 @@
             // columnCommentLbl
             // 
             this.columnCommentLbl.AutoSize = true;
-            this.columnCommentLbl.Location = new System.Drawing.Point(239, 32);
+            this.columnCommentLbl.Location = new System.Drawing.Point(239, 61);
             this.columnCommentLbl.Name = "columnCommentLbl";
             this.columnCommentLbl.Size = new System.Drawing.Size(54, 13);
             this.columnCommentLbl.TabIndex = 20;
@@ -668,7 +696,7 @@
             // 
             // columnDefaultTextBox
             // 
-            this.columnDefaultTextBox.Location = new System.Drawing.Point(590, 3);
+            this.columnDefaultTextBox.Location = new System.Drawing.Point(617, 3);
             this.columnDefaultTextBox.Name = "columnDefaultTextBox";
             this.columnDefaultTextBox.Size = new System.Drawing.Size(149, 20);
             this.columnDefaultTextBox.TabIndex = 17;
@@ -676,7 +704,7 @@
             // columnDefaultLbl
             // 
             this.columnDefaultLbl.AutoSize = true;
-            this.columnDefaultLbl.Location = new System.Drawing.Point(540, 6);
+            this.columnDefaultLbl.Location = new System.Drawing.Point(567, 6);
             this.columnDefaultLbl.Name = "columnDefaultLbl";
             this.columnDefaultLbl.Size = new System.Drawing.Size(44, 13);
             this.columnDefaultLbl.TabIndex = 18;
@@ -685,7 +713,7 @@
             // columnNullableLbl
             // 
             this.columnNullableLbl.AutoSize = true;
-            this.columnNullableLbl.Location = new System.Drawing.Point(454, 6);
+            this.columnNullableLbl.Location = new System.Drawing.Point(481, 6);
             this.columnNullableLbl.Name = "columnNullableLbl";
             this.columnNullableLbl.Size = new System.Drawing.Size(57, 13);
             this.columnNullableLbl.TabIndex = 16;
@@ -696,7 +724,7 @@
             this.columnIsNullableCheckBox.AutoSize = true;
             this.columnIsNullableCheckBox.Checked = true;
             this.columnIsNullableCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.columnIsNullableCheckBox.Location = new System.Drawing.Point(517, 6);
+            this.columnIsNullableCheckBox.Location = new System.Drawing.Point(544, 6);
             this.columnIsNullableCheckBox.Name = "columnIsNullableCheckBox";
             this.columnIsNullableCheckBox.Size = new System.Drawing.Size(15, 14);
             this.columnIsNullableCheckBox.TabIndex = 15;
@@ -712,18 +740,10 @@
             this.columnBtn.UseVisualStyleBackColor = true;
             this.columnBtn.Click += new System.EventHandler(this.columnBtn_Click);
             // 
-            // columnTypeTextBox
-            // 
-            this.columnTypeTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.columnTypeTextBox.Location = new System.Drawing.Point(299, 3);
-            this.columnTypeTextBox.Name = "columnTypeTextBox";
-            this.columnTypeTextBox.Size = new System.Drawing.Size(149, 20);
-            this.columnTypeTextBox.TabIndex = 12;
-            // 
             // columnTypeLbl
             // 
             this.columnTypeLbl.AutoSize = true;
-            this.columnTypeLbl.Location = new System.Drawing.Point(259, 6);
+            this.columnTypeLbl.Location = new System.Drawing.Point(286, 6);
             this.columnTypeLbl.Name = "columnTypeLbl";
             this.columnTypeLbl.Size = new System.Drawing.Size(34, 13);
             this.columnTypeLbl.TabIndex = 13;
@@ -1363,6 +1383,22 @@
             this.domainModels.Text = "Domain models";
             this.domainModels.UseVisualStyleBackColor = true;
             // 
+            // domainNameSpaceTextBox
+            // 
+            this.domainNameSpaceTextBox.Location = new System.Drawing.Point(455, 16);
+            this.domainNameSpaceTextBox.Name = "domainNameSpaceTextBox";
+            this.domainNameSpaceTextBox.Size = new System.Drawing.Size(299, 20);
+            this.domainNameSpaceTextBox.TabIndex = 19;
+            // 
+            // domainNamespaceLbl
+            // 
+            this.domainNamespaceLbl.AutoSize = true;
+            this.domainNamespaceLbl.Location = new System.Drawing.Point(385, 16);
+            this.domainNamespaceLbl.Name = "domainNamespaceLbl";
+            this.domainNamespaceLbl.Size = new System.Drawing.Size(67, 13);
+            this.domainNamespaceLbl.TabIndex = 18;
+            this.domainNamespaceLbl.Text = "Namespace:";
+            // 
             // domainRemoveBtn
             // 
             this.domainRemoveBtn.Location = new System.Drawing.Point(84, 43);
@@ -1468,21 +1504,13 @@
             // 
             this.nonVisualLoadFileDialog.FileName = "Nevizualus_sistemos_nustatymai";
             // 
-            // domainNameSpaceTextBox
+            // columnTypeComboBox
             // 
-            this.domainNameSpaceTextBox.Location = new System.Drawing.Point(455, 16);
-            this.domainNameSpaceTextBox.Name = "domainNameSpaceTextBox";
-            this.domainNameSpaceTextBox.Size = new System.Drawing.Size(299, 20);
-            this.domainNameSpaceTextBox.TabIndex = 19;
-            // 
-            // domainNamespaceLbl
-            // 
-            this.domainNamespaceLbl.AutoSize = true;
-            this.domainNamespaceLbl.Location = new System.Drawing.Point(385, 16);
-            this.domainNamespaceLbl.Name = "domainNamespaceLbl";
-            this.domainNamespaceLbl.Size = new System.Drawing.Size(67, 13);
-            this.domainNamespaceLbl.TabIndex = 18;
-            this.domainNamespaceLbl.Text = "Namespace:";
+            this.columnTypeComboBox.FormattingEnabled = true;
+            this.columnTypeComboBox.Location = new System.Drawing.Point(326, 3);
+            this.columnTypeComboBox.Name = "columnTypeComboBox";
+            this.columnTypeComboBox.Size = new System.Drawing.Size(149, 21);
+            this.columnTypeComboBox.TabIndex = 36;
             // 
             // ScriptGenerator
             // 
@@ -1536,7 +1564,6 @@
         private System.Windows.Forms.TextBox columnsSchemaTextBox;
         private System.Windows.Forms.Label columnsTableNameLbl;
         private System.Windows.Forms.Label columnsSchemaLbl;
-        private System.Windows.Forms.TextBox columnTypeTextBox;
         private System.Windows.Forms.Label columnTypeLbl;
         private System.Windows.Forms.TextBox columnColumnTextBox;
         private System.Windows.Forms.Label columnColumnLbl;
@@ -1591,20 +1618,6 @@
         private System.Windows.Forms.Button nonVisualBtn;
         private System.Windows.Forms.TextBox nonVisualCodeTextBox;
         private System.Windows.Forms.Label nonVisualCodeLbl;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn tableColumnsIsPK;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsDefault;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn tableColumnsIsNullable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsComment;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn tableColumnsIsUnique;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsUniqueConstraintName;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn tableColumnsIsForeignKey;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsFKName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsIndexName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedSchema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedTable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedColumn;
         private System.Windows.Forms.TextBox tableTablespaceTextBox;
         private System.Windows.Forms.Label tableTablespaceLbl;
         private System.Windows.Forms.TabPage NonVisLoad;
@@ -1657,6 +1670,24 @@
         private System.Windows.Forms.Button domainAddBtn;
         private System.Windows.Forms.TextBox domainNameSpaceTextBox;
         private System.Windows.Forms.Label domainNamespaceLbl;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn tableColumnsIsPK;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsDataLength;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsDefault;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn tableColumnsIsNullable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsComment;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn tableColumnsIsUnique;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsUniqueConstraintName;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn tableColumnsIsForeignKey;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsFKName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsIndexName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedSchema;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedTable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedColumn;
+        private System.Windows.Forms.TextBox columnDataLengthTextBox;
+        private System.Windows.Forms.Label columnDataLengthLbl;
+        private System.Windows.Forms.ComboBox columnTypeComboBox;
     }
 }
 

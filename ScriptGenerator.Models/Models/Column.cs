@@ -74,5 +74,46 @@
         /// Foreign key
         /// </summary>
         public ConstraintForeignKey ForeignKey { get; private set; }
+
+        /// <summary>
+        /// Creates a new column
+        /// </summary>
+        /// <param name="tableSchema"></param>
+        /// <param name="tableName"></param>
+        /// <param name="name"></param>
+        /// <param name="dataType"></param>
+        /// <param name="dataLength"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="isNullable"></param>
+        /// <param name="comment"></param>
+        /// <param name="hasPrimaryKeyConstraint"></param>
+        /// <param name="primaryKey"></param>
+        /// <param name="hasUniqueConstraint"></param>
+        /// <param name="uniqueConstraint"></param>
+        /// <param name="hasForeignKeyConstraint"></param>
+        /// <param name="foreignKey"></param>
+        /// <returns></returns>
+        public static Column CreateNew(string tableSchema, string tableName, string name, DataType dataType, int? dataLength, string defaultValue,
+            bool isNullable, string comment, bool hasPrimaryKeyConstraint, Constraint primaryKey, bool hasUniqueConstraint, Constraint uniqueConstraint,
+            bool hasForeignKeyConstraint, ConstraintForeignKey foreignKey)
+        {
+            return new Column()
+            {
+                TableSchema = tableSchema,
+                TableName = tableName,
+                Name = name,
+                DataType = dataType,
+                DataLength = dataLength,
+                DefaultValue = defaultValue,
+                IsNullable = isNullable,
+                Comment = comment,
+                HasPrimaryKeyConstraint = hasPrimaryKeyConstraint,
+                PrimaryKey = primaryKey,
+                HasUniqueConstraint = hasUniqueConstraint,
+                UniqueConstraint = uniqueConstraint,
+                HasForeignKeyConstraint = hasForeignKeyConstraint,
+                ForeignKey = foreignKey
+            };
+        }
     }
 }

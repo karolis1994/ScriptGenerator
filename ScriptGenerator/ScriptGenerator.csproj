@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="FolderSelector\FolderSelectDialog.cs" />
     <Compile Include="FolderSelector\Reflector.cs" />
     <Compile Include="ScriptGenerator.cs">
@@ -82,7 +83,7 @@
     <Compile Include="ScriptGenerator\SequenceCreation\SequenceTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScriptGenerator\Versioning\ScriptGenerator.cs">
+    <Compile Include="ScriptGenerator\Versioning\VersioningTab.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ScriptGenerator\TableCreation\TableTab.cs">
@@ -101,6 +102,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ScriptGenerator.Models\ScriptGenerator.Models.csproj">
+      <Project>{0E82C788-81E6-42F7-AC31-3115A4B5B7AD}</Project>
+      <Name>ScriptGenerator.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Services\ScriptGenerator.Services.csproj">
       <Project>{ead4197f-f8c8-4864-960d-25a840e82e33}</Project>
       <Name>ScriptGenerator.Services</Name>

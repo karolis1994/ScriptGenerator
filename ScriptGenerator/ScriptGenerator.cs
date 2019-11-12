@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScriptGenerator.Services;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -8,6 +9,21 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator : Form
     {
+        private IWordService wordService;
+        private ICharConverterService charConverterService;
+        private IVersioningService versioningService;
+        private IScriptGenerationService scriptGenerationService;
+
+        public ScriptGenerator(IWordService wordWorker, ICharConverterService charConverterService, IVersioningService versioningService, IScriptGenerationService scriptGenerationService)
+        {
+            this.wordService = wordWorker;
+            this.charConverterService = charConverterService;
+            this.versioningService = versioningService;
+            this.scriptGenerationService = scriptGenerationService;
+
+            InitializeWindow();
+        }
+
         private void InitializeWindow()
         {
             InitializeComponent();
@@ -22,7 +38,7 @@ namespace ScriptGenerator
 
             InitializeNonVisualSettingLoadTab();
             InitializeCharacterConversionTab();
-            InitializeNonVisualSettingsTabs();
+            InitializeNonVisualSettingsTab();
             InitializeSequenceTab();
             InitializeColumnTab();
             InitializeTableTab();
