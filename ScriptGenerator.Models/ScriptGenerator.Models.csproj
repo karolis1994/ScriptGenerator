@@ -49,7 +49,6 @@
     <Compile Include="Models\Column.cs" />
     <Compile Include="Models\Constraint.cs" />
     <Compile Include="Models\ConstraintForeignKey.cs" />
-    <Compile Include="Models\ConstraintIndex.cs" />
     <Compile Include="Models\DataType.cs" />
     <Compile Include="Models\Sequence.cs" />
     <Compile Include="Models\Table.cs" />

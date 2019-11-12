@@ -17,12 +17,12 @@ namespace ScriptGenerator.Models
         /// <summary>
         /// Schema name
         /// </summary>
-        public string SchemaName { get; private set; }
+        public string Schema { get; private set; }
 
         /// <summary>
         /// Table comment
         /// </summary>
-        public string TableComment { get; private set; }
+        public string Comment { get; private set; }
 
         /// <summary>
         /// Table space
@@ -60,9 +60,9 @@ namespace ScriptGenerator.Models
             return new Table()
             {
                 Name = name,
-                SchemaName = scehmaName,
+                Schema = scehmaName,
                 TableSpace = tableSpace,
-                TableComment = tableComment,
+                Comment = tableComment,
                 Columns = columns
             };
         }

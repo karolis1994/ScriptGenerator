@@ -51,9 +51,9 @@
         public bool HasPrimaryKeyConstraint { get; private set; }
 
         /// <summary>
-        /// Primary key constraint name
+        /// Primary key constraint
         /// </summary>
-        public string PrimaryKeyConstraintName { get; private set; }
+        public Constraint PrimaryKey { get; set; }
 
         /// <summary>
         /// Does column have a unique constraint
@@ -61,9 +61,9 @@
         public bool HasUniqueConstraint { get; private set; }
 
         /// <summary>
-        /// Unique constraint name
+        /// Unique index
         /// </summary>
-        public string UniqueConstraintName { get; private set; }
+        public Constraint UniqueConstraint { get; set; }
 
         /// <summary>
         /// Does column have a foreign key constraint
@@ -71,28 +71,8 @@
         public bool HasForeignKeyConstraint { get; private set; }
 
         /// <summary>
-        /// Foreign key constraint name
+        /// Foreign key
         /// </summary>
-        public string ForeignKeyConstraintName { get; private set; }
-
-        /// <summary>
-        /// Foreign key constraint schema name
-        /// </summary>
-        public string ForeignKeyConstraintSchema { get; private set; }
-
-        /// <summary>
-        /// Foreign key constraint referenced table
-        /// </summary>
-        public string ForeignKeyConstraintTable { get; private set; }
-
-        /// <summary>
-        /// Foreign key constraint referenced column
-        /// </summary>
-        public string ForeignKeyConstraintColumn { get; private set; }
-
-        /// <summary>
-        /// Index for fk constraint name
-        /// </summary>
-        public string IndexForFKConstraintName { get; private set; }
+        public ConstraintForeignKey ForeignKey { get; set; }
     }
 }

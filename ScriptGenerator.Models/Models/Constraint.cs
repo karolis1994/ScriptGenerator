@@ -30,5 +30,10 @@ namespace ScriptGenerator.Models
         /// Table column name
         /// </summary>
         public string TableColumnName { get; set; }
+
+        /// <summary>
+        /// Tablespace used for this index
+        /// </summary>
+        public string TableSpace { get; set; }
     }
 }

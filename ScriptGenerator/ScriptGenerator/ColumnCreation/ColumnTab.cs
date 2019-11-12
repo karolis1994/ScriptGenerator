@@ -6,7 +6,9 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
-        //Init column creation tab default values
+        /// <summary>
+        /// Set default values of column tab
+        /// </summary>
         private void InitializeColumnTab()
         {
             columnFkNameTextBox.BackColor = Color.Gray;
@@ -21,6 +23,9 @@ namespace ScriptGenerator
             columnRefColumnNameTextBox.ReadOnly = true;
         }
 
+        /// <summary>
+        /// Reset column tab
+        /// </summary>
         private void ResetColumnTab()
         {
             columnRefColumnNameTextBox.Text = String.Empty;
