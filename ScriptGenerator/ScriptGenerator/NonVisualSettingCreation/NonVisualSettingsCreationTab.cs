@@ -43,7 +43,7 @@ namespace ScriptGenerator
 
             foreach (DataGridViewColumn column in nonVisualClientsGrid.Columns)
             {
-                if (!String.IsNullOrWhiteSpace(GetStrCellValue(nonVisualClientsGrid.Rows[0], column.HeaderText)))
+                if (!String.IsNullOrWhiteSpace(GetCellValueString(nonVisualClientsGrid.Rows[0], column.HeaderText)))
                 {
                     if (column.HeaderText != Else)
                     {
@@ -57,7 +57,7 @@ namespace ScriptGenerator
                         insertsBuilder.Append($"    ELSE{Environment.NewLine}");
                     }
 
-                    insertsBuilder.Append($"      {GenerateNonVisualSettingScript(nonVisualCodeTextBox.Text, GetStrCellValue(nonVisualClientsGrid.Rows[0], column.HeaderText))}{Environment.NewLine}");
+                    insertsBuilder.Append($"      {GenerateNonVisualSettingScript(nonVisualCodeTextBox.Text, GetCellValueString(nonVisualClientsGrid.Rows[0], column.HeaderText))}{Environment.NewLine}");
 
                     index++;
                 }

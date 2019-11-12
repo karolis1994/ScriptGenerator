@@ -94,7 +94,7 @@ namespace ScriptGenerator
         private async void columnBtn_Click(Object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            versioningButton.Enabled = false;
+            columnBtn.Enabled = false;
 
             var result = await scriptGenerationService.GenerateCreationScript(TabToModelColumn()).ConfigureAwait(false);
 
@@ -103,7 +103,7 @@ namespace ScriptGenerator
                 scriptTextBox.Text = result;
 
                 Cursor.Current = Cursors.Arrow;
-                versioningButton.Enabled = true;
+                columnBtn.Enabled = true;
             }));
         }
 

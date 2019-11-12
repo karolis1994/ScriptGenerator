@@ -13,8 +13,8 @@ namespace ScriptGenerator
         private void InitializeCharacterConversionTab()
         {
             //Init available charsets for character conversions
-            List<String> charsets = ConfigurationManager.AppSettings["charsets"].Split(',').ToList();
-            foreach (String charset in charsets)
+            List<string> charsets = ConfigurationManager.AppSettings["charsets"].Split(',').ToList();
+            foreach (string charset in charsets)
             {
                 charConvCheckedListBox.Items.Add(charset);
             }
@@ -48,12 +48,12 @@ namespace ScriptGenerator
         }
 
         //Replaces each character from a string with an oracle chr function passing the key from the charset as parameter
-        private String ReplaceWithCharset(String original, Dictionary<Int32, String> charset)
+        private string ReplaceWithCharset(string original, Dictionary<int, string> charset)
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(original);
 
-            foreach (KeyValuePair<Int32, String> pair in charset)
+            foreach (KeyValuePair<int, string> pair in charset)
             {
                 stringBuilder.Replace(pair.Value, $"' || chr({pair.Key}) || '");
             }
@@ -65,21 +65,21 @@ namespace ScriptGenerator
         }
         
         //Reads charset from a file, each row must contain a number and a symbol separated by a space
-        private Dictionary<Int32, String> ReadCharset(String charsetName)
+        private Dictionary<int, string> ReadCharset(string charsetName)
         {
-            Dictionary<Int32, String> charset = new Dictionary<Int32, String>();
-            String charsetPath = Directory.GetCurrentDirectory() + "\\Resources\\" + charsetName + ".txt";
-            Int32 key = 0;
+            Dictionary<int, string> charset = new Dictionary<int, string>();
+            string charsetPath = Directory.GetCurrentDirectory() + "\\Resources\\" + charsetName + ".txt";
+            int key = 0;
 
             if (File.Exists(charsetPath))
             {
-                IEnumerable<String> lines = File.ReadLines(charsetPath);
-                foreach (String line in lines)
+                IEnumerable<string> lines = File.ReadLines(charsetPath);
+                foreach (string line in lines)
                 {
-                    String[] splitResult = line.Split(' ');
+                    string[] splitResult = line.Split(' ');
 
                     if (splitResult.Length == 2)
-                        if (Int32.TryParse(splitResult[0], out key))
+                        if (int.TryParse(splitResult[0], out key))
                             charset.Add(key, splitResult[1]);
                 }
             }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ScriptGenerator.Extensions;
+using ScriptGenerator.Models;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,6 +9,8 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
+        private Table tabTable;
+
         //Init table creation tab default values
         private void InitializeTableTab()
         {
@@ -105,91 +110,29 @@ namespace ScriptGenerator
         {
             AddNewRow();
         }
-        private void tableBtn_Click(Object sender, EventArgs e)
+        private async void tableBtn_Click(Object sender, EventArgs e)
         {
-            //StringBuilder scriptBuilder = new StringBuilder();
+            Cursor.Current = Cursors.WaitCursor;
+            tableBtn.Enabled = false;
 
-            //List<String> columns = new List<String>();
-            //List<String> commentScripts = new List<String>();
-            //List<String> uniqueConstraintScripts = new List<String>();
-            //List<String> fkScripts = new List<String>();
+            var result = await scriptGenerationService.GenerateCreationScript(TabToModelTable()).ConfigureAwait(false);
 
-            //if (!String.IsNullOrEmpty(tableTableCommentTextBox.Text))
-            //    commentScripts.Add(GenerateTableCommentScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, tableTableCommentTextBox.Text));
+            this.Invoke(new Action(() =>
+            {
+                scriptTextBox.Text = result;
 
-            ////Loop through each row and form column, comment, foreign key script values.
-            //foreach (DataGridViewRow row in tableColumnsGrid.Rows)
-            //{
-            //    columns.Add(GenerateColumnDefinition(GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsType"), GetStrCellValue(row, "tableColumnsDefault"), GetBoolCellValue(row, "tableColumnsIsNullable")));
-
-            //    if (GetBoolCellValue(row, "tableColumnsIsUnique"))
-            //        uniqueConstraintScripts.Add($"CONSTRAINT {GetStrCellValue(row, "tableColumnsUniqueConstraintName")} UNIQUE ({GetStrCellValue(row, "tableColumnsName")})");
-
-            //    if (!String.IsNullOrEmpty(GetStrCellValue(row, "tableColumnsComment")))
-            //        commentScripts.Add(GenerateColumnCommentScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsComment")));
-
-            //    if (GetBoolCellValue(row, "tableColumnsIsForeignKey"))
-            //    {
-            //        fkScripts.Add(GenerateForeignKeyScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsFKName"),
-            //            GetStrCellValue(row, "tableColumnsReferencedSchema"), GetStrCellValue(row, "tableColumnsReferencedTable"), GetStrCellValue(row, "tableColumnsReferencedColumn")));
-            //        fkScripts.Add(GenerateIndexScript(tableSchemaTextBox.Text, tableTableNameTextBox.Text, GetStrCellValue(row, "tableColumnsName"), GetStrCellValue(row, "tableColumnsIndexName"), tableSpace: tableTablespaceTextBox.Text));
-            //    }
-            //}
-
-            //scriptBuilder.Append($"DECLARE{Environment.NewLine}");
-            //scriptBuilder.Append($"  ln_exist NUMBER;{Environment.NewLine}");
-            //scriptBuilder.Append($"BEGIN{Environment.NewLine}");
-            //scriptBuilder.Append($"  SELECT COUNT(1){Environment.NewLine}");
-            //scriptBuilder.Append($"    INTO ln_exist{Environment.NewLine}");
-            //scriptBuilder.Append($"    FROM ALL_TABLES AT{Environment.NewLine}");
-            //scriptBuilder.Append($"   WHERE AT.OWNER = '{tableSchemaTextBox.Text}'{Environment.NewLine}");
-            //scriptBuilder.Append($"     AND AT.TABLE_NAME = '{tableTableNameTextBox.Text}';{Environment.NewLine}");
-            //scriptBuilder.Append($"  IF ln_exist = 0 THEN{Environment.NewLine}");
-            //scriptBuilder.Append($"      EXECUTE IMMEDIATE 'CREATE TABLE {tableSchemaTextBox.Text}.{tableTableNameTextBox.Text}{Environment.NewLine}");
-            //scriptBuilder.Append($"      ({Environment.NewLine}");
-            //scriptBuilder.Append($"          {String.Join($",{Environment.NewLine}" + "          ", columns.Concat(uniqueConstraintScripts))}{Environment.NewLine}");
-            //scriptBuilder.Append($"      ){(String.IsNullOrWhiteSpace(tableTablespaceTextBox.Text) ? "" : " TABLESPACE " + tableTablespaceTextBox.Text)}';{Environment.NewLine}");
-            //scriptBuilder.Append($"      EXECUTE IMMEDIATE 'ALTER TABLE {tableSchemaTextBox.Text}.{tableTableNameTextBox.Text} ADD CONSTRAINT {tablePKTextBox.Text} PRIMARY KEY (ID) USING INDEX{(String.IsNullOrWhiteSpace(tableTablespaceTextBox.Text) ? "" : " TABLESPACE " + tableTablespaceTextBox.Text)}';{Environment.NewLine}");
-            //scriptBuilder.Append($"      {String.Join(Environment.NewLine + "      ", commentScripts.Concat(fkScripts))}{Environment.NewLine}");
-            //scriptBuilder.Append($"  END IF;{Environment.NewLine}");
-            //scriptBuilder.Append($"END;{Environment.NewLine}");
-            //scriptBuilder.Append($"/");
-
-            //scriptTextBox.Text = scriptBuilder.ToString();
+                Cursor.Current = Cursors.Arrow;
+                tableBtn.Enabled = true;
+            }));
         }
 
-        private String GenerateColumnCommentScript(String schema, String tableName, String columnName, String comment, String indentation = "")
-        {
-            return $"{indentation}EXECUTE IMMEDIATE 'COMMENT ON COLUMN {schema}.{tableName}.\"{columnName}\" IS ''{comment}''';";
-        }
-        private String GenerateTableCommentScript(String schema, String tableName, String comment, String indentation = "")
-        {
-            return $"{indentation}EXECUTE IMMEDIATE 'COMMENT ON TABLE {schema}.{tableName} IS ''{comment}''';";
-        }
-        private Boolean GetBoolCellValue(DataGridViewRow row, String cell)
+        private Boolean GetCellValueBoolean(DataGridViewRow row, String cell)
         {
             return (Boolean?)row.Cells[cell].Value ?? false;
         }
-        private String GetStrCellValue(DataGridViewRow row, String cell)
+        private String GetCellValueString(DataGridViewRow row, String cell)
         {
             return (String)row.Cells[cell].Value;
-        }
-        private String GetDefaultValue(String input)
-        {
-            Int64 intOutput;
-            DateTime dateOutput;
-
-            if (Int64.TryParse(input, out intOutput) || input.ToUpper() == "SYSDATE")
-            {
-                return input;
-            }
-
-            if (DateTime.TryParse(input, out dateOutput))
-            {
-                return $"TO_DATE(''{dateOutput.Date.ToString("yyyy-MM-dd")}'', ''yyyy-mm-dd'')";
-            }
-
-            return $"''{input}''";
         }
         private void AddUneditableRow(String columnName, String type, String comment)
         {
@@ -216,6 +159,36 @@ namespace ScriptGenerator
                 tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedTable"].Style.BackColor = Color.Gray;
                 tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedColumn"].Style.BackColor = Color.Gray;
             }
+        }
+
+        private Table TabToModelTable()
+        {
+            var columns = new HashSet<Column>();
+
+            //Loop through each row and form column, comment, foreign key script values.
+            foreach (DataGridViewRow row in tableColumnsGrid.Rows)
+            {
+                columnDataLengthTextBox.Text.ParseNullable(out var dataLength);
+
+                ConstraintForeignKey foreignKey = null;
+
+                if (columnIsFkCheckBox.Checked)
+                {
+                    var index = Constraint.CreateNew(tableSchemaTextBox.Text, row.Cells[], tableTableNameTextBox.Text, columnColumnTextBox.Text);
+
+                    foreignKey = ConstraintForeignKey.CreateNew(columnsSchemaTextBox.Text, columnFkNameTextBox.Text, columnsTableNameTextBox.Text,
+                        columnColumnTextBox.Text, columnRefSchemaNameTextBox.Text, columnRefTableNameTextBox.Text, columnRefColumnNameTextBox.Text, index);
+                }
+
+                var column = Column.CreateNew(columnsSchemaTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text,
+                    (DataType)columnTypeComboBox.SelectedValue, dataLength, columnDefaultTextBox.Text, columnIsNullableCheckBox.Checked,
+                    columnCommentTextBox.Text, false, null, false, null, columnIsFkCheckBox.Checked, foreignKey);
+
+                columns.Add(column);
+            }
+
+            var table = Table.CreateNew(tableTableNameTextBox.Text, tableSchemaTextBox.Text, tableTableCommentTextBox.Text, tableTablespaceTextBox.Text,
+                );
         }
 
         // PasteInData pastes clipboard data into the grid passed to it.
