@@ -11,22 +11,67 @@ namespace ScriptGenerator
     {
         private Table tabTable;
 
+        private const string tableCellKeyIsPrimaryKey = "tableColumnsIsPK";
+        private const string tableCellKeyName = "tableColumnsName";
+        private const string tableCellKeyType = "tableColumnsType";
+        private const string tableCellKeyDataLength = "tableColumnsDataLength";
+        private const string tableCellKeyDefault = "tableColumnsDefault";
+        private const string tableCellKeyIsNullable = "tableColumnsIsNullable";
+        private const string tableCellKeyComment = "tableColumnsComment";
+        private const string tableCellKeyIsUnique = "tableColumnsIsUnique";
+        private const string tableCellKeyUniqueConstraintName = "tableColumnsUniqueConstraintName";
+        private const string tableCellKeyIsForeignKey = "tableColumnsIsForeignKey";
+        private const string tableCellKeyForeignKeyName = "tableColumnsFKName";
+        private const string tableCellKeyIndexName = "tableColumnsIndexName";
+        private const string tableCellKeyForeignKeyReferencedSchema = "tableColumnsReferencedSchema";
+        private const string tableCellKeyForeignKeyReferencedTable = "tableColumnsReferencedTable";
+        private const string tableCellKeyForeignKeyReferencedTableColumn = "tableColumnsReferencedColumn";
+
         //Init table creation tab default values
         private void InitializeTableTab()
         {
-            tableColumnsGrid.Rows.Add(true, "ID", "NUMBER", null, null, false, "Identificator", false, null, false, null, null, null, null, null);
+            //DataGridViewComboBoxColumn dataTypeColumn = new DataGridViewComboBoxColumn();
+            //dataTypeColumn.HeaderText = "Type";
+            //dataTypeColumn.DataSource = DataTypeDropDown.GetAllDropDownOptions();
+            //dataTypeColumn.DisplayMember = "Value";
+            //dataTypeColumn.ValueMember = "Key";
+            //dataTypeColumn.ValueType = typeof(DataType);
+            //tableColumnsGrid.Columns.Add(dataTypeColumn);
+
+            ((DataGridViewComboBoxColumn)tableColumnsGrid.Columns[tableCellKeyType]).HeaderText = "Type";
+            ((DataGridViewComboBoxColumn)tableColumnsGrid.Columns[tableCellKeyType]).DataSource = DataTypeDropDown.GetAllDropDownOptions();
+            ((DataGridViewComboBoxColumn)tableColumnsGrid.Columns[tableCellKeyType]).DisplayMember = "Value";
+            ((DataGridViewComboBoxColumn)tableColumnsGrid.Columns[tableCellKeyType]).ValueMember = "Key";
+            tableColumnsGrid.Columns[tableCellKeyType].ValueType = typeof(DataType);
+            //tableColumnsGrid.Columns[tableCellKeyType] = dataTypeColumn;
+
+            tableColumnsGrid.Rows.Add(true,
+                "ID",
+                "NUMBER",
+                null,
+                null,
+                false,
+                "Identificator",
+                false,
+                null,
+                false,
+                null,
+                null,
+                null,
+                null,
+                null);
             tableColumnsGrid.Rows[0].ReadOnly = true;
-            tableColumnsGrid.Columns["tableColumnsIsPK"].DefaultCellStyle.BackColor = Color.Gray;
+            tableColumnsGrid.Columns[tableCellKeyIsPrimaryKey].DefaultCellStyle.BackColor = Color.Gray;
             tableColumnsGrid.Rows[0].DefaultCellStyle.BackColor = Color.Gray;
         }
 
         private void ResetTableTab()
         {
-            tableTableCommentTextBox.Text = String.Empty;
-            tableTablespaceTextBox.Text = String.Empty;
-            tableTableNameTextBox.Text = String.Empty;
-            tableSchemaTextBox.Text = String.Empty;
-            tablePKTextBox.Text = String.Empty;
+            tableTableCommentTextBox.Text = string.Empty;
+            tableTablespaceTextBox.Text = string.Empty;
+            tableTableNameTextBox.Text = string.Empty;
+            tableSchemaTextBox.Text = string.Empty;
+            tablePKTextBox.Text = string.Empty;
 
             tableColumnsGrid.Rows.Clear();
         }
@@ -37,14 +82,14 @@ namespace ScriptGenerator
             InitializeTableTab();
         }
 
-        private void tableColumnsGrid_CellContentClick(Object sender, DataGridViewCellEventArgs e)
+        private void tableColumnsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 7 || e.ColumnIndex == 9)
                 tableColumnsGrid.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
             if (e.ColumnIndex == 7)
             {
-                if ((Boolean)tableColumnsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
+                if ((bool)tableColumnsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
                 {
                     tableColumnsGrid.Rows[e.RowIndex].Cells[8].ReadOnly = false;
                     tableColumnsGrid.Rows[e.RowIndex].Cells[8].Style.BackColor = Color.White;
@@ -58,7 +103,7 @@ namespace ScriptGenerator
 
             if (e.ColumnIndex == 8)
             {
-                if ((Boolean)tableColumnsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
+                if ((bool)tableColumnsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
                 {
                     tableColumnsGrid.Rows[e.RowIndex].Cells[10].ReadOnly = false;
                     tableColumnsGrid.Rows[e.RowIndex].Cells[10].Style.BackColor = Color.White;
@@ -91,7 +136,7 @@ namespace ScriptGenerator
             if (e.Control && e.KeyCode == Keys.V)
                 PasteInData(ref tableColumnsGrid);
         }
-        private void tableRemoveBtn_Click(Object sender, EventArgs e)
+        private void tableRemoveBtn_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in tableColumnsGrid.SelectedRows)
             {
@@ -99,18 +144,18 @@ namespace ScriptGenerator
                     tableColumnsGrid.Rows.Remove(row);
             }
         }
-        private void tableAuditBtn_Click(Object sender, EventArgs e)
+        private void tableAuditBtn_Click(object sender, EventArgs e)
         {
             AddUneditableRow("RECORD_DATE", "DATE", "Date of record creation");
             AddUneditableRow("EDIT_DATE", "DATE", "Date of record edit");
             AddUneditableRow("RECORD_USER", "VARCHAR2(250)", "User name of record creator");
             AddUneditableRow("EDIT_USER", "VARCHAR2(250)", "User name of last record editor");
         }
-        private void tableAddBtn_Click(Object sender, EventArgs e)
+        private void tableAddBtn_Click(object sender, EventArgs e)
         {
             AddNewRow();
         }
-        private async void tableBtn_Click(Object sender, EventArgs e)
+        private async void tableBtn_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
             tableBtn.Enabled = false;
@@ -126,38 +171,46 @@ namespace ScriptGenerator
             }));
         }
 
-        private Boolean GetCellValueBoolean(DataGridViewRow row, String cell)
+        private T GetCellValue<T>(DataGridViewRow row, string cell)
         {
-            return (Boolean?)row.Cells[cell].Value ?? false;
+            return (T)row.Cells[cell].Value;
         }
-        private String GetCellValueString(DataGridViewRow row, String cell)
+        private bool GetCellValueBool(DataGridViewRow row, string cell)
         {
-            return (String)row.Cells[cell].Value;
+            return (bool?)row.Cells[cell].Value ?? false;
         }
-        private void AddUneditableRow(String columnName, String type, String comment)
+        private string GetCellValueString(DataGridViewRow row, string cell)
         {
-            Int32 index = tableColumnsGrid.Rows.Add(false, columnName, type, null, null, true, comment, false, null, false, null, null, null, null, null);
+            return (string)row.Cells[cell].Value;
+        }
+        private DataType GetCellValueDataType(DataGridViewRow row, string cell)
+        {
+            return (DataType)row.Cells[cell].Value;
+        }
+        private void AddUneditableRow(string columnName, string type, string comment)
+        {
+            int index = tableColumnsGrid.Rows.Add(false, columnName, type, null, null, true, comment, false, null, false, null, null, null, null, null);
             tableColumnsGrid.Rows[index].ReadOnly = true;
             tableColumnsGrid.Rows[index].DefaultCellStyle.BackColor = Color.Gray;
         }
-        private void AddNewRow(Int32 size = 1)
+        private void AddNewRow(int size = 1)
         {
-            for (Int32 i = 0; i < size; i++)
+            for (int i = 0; i < size; i++)
             {
-                Int32 index = tableColumnsGrid.Rows.Add(false, null, null, null, null, true, null, false, null, false, null, null, null, null, null);
-                tableColumnsGrid.Rows[index].Cells["tableColumnsUniqueConstraintName"].ReadOnly = true;
-                tableColumnsGrid.Rows[index].Cells["tableColumnsFKName"].ReadOnly = true;
-                tableColumnsGrid.Rows[index].Cells["tableColumnsIndexName"].ReadOnly = true;
-                tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedSchema"].ReadOnly = true;
-                tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedTable"].ReadOnly = true;
-                tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedColumn"].ReadOnly = true;
+                int index = tableColumnsGrid.Rows.Add(false, null, null, null, null, true, null, false, null, false, null, null, null, null, null);
+                tableColumnsGrid.Rows[index].Cells[tableCellKeyUniqueConstraintName].ReadOnly = true;
+                tableColumnsGrid.Rows[index].Cells[tableCellKeyForeignKeyName].ReadOnly = true;
+                tableColumnsGrid.Rows[index].Cells[tableCellKeyIndexName].ReadOnly = true;
+                tableColumnsGrid.Rows[index].Cells[tableCellKeyForeignKeyReferencedSchema].ReadOnly = true;
+                tableColumnsGrid.Rows[index].Cells[tableCellKeyForeignKeyReferencedTable].ReadOnly = true;
+                tableColumnsGrid.Rows[index].Cells[tableCellKeyForeignKeyReferencedTableColumn].ReadOnly = true;
 
-                tableColumnsGrid.Rows[index].Cells["tableColumnsUniqueConstraintName"].Style.BackColor = Color.Gray;
-                tableColumnsGrid.Rows[index].Cells["tableColumnsFKName"].Style.BackColor = Color.Gray;
-                tableColumnsGrid.Rows[index].Cells["tableColumnsIndexName"].Style.BackColor = Color.Gray;
-                tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedSchema"].Style.BackColor = Color.Gray;
-                tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedTable"].Style.BackColor = Color.Gray;
-                tableColumnsGrid.Rows[index].Cells["tableColumnsReferencedColumn"].Style.BackColor = Color.Gray;
+                tableColumnsGrid.Rows[index].Cells[tableCellKeyUniqueConstraintName].Style.BackColor = Color.Gray;
+                tableColumnsGrid.Rows[index].Cells[tableCellKeyForeignKeyName].Style.BackColor = Color.Gray;
+                tableColumnsGrid.Rows[index].Cells[tableCellKeyIndexName].Style.BackColor = Color.Gray;
+                tableColumnsGrid.Rows[index].Cells[tableCellKeyForeignKeyReferencedSchema].Style.BackColor = Color.Gray;
+                tableColumnsGrid.Rows[index].Cells[tableCellKeyForeignKeyReferencedTable].Style.BackColor = Color.Gray;
+                tableColumnsGrid.Rows[index].Cells[tableCellKeyForeignKeyReferencedTableColumn].Style.BackColor = Color.Gray;
             }
         }
 
@@ -168,27 +221,74 @@ namespace ScriptGenerator
             //Loop through each row and form column, comment, foreign key script values.
             foreach (DataGridViewRow row in tableColumnsGrid.Rows)
             {
-                columnDataLengthTextBox.Text.ParseNullable(out var dataLength);
-
                 ConstraintForeignKey foreignKey = null;
 
-                if (columnIsFkCheckBox.Checked)
+                var hasForeignKeyConstraint = GetCellValueBool(row, tableCellKeyIsForeignKey);
+                if (hasForeignKeyConstraint)
                 {
-                    var index = Constraint.CreateNew(tableSchemaTextBox.Text, row.Cells[], tableTableNameTextBox.Text, columnColumnTextBox.Text);
+                    var index = Constraint.CreateNew(tableSchemaTextBox.Text,
+                        GetCellValue<string>(row, tableCellKeyIndexName),
+                        tableTableNameTextBox.Text,
+                        GetCellValue<string>(row, tableCellKeyName));
 
-                    foreignKey = ConstraintForeignKey.CreateNew(columnsSchemaTextBox.Text, columnFkNameTextBox.Text, columnsTableNameTextBox.Text,
-                        columnColumnTextBox.Text, columnRefSchemaNameTextBox.Text, columnRefTableNameTextBox.Text, columnRefColumnNameTextBox.Text, index);
+                    foreignKey = ConstraintForeignKey.CreateNew(tableSchemaTextBox.Text,
+                        GetCellValue<string>(row, tableCellKeyForeignKeyName),
+                        tableTableNameTextBox.Text,
+                        GetCellValue<string>(row, tableCellKeyName),
+                        GetCellValue<string>(row, tableCellKeyForeignKeyReferencedSchema),
+                        GetCellValue<string>(row, tableCellKeyForeignKeyReferencedTable),
+                        GetCellValue<string>(row, tableCellKeyForeignKeyReferencedTableColumn),
+                        index);
                 }
 
-                var column = Column.CreateNew(columnsSchemaTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text,
-                    (DataType)columnTypeComboBox.SelectedValue, dataLength, columnDefaultTextBox.Text, columnIsNullableCheckBox.Checked,
-                    columnCommentTextBox.Text, false, null, false, null, columnIsFkCheckBox.Checked, foreignKey);
+                var hasPrimaryKey = GetCellValueBool(row, tableCellKeyIsPrimaryKey);
+                Constraint primaryKey = null;
+                if (hasPrimaryKey)
+                {
+                    primaryKey = Constraint.CreateNew(tableSchemaTextBox.Text,
+                        tablePKTextBox.Text,
+                        tableTableNameTextBox.Text,
+                        GetCellValue<string>(row, tableCellKeyName));
+                }
+
+                var hasUniqueConstraint = GetCellValueBool(row, tableCellKeyIsUnique);
+                Constraint uniqueConstraint = null;
+                if (hasUniqueConstraint)
+                {
+                    uniqueConstraint = Constraint.CreateNew(tableSchemaTextBox.Text,
+                        GetCellValue<string>(row, tableCellKeyUniqueConstraintName),
+                        tableTableNameTextBox.Text,
+                        GetCellValue<string>(row, tableCellKeyName));
+                }
+
+                GetCellValue<string>(row, tableCellKeyDataLength).ParseNullable(out var dataLength);
+                var isNullable = GetCellValueBool(row, tableCellKeyIsNullable);
+
+                var column = Column.CreateNew(tableSchemaTextBox.Text,
+                    tableTableNameTextBox.Text,
+                    GetCellValue<string>(row, tableCellKeyName),
+                    GetCellValue<DataType>(row, tableCellKeyType), 
+                    dataLength,
+                    GetCellValue<string>(row, tableCellKeyDefault),
+                    isNullable,
+                    GetCellValue<string>(row, tableCellKeyComment),
+                    hasPrimaryKey,
+                    primaryKey,
+                    hasUniqueConstraint,
+                    uniqueConstraint,
+                    hasForeignKeyConstraint, 
+                    foreignKey);
 
                 columns.Add(column);
             }
 
-            var table = Table.CreateNew(tableTableNameTextBox.Text, tableSchemaTextBox.Text, tableTableCommentTextBox.Text, tableTablespaceTextBox.Text,
-                );
+            tabTable = Table.CreateNew(tableTableNameTextBox.Text, 
+                tableSchemaTextBox.Text, 
+                tableTableCommentTextBox.Text, 
+                tableTablespaceTextBox.Text,
+                columns);
+
+            return tabTable;
         }
 
         // PasteInData pastes clipboard data into the grid passed to it.
@@ -228,7 +328,7 @@ namespace ScriptGenerator
                 while (jCol < valuesInRow.Length)
                 {
                     if ((dgv.ColumnCount - 1) >= (c + jCol))
-                        if (dgv.Rows[r + iRow].Cells[c + jCol].ValueType == Type.GetType("System.Boolean"))
+                        if (dgv.Rows[r + iRow].Cells[c + jCol].ValueType == Type.GetType("System.bool"))
                             if (valuesInRow[jCol].Equals("true", StringComparison.InvariantCultureIgnoreCase))
                                 dgv.Rows[r + iRow].Cells[c + jCol].Value = true;
                             else
