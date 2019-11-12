@@ -1,7 +1,7 @@
 ﻿using ScriptGenerator.Models;
 using System.Threading.Tasks;
 
-namespace ScriptGenerator
+namespace ScriptGenerator.Services
 {
     /// <summary>
     /// Script generation service

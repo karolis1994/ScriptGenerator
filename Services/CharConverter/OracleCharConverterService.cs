@@ -12,42 +12,44 @@ namespace ScriptGenerator.Services
 
         public async Task LoadCharset(string charsetFilePath)
         {
-            await new Task(() =>
+            await Task.Run(() =>
             {
-                Dictionary<Int32, String> newCharset = new Dictionary<Int32, String>();
-                Int32 key = 0;
+                Dictionary<int, string> newCharset = new Dictionary<int, string>();
+                int key = 0;
 
                 if (File.Exists(charsetFilePath))
                 {
-                    IEnumerable<String> lines = File.ReadLines(charsetFilePath);
-                    foreach (String line in lines)
+                    IEnumerable<string> lines = File.ReadLines(charsetFilePath);
+                    foreach (string line in lines)
                     {
-                        String[] splitResult = line.Split(' ');
+                        string[] splitResult = line.Split(' ');
 
                         if (splitResult.Length == 2)
-                            if (Int32.TryParse(splitResult[0], out key))
+                            if (int.TryParse(splitResult[0], out key))
                                 newCharset.Add(key, splitResult[1]);
                     }
                 }
 
                 charset = newCharset;
-            });
+            })
+            .ConfigureAwait(false);
         }
 
         public async Task<string> ReplaceWithCharset(string original, bool convertApostrophe = false)
         {
-            return await new Task<string>(() =>
+            return await Task.Run(() =>
             {
                 StringBuilder stringBuilder = new StringBuilder(original);
 
-                foreach (KeyValuePair<Int32, String> pair in charset)
+                foreach (KeyValuePair<int, string> pair in charset)
                     stringBuilder.Replace(pair.Value, $"' || chr({pair.Key}) || '");
 
                 if (convertApostrophe)
                     stringBuilder.Replace("'", "' || chr(39) || '");
 
                 return stringBuilder.ToString();
-            });
+            })
+            .ConfigureAwait(false);
         }
     }
 }

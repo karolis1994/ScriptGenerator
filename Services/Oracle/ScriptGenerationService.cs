@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+namespace ScriptGenerator.Services
 {
     public class ScriptGenerationService : IScriptGenerationService
     {
@@ -15,7 +15,7 @@ namespace Services
             if (t == null)
                 return string.Empty;
 
-            return await new Task<string>(() =>
+            return await Task.Run(() =>
             {
                 StringBuilder scriptBuilder = new StringBuilder();
 
@@ -68,7 +68,8 @@ namespace Services
                 scriptBuilder.AppendLine("/");
 
                 return scriptBuilder.ToString();
-            });
+            })
+            .ConfigureAwait(false);
         }
 
         public async Task<string> GenerateCreationScript(Column c)
@@ -76,7 +77,7 @@ namespace Services
             if (c == null)
                 return string.Empty;
 
-            return await new Task<string>(() =>
+            return await Task.Run(() =>
             {
                 var scriptBuilder = new StringBuilder();
 
@@ -99,7 +100,8 @@ namespace Services
                 scriptBuilder.AppendLine("/");
 
                 return scriptBuilder.ToString();
-            });
+            })
+            .ConfigureAwait(false);
         }
 
         public async Task<string> GenerateCreationScript(Sequence sequence)
@@ -107,7 +109,7 @@ namespace Services
             if (sequence == null)
                 return string.Empty;
 
-            return await new Task<string>(() =>
+            return await Task.Run(() =>
             {
                 var scriptBuilder = new StringBuilder();
 
@@ -126,7 +128,8 @@ namespace Services
                 scriptBuilder.AppendLine("END;");
 
                 return scriptBuilder.ToString();
-            });
+            })
+            .ConfigureAwait(false);
         }
 
         private string GenerateForeignKeyScript(ConstraintForeignKey c)

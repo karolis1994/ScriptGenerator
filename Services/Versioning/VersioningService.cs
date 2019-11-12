@@ -13,7 +13,7 @@ namespace ScriptGenerator.Services
 
         public async Task<string> ChangeVersions(string rootPath, bool increaseMinor, bool increaseMajor)
         {
-            return await new Task<string>(() =>
+            return await Task.Run(() =>
             {
                 string[] files = Directory.GetFiles(rootPath, "AssemblyInfo.cs", SearchOption.AllDirectories);
                 string fileText;
@@ -32,11 +32,11 @@ namespace ScriptGenerator.Services
 
                         if (increaseMajor)
                         {
-                            version[0] = (Int32.Parse(version[0]) + 1).ToString();
+                            version[0] = (int.Parse(version[0]) + 1).ToString();
                         }
                         if (increaseMinor)
                         {
-                            version[1] = (Int32.Parse(version[1]) + 1).ToString();
+                            version[1] = (int.Parse(version[1]) + 1).ToString();
                         }
 
                         newVersion = string.Join(".", version);
@@ -48,12 +48,13 @@ namespace ScriptGenerator.Services
                 }
 
                 return resultBuilder.ToString();
-            });
+            })
+            .ConfigureAwait(false);
         }
 
         public async Task<string> ChangeVersions(string rootPath, string customVersion)
         {
-            return await new Task<string>(() =>
+            return await Task.Run(() =>
             {
                 ValidateVersion(customVersion);
 
@@ -73,7 +74,8 @@ namespace ScriptGenerator.Services
                 }
 
                 return resultBuilder.ToString();
-            });
+            })
+            .ConfigureAwait(false);
         }
 
         private void ValidateVersion(string version)
