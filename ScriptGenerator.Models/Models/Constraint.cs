@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ScriptGenerator.Models
+﻿namespace ScriptGenerator.Models
 {
     /// <summary>
     /// Generic constraint model
@@ -14,26 +8,45 @@ namespace ScriptGenerator.Models
         /// <summary>
         /// Schema name
         /// </summary>
-        public string Schema { get; set; }
+        public string Schema { get; protected set; }
 
         /// <summary>
         /// Constraint name
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; protected set; }
 
         /// <summary>
         /// Table name
         /// </summary>
-        public string TableName { get; set; }
+        public string TableName { get; protected set; }
 
         /// <summary>
         /// Table column name
         /// </summary>
-        public string TableColumnName { get; set; }
+        public string TableColumnName { get; protected set; }
 
         /// <summary>
         /// Tablespace used for this index
         /// </summary>
-        public string TableSpace { get; set; }
+        public string TableSpace { get; protected set; }
+
+        /// <summary>
+        /// Creates new constraint
+        /// </summary>
+        /// <param name="schema"></param>
+        /// <param name="name"></param>
+        /// <param name="tableName"></param>
+        /// <param name="tableColumnName"></param>
+        /// <returns></returns>
+        public static Constraint CreateNew(string schema, string name, string tableName, string tableColumnName)
+        {
+            return new Constraint()
+            {
+                Schema = schema,
+                Name = name,
+                TableName = tableName,
+                TableColumnName = tableColumnName
+            };
+        }
     }
 }

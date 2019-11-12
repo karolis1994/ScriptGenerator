@@ -53,7 +53,7 @@
         /// <summary>
         /// Primary key constraint
         /// </summary>
-        public Constraint PrimaryKey { get; set; }
+        public Constraint PrimaryKey { get; private set; }
 
         /// <summary>
         /// Does column have a unique constraint
@@ -63,7 +63,7 @@
         /// <summary>
         /// Unique index
         /// </summary>
-        public Constraint UniqueConstraint { get; set; }
+        public Constraint UniqueConstraint { get; private set; }
 
         /// <summary>
         /// Does column have a foreign key constraint
@@ -73,6 +73,6 @@
         /// <summary>
         /// Foreign key
         /// </summary>
-        public ConstraintForeignKey ForeignKey { get; set; }
+        public ConstraintForeignKey ForeignKey { get; private set; }
     }
 }
