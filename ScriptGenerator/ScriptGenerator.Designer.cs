@@ -153,8 +153,8 @@
             this.versioningFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.tableColumnsIsPK = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tableColumnsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableColumnsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableColumnsDataLength = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.tableColumnsType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.tableColumnsDataLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableColumnsDefault = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableColumnsIsNullable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tableColumnsComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1437,13 +1437,14 @@
             // 
             this.tableColumnsType.HeaderText = "Type";
             this.tableColumnsType.Name = "tableColumnsType";
+            this.tableColumnsType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tableColumnsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // tableColumnsDataLength
             // 
             this.tableColumnsDataLength.HeaderText = "Data length";
             this.tableColumnsDataLength.Name = "tableColumnsDataLength";
             this.tableColumnsDataLength.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tableColumnsDataLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // tableColumnsDefault
             // 
@@ -1677,8 +1678,8 @@
         private System.Windows.Forms.ComboBox columnTypeComboBox;
         private System.Windows.Forms.DataGridViewCheckBoxColumn tableColumnsIsPK;
         private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsType;
-        private System.Windows.Forms.DataGridViewComboBoxColumn tableColumnsDataLength;
+        private System.Windows.Forms.DataGridViewComboBoxColumn tableColumnsType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsDataLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsDefault;
         private System.Windows.Forms.DataGridViewCheckBoxColumn tableColumnsIsNullable;
         private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsComment;

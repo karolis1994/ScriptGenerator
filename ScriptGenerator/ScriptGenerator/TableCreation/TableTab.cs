@@ -30,24 +30,14 @@ namespace ScriptGenerator
         //Init table creation tab default values
         private void InitializeTableTab()
         {
-            //DataGridViewComboBoxColumn dataTypeColumn = new DataGridViewComboBoxColumn();
-            //dataTypeColumn.HeaderText = "Type";
-            //dataTypeColumn.DataSource = DataTypeDropDown.GetAllDropDownOptions();
-            //dataTypeColumn.DisplayMember = "Value";
-            //dataTypeColumn.ValueMember = "Key";
-            //dataTypeColumn.ValueType = typeof(DataType);
-            //tableColumnsGrid.Columns.Add(dataTypeColumn);
-
-            ((DataGridViewComboBoxColumn)tableColumnsGrid.Columns[tableCellKeyType]).HeaderText = "Type";
             ((DataGridViewComboBoxColumn)tableColumnsGrid.Columns[tableCellKeyType]).DataSource = DataTypeDropDown.GetAllDropDownOptions();
             ((DataGridViewComboBoxColumn)tableColumnsGrid.Columns[tableCellKeyType]).DisplayMember = "Value";
             ((DataGridViewComboBoxColumn)tableColumnsGrid.Columns[tableCellKeyType]).ValueMember = "Key";
             tableColumnsGrid.Columns[tableCellKeyType].ValueType = typeof(DataType);
-            //tableColumnsGrid.Columns[tableCellKeyType] = dataTypeColumn;
 
             tableColumnsGrid.Rows.Add(true,
                 "ID",
-                "NUMBER",
+                DataType.Number,
                 null,
                 null,
                 false,
@@ -101,7 +91,7 @@ namespace ScriptGenerator
                 }
             }
 
-            if (e.ColumnIndex == 8)
+            if (e.ColumnIndex == 9)
             {
                 if ((bool)tableColumnsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
                 {
@@ -146,10 +136,10 @@ namespace ScriptGenerator
         }
         private void tableAuditBtn_Click(object sender, EventArgs e)
         {
-            AddUneditableRow("RECORD_DATE", "DATE", "Date of record creation");
-            AddUneditableRow("EDIT_DATE", "DATE", "Date of record edit");
-            AddUneditableRow("RECORD_USER", "VARCHAR2(250)", "User name of record creator");
-            AddUneditableRow("EDIT_USER", "VARCHAR2(250)", "User name of last record editor");
+            AddUneditableRow("RECORD_DATE", DataType.Date, null, "Date of record creation");
+            AddUneditableRow("EDIT_DATE", DataType.Date, null, "Date of record edit");
+            AddUneditableRow("RECORD_USER", DataType.Varchar2, 250, "User name of record creator");
+            AddUneditableRow("EDIT_USER", DataType.Varchar2, 250, "User name of last record editor");
         }
         private void tableAddBtn_Click(object sender, EventArgs e)
         {
@@ -187,9 +177,9 @@ namespace ScriptGenerator
         {
             return (DataType)row.Cells[cell].Value;
         }
-        private void AddUneditableRow(string columnName, string type, string comment)
+        private void AddUneditableRow(string columnName, DataType type, int? dataLength, string comment)
         {
-            int index = tableColumnsGrid.Rows.Add(false, columnName, type, null, null, true, comment, false, null, false, null, null, null, null, null);
+            int index = tableColumnsGrid.Rows.Add(false, columnName, type, dataLength, null, true, comment, false, null, false, null, null, null, null, null);
             tableColumnsGrid.Rows[index].ReadOnly = true;
             tableColumnsGrid.Rows[index].DefaultCellStyle.BackColor = Color.Gray;
         }
@@ -197,7 +187,7 @@ namespace ScriptGenerator
         {
             for (int i = 0; i < size; i++)
             {
-                int index = tableColumnsGrid.Rows.Add(false, null, null, null, null, true, null, false, null, false, null, null, null, null, null);
+                int index = tableColumnsGrid.Rows.Add(false, null, DataType.Number, null, null, true, null, false, null, false, null, null, null, null, null);
                 tableColumnsGrid.Rows[index].Cells[tableCellKeyUniqueConstraintName].ReadOnly = true;
                 tableColumnsGrid.Rows[index].Cells[tableCellKeyForeignKeyName].ReadOnly = true;
                 tableColumnsGrid.Rows[index].Cells[tableCellKeyIndexName].ReadOnly = true;

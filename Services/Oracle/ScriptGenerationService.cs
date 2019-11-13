@@ -58,7 +58,7 @@ namespace ScriptGenerator.Services
                 scriptBuilder.AppendLine("  IF ln_exist = 0 THEN");
                 scriptBuilder.AppendLine($"      EXECUTE IMMEDIATE 'CREATE TABLE {t.Schema}.{t.Name}");
                 scriptBuilder.AppendLine("      (");
-                scriptBuilder.AppendLine($"          {String.Join($"," + "          ", columns)}");
+                scriptBuilder.AppendLine($"          {String.Join($",{Environment.NewLine}          ", columns)}");
                 scriptBuilder.AppendLine($"      ){(String.IsNullOrWhiteSpace(t.TableSpace) ? "" : " TABLESPACE " + t.TableSpace)}';");
                 scriptBuilder.AppendLine($"      {GeneratePrimaryKeyScript(primaryKeyConstraint)}'");
                 scriptBuilder.AppendLine($"      {String.Join(Environment.NewLine + "      ", commentScripts.Concat(fkScripts))}");
