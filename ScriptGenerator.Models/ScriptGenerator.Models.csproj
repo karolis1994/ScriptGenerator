@@ -53,6 +53,7 @@
     <Compile Include="Models\DataTypeDropDown.cs" />
     <Compile Include="Models\Sequence.cs" />
     <Compile Include="Models\Table.cs" />
+    <Compile Include="Models\Trigger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

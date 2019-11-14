@@ -12,16 +12,17 @@ namespace ScriptGenerator.Tests
     public static class TestConstants
     {
         public const string Schema = "Schema";
-        public const string TableName = "TableName";
-        public const string SequenceName = "SequenceName";
-        public const string ColumnName = "ColumnName";
-        public const string ConstraintName = "ConstraintName";
+        public const string NameTable = "TableName";
+        public const string NameSequence = "SequenceName";
+        public const string NameColumn = "ColumnName";
+        public const string NameConstraint = "ConstraintName";
+        public const string NameTrigger = "TriggerName";
         public const string ReferencedSchemaName = "ReferencedSchema";
         public const string ReferencedTableName = "ReferencedTable";
         public const string ReferencedColumnName = "ReferencedColumn";
         public const string CommentColumn = "CommentColumn";
         public const string CommentTable = "CommentTable";
-        public const string TableColumn = "TableColumn";
+        public const string NameTableColumn = "TableColumn";
         public const string TableSpace = "TableSpace";
         public const string DefaultValue = null;
         public const int DataLength = 20;
@@ -33,21 +34,25 @@ namespace ScriptGenerator.Tests
         public const bool HasUnique = false;
         public const bool isNullable = false;
 
+        public static Trigger MockTrigger() => Trigger.CreateNew(
+            Schema,
+            NameTrigger,
+            NameTable);
         public static Table MockTable() => Table.CreateNew(
-            TableName,
+            NameTable,
             Schema,
             CommentTable,
             TableSpace,
             new HashSet<Column>());
         public static Sequence MockSequence() => Sequence.CreateNew(
-            SequenceName,
+            NameSequence,
             Schema,
             StartsWith,
             IncrementBy);
         public static Column MockColumn() => Column.CreateNew(
             Schema,
-            TableName,
-            ColumnName,
+            NameTable,
+            NameColumn,
             Type, 
             DataLength,
             DefaultValue,
@@ -61,15 +66,15 @@ namespace ScriptGenerator.Tests
             null);
         public static Constraint MockConstraint() => Constraint.CreateNew(
             Schema,
-            ConstraintName,
-            TableName,
-            TableColumn,
+            NameConstraint,
+            NameTable,
+            NameTableColumn,
             TableSpace);
         public static ConstraintForeignKey MockConstraintForeignKey() => ConstraintForeignKey.CreateNew(
             Schema,
-            ConstraintName,
-            TableName,
-            TableColumn, 
+            NameConstraint,
+            NameTable,
+            NameTableColumn, 
             ReferencedSchemaName,
             ReferencedTableName, 
             ReferencedColumnName, 

@@ -131,6 +131,43 @@ namespace ScriptGenerator.Services
             .ConfigureAwait(false);
         }
 
+        public async Task<string> GenerateCreationScript(Trigger trigger)
+        {
+            if (trigger == null)
+                return string.Empty;
+
+            return await Task.Run(() =>
+            {
+                var scriptBuilder = new StringBuilder();
+
+                scriptBuilder.AppendLine($"CREATE OR REPLACE TRIGGER {trigger.Schema}.{trigger.TableName}.{trigger.Name}");
+                scriptBuilder.AppendLine($"  BEFORE INSERT OR UPDATE ON {trigger.Schema}.{trigger.TableName}");
+                scriptBuilder.AppendLine("  FOR EACH ROW");
+                scriptBuilder.AppendLine("DECLARE");
+                scriptBuilder.AppendLine("  ls_user VARCHAR2(250);");
+                scriptBuilder.AppendLine("BEGIN");
+                scriptBuilder.AppendLine("  SELECT NVL(settings.glob.s_current_user_name, MIN(vs.osuser))");
+                scriptBuilder.AppendLine("    INTO ls_user");
+                scriptBuilder.AppendLine("    FROM v$session vs");
+                scriptBuilder.AppendLine("   WHERE vs.audsid = userenv('sessionid');");
+                scriptBuilder.AppendLine("  IF INSERTING THEN");
+                scriptBuilder.AppendLine("    :NEW.record_date := sysdate;");
+                scriptBuilder.AppendLine("    IF :NEW.record_user IS NULL THEN");
+                scriptBuilder.AppendLine("      :NEW.record_user := s_user;");
+                scriptBuilder.AppendLine("    END IF;");
+                scriptBuilder.AppendLine("  ELSE");
+                scriptBuilder.AppendLine("    :NEW.edit_date := sysdate;");
+                scriptBuilder.AppendLine("    IF :NEW.edit_user IS NULL THEN");
+                scriptBuilder.AppendLine("      :NEW.edit_user := s_user;");
+                scriptBuilder.AppendLine("    END IF;");
+                scriptBuilder.AppendLine("  END IF;");
+                scriptBuilder.AppendLine("END;");
+
+                return scriptBuilder.ToString();
+            })
+            .ConfigureAwait(false);
+        }
+
         private string GenerateForeignKeyScript(ConstraintForeignKey c)
         {
             if (c == null)

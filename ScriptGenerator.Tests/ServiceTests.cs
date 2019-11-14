@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ScriptGenerator.Models;
 using ScriptGenerator.Services;
+using System;
+using System.IO;
 
 namespace ScriptGenerator.Tests
 {
@@ -133,6 +129,34 @@ namespace ScriptGenerator.Tests
 
             //Act
             var script = scriptGenerator.GenerateCreationScript(sequence).Result;
+
+            //Assert
+            Assert.AreEqual(string.Empty, script);
+        }
+
+        [TestMethod]
+        public void ScriptGenerator_GenerateCreationScript_TriggerNotNull()
+        {
+            //Arrange
+            IScriptGenerationService scriptGenerator = new ScriptGenerationService();
+            var trigger = TestConstants.MockTrigger();
+
+            //Act
+            var script = scriptGenerator.GenerateCreationScript(trigger).Result;
+
+            //Assert
+            Assert.IsNotNull(script);
+        }
+
+        [TestMethod]
+        public void ScriptGenerator_GenerateCreationScript_TriggerNull()
+        {
+            //Arrange
+            IScriptGenerationService scriptGenerator = new ScriptGenerationService();
+            Trigger trigger = null;
+
+            //Act
+            var script = scriptGenerator.GenerateCreationScript(trigger).Result;
 
             //Assert
             Assert.AreEqual(string.Empty, script);

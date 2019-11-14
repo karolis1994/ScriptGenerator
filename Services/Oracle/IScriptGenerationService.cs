@@ -28,5 +28,12 @@ namespace ScriptGenerator.Services
         /// <param name="sequence"></param>
         /// <returns></returns>
         Task<string> GenerateCreationScript(Sequence sequence);
+
+        /// <summary>
+        /// Generates audit trigger creation script
+        /// </summary>
+        /// <param name="trigger"></param>
+        /// <returns></returns>
+        Task<string> GenerateCreationScript(Trigger trigger);
     }
 }
