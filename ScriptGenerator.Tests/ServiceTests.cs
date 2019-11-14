@@ -42,7 +42,7 @@ namespace ScriptGenerator.Tests
         {
             //Arrange
             ICharConverterService converter = new OracleCharConverterService();
-            var charset = converter.LoadCharset(Directory.GetCurrentDirectory() + TestConstants.CharsetTestRelativePath).Result;
+            _ = converter.LoadCharset(Directory.GetCurrentDirectory() + TestConstants.CharsetTestRelativePath).Result;
             var original = "ą";
 
             //Act
