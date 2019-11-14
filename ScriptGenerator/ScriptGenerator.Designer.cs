@@ -45,6 +45,21 @@
             this.tableRemoveBtn = new System.Windows.Forms.Button();
             this.tableAddBtn = new System.Windows.Forms.Button();
             this.tableColumnsGrid = new System.Windows.Forms.DataGridView();
+            this.tableColumnsIsPK = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.tableColumnsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableColumnsType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.tableColumnsDataLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableColumnsDefault = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableColumnsIsNullable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.tableColumnsComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableColumnsIsUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.tableColumnsUniqueConstraintName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableColumnsIsForeignKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.tableColumnsFKName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableColumnsIndexName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableColumnsReferencedSchema = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableColumnsReferencedTable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableColumnsReferencedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tablePKTextBox = new System.Windows.Forms.TextBox();
             this.tablePKLbl = new System.Windows.Forms.Label();
             this.tableColumnsLbl = new System.Windows.Forms.Label();
@@ -151,21 +166,6 @@
             this.IsUsedInUpdating = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.nonVisualLoadFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.versioningFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.tableColumnsIsPK = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.tableColumnsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableColumnsType = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.tableColumnsDataLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableColumnsDefault = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableColumnsIsNullable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.tableColumnsComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableColumnsIsUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.tableColumnsUniqueConstraintName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableColumnsIsForeignKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.tableColumnsFKName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableColumnsIndexName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableColumnsReferencedSchema = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableColumnsReferencedTable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableColumnsReferencedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
@@ -215,7 +215,7 @@
             this.tableSchemaLbl.Location = new System.Drawing.Point(21, 3);
             this.tableSchemaLbl.Name = "tableSchemaLbl";
             this.tableSchemaLbl.Size = new System.Drawing.Size(49, 13);
-            this.tableSchemaLbl.TabIndex = 4;
+            this.tableSchemaLbl.TabIndex = 12;
             this.tableSchemaLbl.Text = "Schema:";
             // 
             // tableTableNameLbl
@@ -224,7 +224,7 @@
             this.tableTableNameLbl.Location = new System.Drawing.Point(4, 29);
             this.tableTableNameLbl.Name = "tableTableNameLbl";
             this.tableTableNameLbl.Size = new System.Drawing.Size(66, 13);
-            this.tableTableNameLbl.TabIndex = 5;
+            this.tableTableNameLbl.TabIndex = 13;
             this.tableTableNameLbl.Text = "Table name:";
             // 
             // tableBtn
@@ -232,7 +232,7 @@
             this.tableBtn.Location = new System.Drawing.Point(10, 307);
             this.tableBtn.Name = "tableBtn";
             this.tableBtn.Size = new System.Drawing.Size(75, 23);
-            this.tableBtn.TabIndex = 6;
+            this.tableBtn.TabIndex = 9;
             this.tableBtn.Text = "Generate";
             this.tableBtn.UseVisualStyleBackColor = true;
             this.tableBtn.Click += new System.EventHandler(this.tableBtn_Click);
@@ -286,7 +286,7 @@
             this.tableResetBtn.Location = new System.Drawing.Point(91, 307);
             this.tableResetBtn.Name = "tableResetBtn";
             this.tableResetBtn.Size = new System.Drawing.Size(75, 23);
-            this.tableResetBtn.TabIndex = 21;
+            this.tableResetBtn.TabIndex = 10;
             this.tableResetBtn.Text = "Reset tab";
             this.tableResetBtn.UseVisualStyleBackColor = true;
             this.tableResetBtn.Click += new System.EventHandler(this.tableResetBtn_Click);
@@ -298,7 +298,7 @@
             this.tableTablespaceTextBox.MaxLength = 30;
             this.tableTablespaceTextBox.Name = "tableTablespaceTextBox";
             this.tableTablespaceTextBox.Size = new System.Drawing.Size(149, 20);
-            this.tableTablespaceTextBox.TabIndex = 19;
+            this.tableTablespaceTextBox.TabIndex = 3;
             // 
             // tableTablespaceLbl
             // 
@@ -306,7 +306,7 @@
             this.tableTablespaceLbl.Location = new System.Drawing.Point(258, 7);
             this.tableTablespaceLbl.Name = "tableTablespaceLbl";
             this.tableTablespaceLbl.Size = new System.Drawing.Size(66, 13);
-            this.tableTablespaceLbl.TabIndex = 20;
+            this.tableTablespaceLbl.TabIndex = 14;
             this.tableTablespaceLbl.Text = "Tablespace:";
             // 
             // tableAuditBtn
@@ -314,7 +314,7 @@
             this.tableAuditBtn.Location = new System.Drawing.Point(257, 55);
             this.tableAuditBtn.Name = "tableAuditBtn";
             this.tableAuditBtn.Size = new System.Drawing.Size(107, 23);
-            this.tableAuditBtn.TabIndex = 18;
+            this.tableAuditBtn.TabIndex = 8;
             this.tableAuditBtn.Text = "Add Audit Columns";
             this.tableAuditBtn.UseVisualStyleBackColor = true;
             this.tableAuditBtn.Click += new System.EventHandler(this.tableAuditBtn_Click);
@@ -324,7 +324,7 @@
             this.tableTableCommentTextBox.Location = new System.Drawing.Point(570, 26);
             this.tableTableCommentTextBox.Name = "tableTableCommentTextBox";
             this.tableTableCommentTextBox.Size = new System.Drawing.Size(841, 20);
-            this.tableTableCommentTextBox.TabIndex = 16;
+            this.tableTableCommentTextBox.TabIndex = 5;
             // 
             // tableTableCommentLbl
             // 
@@ -332,7 +332,7 @@
             this.tableTableCommentLbl.Location = new System.Drawing.Point(481, 29);
             this.tableTableCommentLbl.Name = "tableTableCommentLbl";
             this.tableTableCommentLbl.Size = new System.Drawing.Size(83, 13);
-            this.tableTableCommentLbl.TabIndex = 17;
+            this.tableTableCommentLbl.TabIndex = 16;
             this.tableTableCommentLbl.Text = "Table comment:";
             // 
             // tableRemoveBtn
@@ -340,7 +340,7 @@
             this.tableRemoveBtn.Location = new System.Drawing.Point(144, 55);
             this.tableRemoveBtn.Name = "tableRemoveBtn";
             this.tableRemoveBtn.Size = new System.Drawing.Size(107, 23);
-            this.tableRemoveBtn.TabIndex = 15;
+            this.tableRemoveBtn.TabIndex = 7;
             this.tableRemoveBtn.Text = "Remove Selected";
             this.tableRemoveBtn.UseVisualStyleBackColor = true;
             this.tableRemoveBtn.Click += new System.EventHandler(this.tableRemoveBtn_Click);
@@ -350,7 +350,7 @@
             this.tableAddBtn.Location = new System.Drawing.Point(63, 55);
             this.tableAddBtn.Name = "tableAddBtn";
             this.tableAddBtn.Size = new System.Drawing.Size(75, 23);
-            this.tableAddBtn.TabIndex = 14;
+            this.tableAddBtn.TabIndex = 6;
             this.tableAddBtn.Text = "Add Column";
             this.tableAddBtn.UseVisualStyleBackColor = true;
             this.tableAddBtn.Click += new System.EventHandler(this.tableAddBtn_Click);
@@ -379,9 +379,104 @@
             this.tableColumnsGrid.Location = new System.Drawing.Point(10, 81);
             this.tableColumnsGrid.Name = "tableColumnsGrid";
             this.tableColumnsGrid.Size = new System.Drawing.Size(1401, 220);
-            this.tableColumnsGrid.TabIndex = 13;
+            this.tableColumnsGrid.TabIndex = 11;
             this.tableColumnsGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tableColumnsGrid_CellContentClick);
             this.tableColumnsGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tableColumnsGrid_KeyDown);
+            // 
+            // tableColumnsIsPK
+            // 
+            this.tableColumnsIsPK.HeaderText = "Is Primary Key";
+            this.tableColumnsIsPK.Name = "tableColumnsIsPK";
+            this.tableColumnsIsPK.ReadOnly = true;
+            this.tableColumnsIsPK.Width = 80;
+            // 
+            // tableColumnsName
+            // 
+            this.tableColumnsName.HeaderText = "Name";
+            this.tableColumnsName.MaxInputLength = 30;
+            this.tableColumnsName.Name = "tableColumnsName";
+            // 
+            // tableColumnsType
+            // 
+            this.tableColumnsType.HeaderText = "Type";
+            this.tableColumnsType.Name = "tableColumnsType";
+            this.tableColumnsType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tableColumnsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // tableColumnsDataLength
+            // 
+            this.tableColumnsDataLength.HeaderText = "Data length";
+            this.tableColumnsDataLength.Name = "tableColumnsDataLength";
+            this.tableColumnsDataLength.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // tableColumnsDefault
+            // 
+            this.tableColumnsDefault.HeaderText = "Default";
+            this.tableColumnsDefault.Name = "tableColumnsDefault";
+            // 
+            // tableColumnsIsNullable
+            // 
+            this.tableColumnsIsNullable.HeaderText = "Is Nullable";
+            this.tableColumnsIsNullable.Name = "tableColumnsIsNullable";
+            this.tableColumnsIsNullable.Width = 80;
+            // 
+            // tableColumnsComment
+            // 
+            this.tableColumnsComment.HeaderText = "Comment";
+            this.tableColumnsComment.Name = "tableColumnsComment";
+            this.tableColumnsComment.Width = 200;
+            // 
+            // tableColumnsIsUnique
+            // 
+            this.tableColumnsIsUnique.HeaderText = "Is Unique";
+            this.tableColumnsIsUnique.Name = "tableColumnsIsUnique";
+            this.tableColumnsIsUnique.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tableColumnsIsUnique.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.tableColumnsIsUnique.Width = 80;
+            // 
+            // tableColumnsUniqueConstraintName
+            // 
+            this.tableColumnsUniqueConstraintName.HeaderText = "Unique Constraint Name";
+            this.tableColumnsUniqueConstraintName.MaxInputLength = 30;
+            this.tableColumnsUniqueConstraintName.Name = "tableColumnsUniqueConstraintName";
+            // 
+            // tableColumnsIsForeignKey
+            // 
+            this.tableColumnsIsForeignKey.HeaderText = "Is Foreign Key";
+            this.tableColumnsIsForeignKey.Name = "tableColumnsIsForeignKey";
+            this.tableColumnsIsForeignKey.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tableColumnsIsForeignKey.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.tableColumnsIsForeignKey.Width = 80;
+            // 
+            // tableColumnsFKName
+            // 
+            this.tableColumnsFKName.HeaderText = "FK name";
+            this.tableColumnsFKName.MaxInputLength = 30;
+            this.tableColumnsFKName.Name = "tableColumnsFKName";
+            // 
+            // tableColumnsIndexName
+            // 
+            this.tableColumnsIndexName.HeaderText = "Index name";
+            this.tableColumnsIndexName.MaxInputLength = 30;
+            this.tableColumnsIndexName.Name = "tableColumnsIndexName";
+            // 
+            // tableColumnsReferencedSchema
+            // 
+            this.tableColumnsReferencedSchema.HeaderText = "Referenced Schema";
+            this.tableColumnsReferencedSchema.MaxInputLength = 30;
+            this.tableColumnsReferencedSchema.Name = "tableColumnsReferencedSchema";
+            // 
+            // tableColumnsReferencedTable
+            // 
+            this.tableColumnsReferencedTable.HeaderText = "Referenced Table";
+            this.tableColumnsReferencedTable.MaxInputLength = 30;
+            this.tableColumnsReferencedTable.Name = "tableColumnsReferencedTable";
+            // 
+            // tableColumnsReferencedColumn
+            // 
+            this.tableColumnsReferencedColumn.HeaderText = "Referenced Column";
+            this.tableColumnsReferencedColumn.MaxInputLength = 30;
+            this.tableColumnsReferencedColumn.Name = "tableColumnsReferencedColumn";
             // 
             // tablePKTextBox
             // 
@@ -390,7 +485,7 @@
             this.tablePKTextBox.MaxLength = 30;
             this.tablePKTextBox.Name = "tablePKTextBox";
             this.tablePKTextBox.Size = new System.Drawing.Size(149, 20);
-            this.tablePKTextBox.TabIndex = 9;
+            this.tablePKTextBox.TabIndex = 4;
             // 
             // tablePKLbl
             // 
@@ -398,7 +493,7 @@
             this.tablePKLbl.Location = new System.Drawing.Point(231, 29);
             this.tablePKLbl.Name = "tablePKLbl";
             this.tablePKLbl.Size = new System.Drawing.Size(93, 13);
-            this.tablePKLbl.TabIndex = 10;
+            this.tablePKLbl.TabIndex = 15;
             this.tablePKLbl.Text = "Primary key name:";
             // 
             // tableColumnsLbl
@@ -407,7 +502,7 @@
             this.tableColumnsLbl.Location = new System.Drawing.Point(7, 65);
             this.tableColumnsLbl.Name = "tableColumnsLbl";
             this.tableColumnsLbl.Size = new System.Drawing.Size(50, 13);
-            this.tableColumnsLbl.TabIndex = 8;
+            this.tableColumnsLbl.TabIndex = 17;
             this.tableColumnsLbl.Text = "Columns:";
             // 
             // columnTabPage
@@ -456,7 +551,7 @@
             this.columnTypeComboBox.Location = new System.Drawing.Point(326, 3);
             this.columnTypeComboBox.Name = "columnTypeComboBox";
             this.columnTypeComboBox.Size = new System.Drawing.Size(149, 21);
-            this.columnTypeComboBox.TabIndex = 36;
+            this.columnTypeComboBox.TabIndex = 4;
             // 
             // columnDataLengthTextBox
             // 
@@ -464,7 +559,7 @@
             this.columnDataLengthTextBox.Location = new System.Drawing.Point(326, 29);
             this.columnDataLengthTextBox.Name = "columnDataLengthTextBox";
             this.columnDataLengthTextBox.Size = new System.Drawing.Size(149, 20);
-            this.columnDataLengthTextBox.TabIndex = 34;
+            this.columnDataLengthTextBox.TabIndex = 7;
             // 
             // columnDataLengthLbl
             // 
@@ -472,7 +567,7 @@
             this.columnDataLengthLbl.Location = new System.Drawing.Point(255, 32);
             this.columnDataLengthLbl.Name = "columnDataLengthLbl";
             this.columnDataLengthLbl.Size = new System.Drawing.Size(65, 13);
-            this.columnDataLengthLbl.TabIndex = 35;
+            this.columnDataLengthLbl.TabIndex = 20;
             this.columnDataLengthLbl.Text = "Data length:";
             // 
             // columnResetBtn
@@ -480,7 +575,7 @@
             this.columnResetBtn.Location = new System.Drawing.Point(84, 110);
             this.columnResetBtn.Name = "columnResetBtn";
             this.columnResetBtn.Size = new System.Drawing.Size(75, 23);
-            this.columnResetBtn.TabIndex = 33;
+            this.columnResetBtn.TabIndex = 16;
             this.columnResetBtn.Text = "Reset tab";
             this.columnResetBtn.UseVisualStyleBackColor = true;
             this.columnResetBtn.Click += new System.EventHandler(this.columnResetBtn_Click);
@@ -492,7 +587,7 @@
             this.columnRefColumnNameTextBox.MaxLength = 30;
             this.columnRefColumnNameTextBox.Name = "columnRefColumnNameTextBox";
             this.columnRefColumnNameTextBox.Size = new System.Drawing.Size(149, 20);
-            this.columnRefColumnNameTextBox.TabIndex = 31;
+            this.columnRefColumnNameTextBox.TabIndex = 14;
             // 
             // columnRefColumnNameLbl
             // 
@@ -510,7 +605,7 @@
             this.columnRefTableNameTextBox.MaxLength = 30;
             this.columnRefTableNameTextBox.Name = "columnRefTableNameTextBox";
             this.columnRefTableNameTextBox.Size = new System.Drawing.Size(149, 20);
-            this.columnRefTableNameTextBox.TabIndex = 29;
+            this.columnRefTableNameTextBox.TabIndex = 13;
             // 
             // columnRefTableNameLbl
             // 
@@ -528,7 +623,7 @@
             this.columnRefSchemaNameTextBox.MaxLength = 30;
             this.columnRefSchemaNameTextBox.Name = "columnRefSchemaNameTextBox";
             this.columnRefSchemaNameTextBox.Size = new System.Drawing.Size(149, 20);
-            this.columnRefSchemaNameTextBox.TabIndex = 27;
+            this.columnRefSchemaNameTextBox.TabIndex = 12;
             // 
             // columnRefSchemaNameLbl
             // 
@@ -546,7 +641,7 @@
             this.columnIndexNameTextBox.MaxLength = 30;
             this.columnIndexNameTextBox.Name = "columnIndexNameTextBox";
             this.columnIndexNameTextBox.Size = new System.Drawing.Size(149, 20);
-            this.columnIndexNameTextBox.TabIndex = 25;
+            this.columnIndexNameTextBox.TabIndex = 11;
             // 
             // columnIndexNameLbl
             // 
@@ -564,7 +659,7 @@
             this.columnFkNameTextBox.MaxLength = 30;
             this.columnFkNameTextBox.Name = "columnFkNameTextBox";
             this.columnFkNameTextBox.Size = new System.Drawing.Size(149, 20);
-            this.columnFkNameTextBox.TabIndex = 23;
+            this.columnFkNameTextBox.TabIndex = 10;
             // 
             // columnFkNameLbl
             // 
@@ -572,7 +667,7 @@
             this.columnFkNameLbl.Location = new System.Drawing.Point(348, 87);
             this.columnFkNameLbl.Name = "columnFkNameLbl";
             this.columnFkNameLbl.Size = new System.Drawing.Size(52, 13);
-            this.columnFkNameLbl.TabIndex = 24;
+            this.columnFkNameLbl.TabIndex = 25;
             this.columnFkNameLbl.Text = "FK name:";
             // 
             // columnIsFkLbl
@@ -581,7 +676,7 @@
             this.columnIsFkLbl.Location = new System.Drawing.Point(247, 87);
             this.columnIsFkLbl.Name = "columnIsFkLbl";
             this.columnIsFkLbl.Size = new System.Drawing.Size(73, 13);
-            this.columnIsFkLbl.TabIndex = 22;
+            this.columnIsFkLbl.TabIndex = 24;
             this.columnIsFkLbl.Text = "Is foreign key:";
             // 
             // columnIsFkCheckBox
@@ -590,7 +685,7 @@
             this.columnIsFkCheckBox.Location = new System.Drawing.Point(326, 87);
             this.columnIsFkCheckBox.Name = "columnIsFkCheckBox";
             this.columnIsFkCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.columnIsFkCheckBox.TabIndex = 21;
+            this.columnIsFkCheckBox.TabIndex = 9;
             this.columnIsFkCheckBox.UseVisualStyleBackColor = true;
             this.columnIsFkCheckBox.CheckedChanged += new System.EventHandler(this.columnIsFkCheckBox_CheckedChanged);
             // 
@@ -599,7 +694,7 @@
             this.columnCommentTextBox.Location = new System.Drawing.Point(299, 58);
             this.columnCommentTextBox.Name = "columnCommentTextBox";
             this.columnCommentTextBox.Size = new System.Drawing.Size(440, 20);
-            this.columnCommentTextBox.TabIndex = 19;
+            this.columnCommentTextBox.TabIndex = 8;
             // 
             // columnCommentLbl
             // 
@@ -607,7 +702,7 @@
             this.columnCommentLbl.Location = new System.Drawing.Point(239, 61);
             this.columnCommentLbl.Name = "columnCommentLbl";
             this.columnCommentLbl.Size = new System.Drawing.Size(54, 13);
-            this.columnCommentLbl.TabIndex = 20;
+            this.columnCommentLbl.TabIndex = 21;
             this.columnCommentLbl.Text = "Comment:";
             // 
             // columnDefaultTextBox
@@ -615,7 +710,7 @@
             this.columnDefaultTextBox.Location = new System.Drawing.Point(617, 3);
             this.columnDefaultTextBox.Name = "columnDefaultTextBox";
             this.columnDefaultTextBox.Size = new System.Drawing.Size(149, 20);
-            this.columnDefaultTextBox.TabIndex = 17;
+            this.columnDefaultTextBox.TabIndex = 6;
             // 
             // columnDefaultLbl
             // 
@@ -623,7 +718,7 @@
             this.columnDefaultLbl.Location = new System.Drawing.Point(567, 6);
             this.columnDefaultLbl.Name = "columnDefaultLbl";
             this.columnDefaultLbl.Size = new System.Drawing.Size(44, 13);
-            this.columnDefaultLbl.TabIndex = 18;
+            this.columnDefaultLbl.TabIndex = 23;
             this.columnDefaultLbl.Text = "Default:";
             // 
             // columnNullableLbl
@@ -632,7 +727,7 @@
             this.columnNullableLbl.Location = new System.Drawing.Point(481, 6);
             this.columnNullableLbl.Name = "columnNullableLbl";
             this.columnNullableLbl.Size = new System.Drawing.Size(57, 13);
-            this.columnNullableLbl.TabIndex = 16;
+            this.columnNullableLbl.TabIndex = 22;
             this.columnNullableLbl.Text = "Is nullable:";
             // 
             // columnIsNullableCheckBox
@@ -643,7 +738,7 @@
             this.columnIsNullableCheckBox.Location = new System.Drawing.Point(544, 6);
             this.columnIsNullableCheckBox.Name = "columnIsNullableCheckBox";
             this.columnIsNullableCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.columnIsNullableCheckBox.TabIndex = 15;
+            this.columnIsNullableCheckBox.TabIndex = 5;
             this.columnIsNullableCheckBox.UseVisualStyleBackColor = true;
             // 
             // columnBtn
@@ -651,7 +746,7 @@
             this.columnBtn.Location = new System.Drawing.Point(84, 81);
             this.columnBtn.Name = "columnBtn";
             this.columnBtn.Size = new System.Drawing.Size(75, 23);
-            this.columnBtn.TabIndex = 14;
+            this.columnBtn.TabIndex = 15;
             this.columnBtn.Text = "Generate";
             this.columnBtn.UseVisualStyleBackColor = true;
             this.columnBtn.Click += new System.EventHandler(this.columnBtn_Click);
@@ -662,7 +757,7 @@
             this.columnTypeLbl.Location = new System.Drawing.Point(286, 6);
             this.columnTypeLbl.Name = "columnTypeLbl";
             this.columnTypeLbl.Size = new System.Drawing.Size(34, 13);
-            this.columnTypeLbl.TabIndex = 13;
+            this.columnTypeLbl.TabIndex = 19;
             this.columnTypeLbl.Text = "Type:";
             // 
             // columnColumnTextBox
@@ -672,7 +767,7 @@
             this.columnColumnTextBox.MaxLength = 30;
             this.columnColumnTextBox.Name = "columnColumnTextBox";
             this.columnColumnTextBox.Size = new System.Drawing.Size(149, 20);
-            this.columnColumnTextBox.TabIndex = 10;
+            this.columnColumnTextBox.TabIndex = 3;
             // 
             // columnColumnLbl
             // 
@@ -680,7 +775,7 @@
             this.columnColumnLbl.Location = new System.Drawing.Point(4, 58);
             this.columnColumnLbl.Name = "columnColumnLbl";
             this.columnColumnLbl.Size = new System.Drawing.Size(74, 13);
-            this.columnColumnLbl.TabIndex = 11;
+            this.columnColumnLbl.TabIndex = 18;
             this.columnColumnLbl.Text = "Column name:";
             // 
             // columnsTableNameTextBox
@@ -690,7 +785,7 @@
             this.columnsTableNameTextBox.MaxLength = 30;
             this.columnsTableNameTextBox.Name = "columnsTableNameTextBox";
             this.columnsTableNameTextBox.Size = new System.Drawing.Size(149, 20);
-            this.columnsTableNameTextBox.TabIndex = 7;
+            this.columnsTableNameTextBox.TabIndex = 2;
             // 
             // columnsSchemaTextBox
             // 
@@ -699,7 +794,7 @@
             this.columnsSchemaTextBox.MaxLength = 30;
             this.columnsSchemaTextBox.Name = "columnsSchemaTextBox";
             this.columnsSchemaTextBox.Size = new System.Drawing.Size(149, 20);
-            this.columnsSchemaTextBox.TabIndex = 6;
+            this.columnsSchemaTextBox.TabIndex = 1;
             // 
             // columnsTableNameLbl
             // 
@@ -707,7 +802,7 @@
             this.columnsTableNameLbl.Location = new System.Drawing.Point(12, 32);
             this.columnsTableNameLbl.Name = "columnsTableNameLbl";
             this.columnsTableNameLbl.Size = new System.Drawing.Size(66, 13);
-            this.columnsTableNameLbl.TabIndex = 9;
+            this.columnsTableNameLbl.TabIndex = 17;
             this.columnsTableNameLbl.Text = "Table name:";
             // 
             // columnsSchemaLbl
@@ -716,7 +811,7 @@
             this.columnsSchemaLbl.Location = new System.Drawing.Point(29, 6);
             this.columnsSchemaLbl.Name = "columnsSchemaLbl";
             this.columnsSchemaLbl.Size = new System.Drawing.Size(49, 13);
-            this.columnsSchemaLbl.TabIndex = 8;
+            this.columnsSchemaLbl.TabIndex = 16;
             this.columnsSchemaLbl.Text = "Schema:";
             // 
             // auditTabPage
@@ -742,7 +837,7 @@
             this.auditResetBtn.Location = new System.Drawing.Point(77, 113);
             this.auditResetBtn.Name = "auditResetBtn";
             this.auditResetBtn.Size = new System.Drawing.Size(75, 23);
-            this.auditResetBtn.TabIndex = 22;
+            this.auditResetBtn.TabIndex = 5;
             this.auditResetBtn.Text = "Reset tab";
             this.auditResetBtn.UseVisualStyleBackColor = true;
             this.auditResetBtn.Click += new System.EventHandler(this.auditResetBtn_Click);
@@ -754,7 +849,7 @@
             this.auditTriggerNameTextBox.MaxLength = 30;
             this.auditTriggerNameTextBox.Name = "auditTriggerNameTextBox";
             this.auditTriggerNameTextBox.Size = new System.Drawing.Size(149, 20);
-            this.auditTriggerNameTextBox.TabIndex = 16;
+            this.auditTriggerNameTextBox.TabIndex = 3;
             // 
             // auditTriggerNameLbl
             // 
@@ -762,7 +857,7 @@
             this.auditTriggerNameLbl.Location = new System.Drawing.Point(-1, 61);
             this.auditTriggerNameLbl.Name = "auditTriggerNameLbl";
             this.auditTriggerNameLbl.Size = new System.Drawing.Size(72, 13);
-            this.auditTriggerNameLbl.TabIndex = 17;
+            this.auditTriggerNameLbl.TabIndex = 8;
             this.auditTriggerNameLbl.Text = "Trigger name:";
             // 
             // auditBtn
@@ -770,7 +865,7 @@
             this.auditBtn.Location = new System.Drawing.Point(77, 84);
             this.auditBtn.Name = "auditBtn";
             this.auditBtn.Size = new System.Drawing.Size(75, 23);
-            this.auditBtn.TabIndex = 15;
+            this.auditBtn.TabIndex = 4;
             this.auditBtn.Text = "Generate";
             this.auditBtn.UseVisualStyleBackColor = true;
             this.auditBtn.Click += new System.EventHandler(this.auditBtn_Click);
@@ -782,7 +877,7 @@
             this.auditTableNameTextBox.MaxLength = 30;
             this.auditTableNameTextBox.Name = "auditTableNameTextBox";
             this.auditTableNameTextBox.Size = new System.Drawing.Size(149, 20);
-            this.auditTableNameTextBox.TabIndex = 11;
+            this.auditTableNameTextBox.TabIndex = 2;
             // 
             // auditSchemaTextBox
             // 
@@ -791,7 +886,7 @@
             this.auditSchemaTextBox.MaxLength = 30;
             this.auditSchemaTextBox.Name = "auditSchemaTextBox";
             this.auditSchemaTextBox.Size = new System.Drawing.Size(149, 20);
-            this.auditSchemaTextBox.TabIndex = 10;
+            this.auditSchemaTextBox.TabIndex = 1;
             // 
             // auditTableNameLbl
             // 
@@ -799,7 +894,7 @@
             this.auditTableNameLbl.Location = new System.Drawing.Point(5, 35);
             this.auditTableNameLbl.Name = "auditTableNameLbl";
             this.auditTableNameLbl.Size = new System.Drawing.Size(66, 13);
-            this.auditTableNameLbl.TabIndex = 13;
+            this.auditTableNameLbl.TabIndex = 7;
             this.auditTableNameLbl.Text = "Table name:";
             // 
             // auditSchemaLbl
@@ -808,7 +903,7 @@
             this.auditSchemaLbl.Location = new System.Drawing.Point(22, 9);
             this.auditSchemaLbl.Name = "auditSchemaLbl";
             this.auditSchemaLbl.Size = new System.Drawing.Size(49, 13);
-            this.auditSchemaLbl.TabIndex = 12;
+            this.auditSchemaLbl.TabIndex = 6;
             this.auditSchemaLbl.Text = "Schema:";
             // 
             // SequenceTabPage
@@ -835,7 +930,7 @@
             this.seqResetBtn.Location = new System.Drawing.Point(98, 84);
             this.seqResetBtn.Name = "seqResetBtn";
             this.seqResetBtn.Size = new System.Drawing.Size(75, 23);
-            this.seqResetBtn.TabIndex = 23;
+            this.seqResetBtn.TabIndex = 6;
             this.seqResetBtn.Text = "Reset tab";
             this.seqResetBtn.UseVisualStyleBackColor = true;
             this.seqResetBtn.Click += new System.EventHandler(this.seqResetBtn_Click);
@@ -845,7 +940,7 @@
             this.seqBtn.Location = new System.Drawing.Point(98, 55);
             this.seqBtn.Name = "seqBtn";
             this.seqBtn.Size = new System.Drawing.Size(75, 23);
-            this.seqBtn.TabIndex = 22;
+            this.seqBtn.TabIndex = 5;
             this.seqBtn.Text = "Generate";
             this.seqBtn.UseVisualStyleBackColor = true;
             this.seqBtn.Click += new System.EventHandler(this.seqBtn_Click);
@@ -856,7 +951,7 @@
             this.seqIncrementByTextBox.Location = new System.Drawing.Point(332, 29);
             this.seqIncrementByTextBox.Name = "seqIncrementByTextBox";
             this.seqIncrementByTextBox.Size = new System.Drawing.Size(149, 20);
-            this.seqIncrementByTextBox.TabIndex = 19;
+            this.seqIncrementByTextBox.TabIndex = 4;
             // 
             // seqStartWithTextBox
             // 
@@ -864,7 +959,7 @@
             this.seqStartWithTextBox.Location = new System.Drawing.Point(332, 3);
             this.seqStartWithTextBox.Name = "seqStartWithTextBox";
             this.seqStartWithTextBox.Size = new System.Drawing.Size(149, 20);
-            this.seqStartWithTextBox.TabIndex = 18;
+            this.seqStartWithTextBox.TabIndex = 3;
             // 
             // seqIncrementByLbl
             // 
@@ -891,7 +986,7 @@
             this.seqSequenceNameTextBox.MaxLength = 30;
             this.seqSequenceNameTextBox.Name = "seqSequenceNameTextBox";
             this.seqSequenceNameTextBox.Size = new System.Drawing.Size(149, 20);
-            this.seqSequenceNameTextBox.TabIndex = 15;
+            this.seqSequenceNameTextBox.TabIndex = 2;
             // 
             // seqSchemaTextBox
             // 
@@ -900,7 +995,7 @@
             this.seqSchemaTextBox.MaxLength = 30;
             this.seqSchemaTextBox.Name = "seqSchemaTextBox";
             this.seqSchemaTextBox.Size = new System.Drawing.Size(149, 20);
-            this.seqSchemaTextBox.TabIndex = 14;
+            this.seqSchemaTextBox.TabIndex = 1;
             // 
             // seqSequenceNameLbl
             // 
@@ -940,7 +1035,7 @@
             this.nonVisualResetBtn.Location = new System.Drawing.Point(13, 300);
             this.nonVisualResetBtn.Name = "nonVisualResetBtn";
             this.nonVisualResetBtn.Size = new System.Drawing.Size(75, 23);
-            this.nonVisualResetBtn.TabIndex = 22;
+            this.nonVisualResetBtn.TabIndex = 4;
             this.nonVisualResetBtn.Text = "Reset tab";
             this.nonVisualResetBtn.UseVisualStyleBackColor = true;
             this.nonVisualResetBtn.Click += new System.EventHandler(this.nonVisualResetBtn_Click);
@@ -953,7 +1048,7 @@
             this.nonVisualClientsGrid.Location = new System.Drawing.Point(13, 45);
             this.nonVisualClientsGrid.Name = "nonVisualClientsGrid";
             this.nonVisualClientsGrid.Size = new System.Drawing.Size(1401, 220);
-            this.nonVisualClientsGrid.TabIndex = 21;
+            this.nonVisualClientsGrid.TabIndex = 2;
             // 
             // nonVisualClientsLbl
             // 
@@ -969,7 +1064,7 @@
             this.nonVisualBtn.Location = new System.Drawing.Point(13, 271);
             this.nonVisualBtn.Name = "nonVisualBtn";
             this.nonVisualBtn.Size = new System.Drawing.Size(75, 23);
-            this.nonVisualBtn.TabIndex = 19;
+            this.nonVisualBtn.TabIndex = 3;
             this.nonVisualBtn.Text = "Generate";
             this.nonVisualBtn.UseVisualStyleBackColor = true;
             this.nonVisualBtn.Click += new System.EventHandler(this.nonVisualBtn_Click);
@@ -981,7 +1076,7 @@
             this.nonVisualCodeTextBox.MaxLength = 30;
             this.nonVisualCodeTextBox.Name = "nonVisualCodeTextBox";
             this.nonVisualCodeTextBox.Size = new System.Drawing.Size(149, 20);
-            this.nonVisualCodeTextBox.TabIndex = 17;
+            this.nonVisualCodeTextBox.TabIndex = 1;
             // 
             // nonVisualCodeLbl
             // 
@@ -1419,101 +1514,6 @@
             // nonVisualLoadFileDialog
             // 
             this.nonVisualLoadFileDialog.FileName = "Nevizualus_sistemos_nustatymai";
-            // 
-            // tableColumnsIsPK
-            // 
-            this.tableColumnsIsPK.HeaderText = "Is Primary Key";
-            this.tableColumnsIsPK.Name = "tableColumnsIsPK";
-            this.tableColumnsIsPK.ReadOnly = true;
-            this.tableColumnsIsPK.Width = 80;
-            // 
-            // tableColumnsName
-            // 
-            this.tableColumnsName.HeaderText = "Name";
-            this.tableColumnsName.MaxInputLength = 30;
-            this.tableColumnsName.Name = "tableColumnsName";
-            // 
-            // tableColumnsType
-            // 
-            this.tableColumnsType.HeaderText = "Type";
-            this.tableColumnsType.Name = "tableColumnsType";
-            this.tableColumnsType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tableColumnsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // tableColumnsDataLength
-            // 
-            this.tableColumnsDataLength.HeaderText = "Data length";
-            this.tableColumnsDataLength.Name = "tableColumnsDataLength";
-            this.tableColumnsDataLength.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // tableColumnsDefault
-            // 
-            this.tableColumnsDefault.HeaderText = "Default";
-            this.tableColumnsDefault.Name = "tableColumnsDefault";
-            // 
-            // tableColumnsIsNullable
-            // 
-            this.tableColumnsIsNullable.HeaderText = "Is Nullable";
-            this.tableColumnsIsNullable.Name = "tableColumnsIsNullable";
-            this.tableColumnsIsNullable.Width = 80;
-            // 
-            // tableColumnsComment
-            // 
-            this.tableColumnsComment.HeaderText = "Comment";
-            this.tableColumnsComment.Name = "tableColumnsComment";
-            this.tableColumnsComment.Width = 200;
-            // 
-            // tableColumnsIsUnique
-            // 
-            this.tableColumnsIsUnique.HeaderText = "Is Unique";
-            this.tableColumnsIsUnique.Name = "tableColumnsIsUnique";
-            this.tableColumnsIsUnique.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tableColumnsIsUnique.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.tableColumnsIsUnique.Width = 80;
-            // 
-            // tableColumnsUniqueConstraintName
-            // 
-            this.tableColumnsUniqueConstraintName.HeaderText = "Unique Constraint Name";
-            this.tableColumnsUniqueConstraintName.MaxInputLength = 30;
-            this.tableColumnsUniqueConstraintName.Name = "tableColumnsUniqueConstraintName";
-            // 
-            // tableColumnsIsForeignKey
-            // 
-            this.tableColumnsIsForeignKey.HeaderText = "Is Foreign Key";
-            this.tableColumnsIsForeignKey.Name = "tableColumnsIsForeignKey";
-            this.tableColumnsIsForeignKey.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tableColumnsIsForeignKey.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.tableColumnsIsForeignKey.Width = 80;
-            // 
-            // tableColumnsFKName
-            // 
-            this.tableColumnsFKName.HeaderText = "FK name";
-            this.tableColumnsFKName.MaxInputLength = 30;
-            this.tableColumnsFKName.Name = "tableColumnsFKName";
-            // 
-            // tableColumnsIndexName
-            // 
-            this.tableColumnsIndexName.HeaderText = "Index name";
-            this.tableColumnsIndexName.MaxInputLength = 30;
-            this.tableColumnsIndexName.Name = "tableColumnsIndexName";
-            // 
-            // tableColumnsReferencedSchema
-            // 
-            this.tableColumnsReferencedSchema.HeaderText = "Referenced Schema";
-            this.tableColumnsReferencedSchema.MaxInputLength = 30;
-            this.tableColumnsReferencedSchema.Name = "tableColumnsReferencedSchema";
-            // 
-            // tableColumnsReferencedTable
-            // 
-            this.tableColumnsReferencedTable.HeaderText = "Referenced Table";
-            this.tableColumnsReferencedTable.MaxInputLength = 30;
-            this.tableColumnsReferencedTable.Name = "tableColumnsReferencedTable";
-            // 
-            // tableColumnsReferencedColumn
-            // 
-            this.tableColumnsReferencedColumn.HeaderText = "Referenced Column";
-            this.tableColumnsReferencedColumn.MaxInputLength = 30;
-            this.tableColumnsReferencedColumn.Name = "tableColumnsReferencedColumn";
             // 
             // ScriptGenerator
             // 
