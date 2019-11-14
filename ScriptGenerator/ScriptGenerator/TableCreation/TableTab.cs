@@ -216,12 +216,15 @@ namespace ScriptGenerator
                 var hasForeignKeyConstraint = GetCellValueBool(row, tableCellKeyIsForeignKey);
                 if (hasForeignKeyConstraint)
                 {
-                    var index = Constraint.CreateNew(tableSchemaTextBox.Text,
+                    var index = Constraint.CreateNew(
+                        tableSchemaTextBox.Text,
                         GetCellValue<string>(row, tableCellKeyIndexName),
                         tableTableNameTextBox.Text,
-                        GetCellValue<string>(row, tableCellKeyName));
+                        GetCellValue<string>(row, tableCellKeyName),
+                        null);
 
-                    foreignKey = ConstraintForeignKey.CreateNew(tableSchemaTextBox.Text,
+                    foreignKey = ConstraintForeignKey.CreateNew(
+                        tableSchemaTextBox.Text,
                         GetCellValue<string>(row, tableCellKeyForeignKeyName),
                         tableTableNameTextBox.Text,
                         GetCellValue<string>(row, tableCellKeyName),
@@ -235,26 +238,31 @@ namespace ScriptGenerator
                 Constraint primaryKey = null;
                 if (hasPrimaryKey)
                 {
-                    primaryKey = Constraint.CreateNew(tableSchemaTextBox.Text,
+                    primaryKey = Constraint.CreateNew(
+                        tableSchemaTextBox.Text,
                         tablePKTextBox.Text,
                         tableTableNameTextBox.Text,
-                        GetCellValue<string>(row, tableCellKeyName));
+                        GetCellValue<string>(row, tableCellKeyName),
+                        null);
                 }
 
                 var hasUniqueConstraint = GetCellValueBool(row, tableCellKeyIsUnique);
                 Constraint uniqueConstraint = null;
                 if (hasUniqueConstraint)
                 {
-                    uniqueConstraint = Constraint.CreateNew(tableSchemaTextBox.Text,
+                    uniqueConstraint = Constraint.CreateNew(
+                        tableSchemaTextBox.Text,
                         GetCellValue<string>(row, tableCellKeyUniqueConstraintName),
                         tableTableNameTextBox.Text,
-                        GetCellValue<string>(row, tableCellKeyName));
+                        GetCellValue<string>(row, tableCellKeyName),
+                        null);
                 }
 
                 GetCellValue<string>(row, tableCellKeyDataLength).ParseNullable(out var dataLength);
                 var isNullable = GetCellValueBool(row, tableCellKeyIsNullable);
 
-                var column = Column.CreateNew(tableSchemaTextBox.Text,
+                var column = Column.CreateNew(
+                    tableSchemaTextBox.Text,
                     tableTableNameTextBox.Text,
                     GetCellValue<string>(row, tableCellKeyName),
                     GetCellValue<DataType>(row, tableCellKeyType), 
@@ -272,7 +280,8 @@ namespace ScriptGenerator
                 columns.Add(column);
             }
 
-            tabTable = Table.CreateNew(tableTableNameTextBox.Text, 
+            tabTable = Table.CreateNew(
+                tableTableNameTextBox.Text, 
                 tableSchemaTextBox.Text, 
                 tableTableCommentTextBox.Text, 
                 tableTablespaceTextBox.Text,

@@ -31,16 +31,16 @@
         /// <param name="name"></param>
         /// <param name="schema"></param>
         /// <param name="startWith"></param>
-        /// <param name="incrememntBy"></param>
+        /// <param name="incrementBy"></param>
         /// <returns></returns>
-        public static Sequence CreateNew(string name, string schema, int startWith, int incrememntBy)
+        public static Sequence CreateNew(string name, string schema, int startWith, int incrementBy)
         {
             return new Sequence()
             {
                 Name = name,
                 Schema = schema,
                 StartWith = startWith,
-                IncrementBy = incrememntBy
+                IncrementBy = incrementBy
             };
         }
     }

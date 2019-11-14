@@ -38,14 +38,15 @@
         /// <param name="tableName"></param>
         /// <param name="tableColumnName"></param>
         /// <returns></returns>
-        public static Constraint CreateNew(string schema, string name, string tableName, string tableColumnName)
+        public static Constraint CreateNew(string schema, string name, string tableName, string tableColumnName, string tableSpace)
         {
             return new Constraint()
             {
                 Schema = schema,
                 Name = name,
                 TableName = tableName,
-                TableColumnName = tableColumnName
+                TableColumnName = tableColumnName,
+                TableSpace = tableSpace
             };
         }
     }

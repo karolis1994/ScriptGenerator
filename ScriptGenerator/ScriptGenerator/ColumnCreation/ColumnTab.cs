@@ -114,7 +114,7 @@ namespace ScriptGenerator
             ConstraintForeignKey foreignKey = null;
             if (columnIsFkCheckBox.Checked)
             {
-                var index = Constraint.CreateNew(columnsSchemaTextBox.Text, columnIndexNameTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text);
+                var index = Constraint.CreateNew(columnsSchemaTextBox.Text, columnIndexNameTextBox.Text, columnsTableNameTextBox.Text, columnColumnTextBox.Text, null);
 
                 foreignKey = ConstraintForeignKey.CreateNew(columnsSchemaTextBox.Text, columnFkNameTextBox.Text, columnsTableNameTextBox.Text,
                     columnColumnTextBox.Text, columnRefSchemaNameTextBox.Text, columnRefTableNameTextBox.Text, columnRefColumnNameTextBox.Text, index);

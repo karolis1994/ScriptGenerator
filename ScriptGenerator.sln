@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptGenerator.Services", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptGenerator.Models", "ScriptGenerator.Models\ScriptGenerator.Models.csproj", "{0E82C788-81E6-42F7-AC31-3115A4B5B7AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptGenerator.Tests", "ScriptGenerator.Tests\ScriptGenerator.Tests.csproj", "{6DAF438C-2430-46EA-9B00-FAAA157FE79E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0E82C788-81E6-42F7-AC31-3115A4B5B7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E82C788-81E6-42F7-AC31-3115A4B5B7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E82C788-81E6-42F7-AC31-3115A4B5B7AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DAF438C-2430-46EA-9B00-FAAA157FE79E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DAF438C-2430-46EA-9B00-FAAA157FE79E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DAF438C-2430-46EA-9B00-FAAA157FE79E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DAF438C-2430-46EA-9B00-FAAA157FE79E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
