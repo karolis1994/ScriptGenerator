@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace ScriptGenerator.Services
 {
+    /// <summary>
+    /// Char converter for oracle
+    /// </summary>
     public class OracleCharConverterService : ICharConverterService
     {
+        /// <summary>
+        /// Currently set charset
+        /// </summary>
         private Dictionary<int, string> charset = new Dictionary<int, string>();
 
         public OracleCharConverterService() { }

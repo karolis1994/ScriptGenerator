@@ -31,11 +31,11 @@ namespace ScriptGenerator.Services
         /// <param name="clientName"></param>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public Dictionary<String, Int32> GetClientSettings(String clientName, String filePath)
+        public Dictionary<string, int> GetClientSettings(string clientName, string filePath)
         {
-            Dictionary<String, Int32> map = new Dictionary<String, Int32>();
-            Int32 settingColumn;
-            Int32 temp;
+            Dictionary<string, int> map = new Dictionary<string, int>();
+            int settingColumn;
+            int temp;
 
             // Open a doc file.
             Application application = new Application();
@@ -46,9 +46,9 @@ namespace ScriptGenerator.Services
                 Document document = application.Documents.Open(filePath);
                 Table nonVisualSettingsTable = document.Tables[5];
 
-                for (Int32 i = 2; i <= nonVisualSettingsTable.Rows.Count; i++)
+                for (int i = 2; i <= nonVisualSettingsTable.Rows.Count; i++)
                 {
-                    if (Int32.TryParse(nonVisualSettingsTable.Rows[i].Cells[settingColumn].Range.Text.Replace("\r\a", "").Trim(), out temp))
+                    if (int.TryParse(nonVisualSettingsTable.Rows[i].Cells[settingColumn].Range.Text.Replace("\r\a", "").Trim(), out temp))
                         map[nonVisualSettingsTable.Rows[i].Cells[1].Range.Text.Replace("\r\a", "")] = temp;
                 }
 
@@ -64,7 +64,7 @@ namespace ScriptGenerator.Services
             return map;
         }
 
-        private Int32 GetColumnBySuppliedClientName(String clientName)
+        private int GetColumnBySuppliedClientName(string clientName)
         {
             Client clientRow;
 
@@ -100,7 +100,7 @@ namespace ScriptGenerator.Services
                     throw new NotImplementedException("No such client exists in the system.");  
             }
 
-            return (Int32)clientRow;
+            return (int)clientRow;
         }
     }
 }

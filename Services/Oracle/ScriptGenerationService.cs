@@ -1,5 +1,4 @@
-﻿using ScriptGenerator;
-using ScriptGenerator.Models;
+﻿using ScriptGenerator.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +26,7 @@ namespace ScriptGenerator.Services
                 if (!String.IsNullOrEmpty(t.Comment))
                     commentScripts.Add(GenerateCommentScript(t));
 
-                //Loop through each collumn and form column, comment, foreign key script values.
+                //Loop through each column and form column, comment, foreign key script values.
                 foreach (var c in t.Columns)
                 {
                     columns.Add(GenerateColumnDefinition(c));
