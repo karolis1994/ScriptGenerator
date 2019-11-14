@@ -12,8 +12,8 @@ namespace ScriptGenerator
         private void InitializeNonVisualSettingLoadTab()
         {
             //Init non visual settings creation tab default values
-            List<String> clients = ConfigurationManager.AppSettings["clients"].Split(',').ToList();
-            foreach (String client in clients)
+            List<string> clients = ConfigurationManager.AppSettings["clients"].Split(',').ToList();
+            foreach (string client in clients)
             {
                 nonVisLoadCheckedListBox.Items.Add(client, false);
             }
@@ -44,7 +44,7 @@ namespace ScriptGenerator
         {
             Cursor.Current = Cursors.WaitCursor;
 
-            if (nonVisLoadCheckedListBox.CheckedItems.Count > 0 && !String.IsNullOrWhiteSpace(nonVisualLoadPathLabel.Text))
+            if (nonVisLoadCheckedListBox.CheckedItems.Count > 0 && !string.IsNullOrWhiteSpace(nonVisualLoadPathLabel.Text))
             {
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.Append($"DECLARE{Environment.NewLine}");
@@ -61,7 +61,7 @@ namespace ScriptGenerator
                 stringBuilder.Append($"BEGIN{Environment.NewLine}");
                 stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting("APT_CLIENT", nonVisLoadCheckedListBox.CheckedItems[0].ToString()));
 
-                foreach (KeyValuePair<String, Int32> entry in wordService.GetClientSettings(nonVisLoadCheckedListBox.CheckedItems[0].ToString(), nonVisualLoadPathLabel.Text))
+                foreach (KeyValuePair<string, int> entry in wordService.GetClientSettings(nonVisLoadCheckedListBox.CheckedItems[0].ToString(), nonVisualLoadPathLabel.Text))
                 {
                     if (entry.Key.Length <= 30)
                         stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting(entry.Key, entry.Value.ToString()));
@@ -83,12 +83,12 @@ namespace ScriptGenerator
             if (nonVisualLoadFileDialog.ShowDialog() == DialogResult.OK)
                 nonVisualLoadPathLabel.Text = nonVisualLoadFileDialog.FileName;
             else
-                nonVisualLoadPathLabel.Text = String.Empty;
+                nonVisualLoadPathLabel.Text = string.Empty;
 
             Cursor.Current = Cursors.Arrow;
         }
 
-        private String GenerateUpdateStatementForNonVisualSetting(String nonVisualSetting, String value)
+        private string GenerateUpdateStatementForNonVisualSetting(string nonVisualSetting, string value)
         {
             return $"  update_non_visual_setting('{nonVisualSetting}', '{value}');{Environment.NewLine}";
         }
