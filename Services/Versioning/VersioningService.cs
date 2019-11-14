@@ -8,8 +8,8 @@ namespace ScriptGenerator.Services
 {
     public class VersioningService : IVersioningService
     {
-        private readonly Regex _AssemblyVersionRegex = new Regex("(?<=AssemblyVersion\\(\"|AssemblyFileVersion\\(\")\\d+.\\d+.\\d+.\\d+(?=\"\\)\\])");
-        private readonly Regex _VersionRegex = new Regex("\\d+\\.\\d+\\.\\d+\\.\\d+");
+        private readonly Regex assemblyVersionRegex = new Regex("(?<=AssemblyVersion\\(\"|AssemblyFileVersion\\(\")\\d+.\\d+.\\d+.\\d+(?=\"\\)\\])");
+        private readonly Regex versionRegex = new Regex("\\d+\\.\\d+\\.\\d+\\.\\d+");
 
         public async Task<string> ChangeVersions(string rootPath, bool increaseMinor, bool increaseMajor)
         {
@@ -24,24 +24,20 @@ namespace ScriptGenerator.Services
                 foreach (string file in files)
                 {
                     fileText = File.ReadAllText(file);
-                    Match match = _AssemblyVersionRegex.Match(fileText);
+                    Match match = assemblyVersionRegex.Match(fileText);
 
                     if (match.Success)
                     {
                         string[] version = match.Value.Split('.');
 
                         if (increaseMajor)
-                        {
                             version[0] = (int.Parse(version[0]) + 1).ToString();
-                        }
                         if (increaseMinor)
-                        {
                             version[1] = (int.Parse(version[1]) + 1).ToString();
-                        }
 
                         newVersion = string.Join(".", version);
                     }
-                    fileText = _AssemblyVersionRegex.Replace(fileText, newVersion);
+                    fileText = assemblyVersionRegex.Replace(fileText, newVersion);
                     File.WriteAllText(file, fileText);
 
                     resultBuilder.AppendLine(string.Format(VersioningMessages.Result_Info, file, newVersion));
@@ -67,7 +63,7 @@ namespace ScriptGenerator.Services
                 {
                     fileText = File.ReadAllText(file);
 
-                    fileText = _AssemblyVersionRegex.Replace(fileText, customVersion);
+                    fileText = assemblyVersionRegex.Replace(fileText, customVersion);
                     File.WriteAllText(file, fileText);
 
                     resultBuilder.AppendLine(string.Format(VersioningMessages.Result_Info, file, customVersion));
@@ -78,9 +74,9 @@ namespace ScriptGenerator.Services
             .ConfigureAwait(false);
         }
 
-        private void ValidateVersion(string version)
+        public void ValidateVersion(string version)
         {
-            if (_VersionRegex.Match(version).Success)
+            if (!versionRegex.Match(version).Success)
                 throw new ArgumentException("Invalid version format");
         }
     }

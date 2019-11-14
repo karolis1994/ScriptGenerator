@@ -45,7 +45,7 @@ namespace ScriptGenerator.Services
                     }
                 }
 
-                var primaryKeyConstraint = t.Columns.Where(e => e.HasPrimaryKeyConstraint).FirstOrDefault().PrimaryKey;
+                var primaryKeyConstraint = t.Columns.Where(e => e.HasPrimaryKeyConstraint).FirstOrDefault()?.PrimaryKey;
 
                 scriptBuilder.AppendLine("DECLARE");
                 scriptBuilder.AppendLine("  ln_exist NUMBER;");

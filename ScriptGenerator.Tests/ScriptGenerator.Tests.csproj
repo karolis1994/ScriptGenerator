@@ -51,6 +51,9 @@
   <ItemGroup>
     <Compile Include="ModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Resources\AssemblyInfo.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Compile Include="ServiceTests.cs" />
     <Compile Include="TestConstants.cs" />
   </ItemGroup>

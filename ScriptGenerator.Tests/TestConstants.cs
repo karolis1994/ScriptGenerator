@@ -1,8 +1,10 @@
 ﻿using ScriptGenerator.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ScriptGenerator.Tests
@@ -73,8 +75,14 @@ namespace ScriptGenerator.Tests
             ReferencedColumnName, 
             null);
 
-        public const string CharsetTestRelativePath = "\\Resources\\TestCharset.txt";
-        public const string CharsetTestRelativePathIncorrect = "\\Resources\\TestCharsetsdasdasd.txt";
+        public static string PathResources() => Directory.GetCurrentDirectory() + "\\Resources";
+        public static string PathResourceAssemblyInfo() => Directory.GetCurrentDirectory() + "\\Resources\\AssemblyInfo.cs";
+        public static string PathResourceCharset() => Directory.GetCurrentDirectory() + "\\Resources\\TestCharset.txt";
+        public static string PathResourceCharsetIncorrect() => Directory.GetCurrentDirectory() + "\\Resources\\TestCharsetsdasdasd.txt";
         public const string CharsetTestResult = "' || chr(1) || '";
+
+        public static Regex RegexAssemblyVersion = new Regex("(?<=AssemblyVersion\\(\")\\d+.\\d+.\\d+.\\d+(?=\"\\)\\])");
+        public static Regex RegexAssemblyFileVersion = new Regex("(?<=AssemblyFileVersion\\(\")\\d+.\\d+.\\d+.\\d+(?=\"\\)\\])");
+        public const string CustomVersion = "1.0.0.0";
     }
 }
