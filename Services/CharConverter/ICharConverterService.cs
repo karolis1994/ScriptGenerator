@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ScriptGenerator.Services
 {
@@ -12,7 +13,7 @@ namespace ScriptGenerator.Services
         /// </summary>
         /// <param name="charsetFilePath"></param>
         /// <returns></returns>
-        Task LoadCharset(string charsetFilePath);
+        Task<Dictionary<int, string>> LoadCharset(string charsetFilePath);
 
         /// <summary>
         /// Replaces characters inside the supplied string with encoded values of supplied charset

@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ScriptGenerator.Models;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ScriptGenerator.Tests
 {
@@ -14,17 +12,17 @@ namespace ScriptGenerator.Tests
             var column = TestConstants.MockColumn();
 
             //Assert
-            Assert.AreEqual(column.Name, TestConstants.ColumnName);
-            Assert.AreEqual(column.TableSchema, TestConstants.Schema);
-            Assert.AreEqual(column.TableName, TestConstants.TableName);
-            Assert.AreEqual(column.DataType, TestConstants.Type);
-            Assert.AreEqual(column.DataLength, TestConstants.DataLength);
-            Assert.AreEqual(column.IsNullable, TestConstants.isNullable);
-            Assert.AreEqual(column.HasPrimaryKeyConstraint, TestConstants.HasPrimaryKey);
-            Assert.AreEqual(column.HasUniqueConstraint, TestConstants.HasUnique);
-            Assert.AreEqual(column.HasForeignKeyConstraint, TestConstants.HasForeignKey);
-            Assert.AreEqual(column.DefaultValue, TestConstants.DefaultValue);
-            Assert.AreEqual(column.Comment, TestConstants.CommentColumn);
+            Assert.AreEqual(TestConstants.ColumnName, column.Name);
+            Assert.AreEqual(TestConstants.Schema, column.TableSchema);
+            Assert.AreEqual(TestConstants.TableName, column.TableName);
+            Assert.AreEqual(TestConstants.Type, column.DataType);
+            Assert.AreEqual(TestConstants.DataLength, column.DataLength);
+            Assert.AreEqual(TestConstants.isNullable, column.IsNullable);
+            Assert.AreEqual(TestConstants.HasPrimaryKey, column.HasPrimaryKeyConstraint);
+            Assert.AreEqual(TestConstants.HasUnique, column.HasUniqueConstraint);
+            Assert.AreEqual(TestConstants.HasForeignKey, column.HasForeignKeyConstraint);
+            Assert.AreEqual(TestConstants.DefaultValue, column.DefaultValue);
+            Assert.AreEqual(TestConstants.CommentColumn, column.Comment);
         }
 
         [TestMethod]
@@ -34,11 +32,11 @@ namespace ScriptGenerator.Tests
             var constraint = TestConstants.MockConstraint();
 
             //Assert
-            Assert.AreEqual(constraint.Name, TestConstants.ConstraintName);
-            Assert.AreEqual(constraint.Schema, TestConstants.Schema);
-            Assert.AreEqual(constraint.TableColumnName, TestConstants.TableColumn);
-            Assert.AreEqual(constraint.TableName, TestConstants.TableName);
-            Assert.AreEqual(constraint.TableSpace, TestConstants.TableSpace);
+            Assert.AreEqual(TestConstants.ConstraintName, constraint.Name);
+            Assert.AreEqual(TestConstants.Schema, constraint.Schema);
+            Assert.AreEqual(TestConstants.TableColumn, constraint.TableColumnName);
+            Assert.AreEqual(TestConstants.TableName, constraint.TableName);
+            Assert.AreEqual(TestConstants.TableSpace, constraint.TableSpace);
         }
 
         [TestMethod]
@@ -48,13 +46,13 @@ namespace ScriptGenerator.Tests
             var foreignKey = TestConstants.MockConstraintForeignKey();
 
             //Assert
-            Assert.AreEqual(foreignKey.Name, TestConstants.ConstraintName);
-            Assert.AreEqual(foreignKey.Schema, TestConstants.Schema);
-            Assert.AreEqual(foreignKey.TableColumnName, TestConstants.TableColumn);
-            Assert.AreEqual(foreignKey.ReferencedTableSchemaName, TestConstants.ReferencedSchemaName);
-            Assert.AreEqual(foreignKey.ReferencedTableName, TestConstants.ReferencedTableName);
-            Assert.AreEqual(foreignKey.ReferencedTableColumnName, TestConstants.ReferencedColumnName);
-            Assert.AreEqual(foreignKey.TableSpace, null);
+            Assert.AreEqual(TestConstants.ConstraintName, foreignKey.Name);
+            Assert.AreEqual(TestConstants.Schema, foreignKey.Schema);
+            Assert.AreEqual(TestConstants.TableColumn, foreignKey.TableColumnName);
+            Assert.AreEqual(TestConstants.ReferencedSchemaName, foreignKey.ReferencedTableSchemaName);
+            Assert.AreEqual(TestConstants.ReferencedTableName, foreignKey.ReferencedTableName);
+            Assert.AreEqual(TestConstants.ReferencedColumnName, foreignKey.ReferencedTableColumnName);
+            Assert.AreEqual(null, foreignKey.TableSpace);
         }
 
         [TestMethod]
@@ -64,10 +62,10 @@ namespace ScriptGenerator.Tests
             var sequence = TestConstants.MockSequence();
 
             //Assert
-            Assert.AreEqual(sequence.Name, TestConstants.SequenceName);
-            Assert.AreEqual(sequence.Schema, TestConstants.Schema);
-            Assert.AreEqual(sequence.StartWith, TestConstants.StartsWith);
-            Assert.AreEqual(sequence.IncrementBy, TestConstants.IncrementBy);
+            Assert.AreEqual(TestConstants.SequenceName, sequence.Name);
+            Assert.AreEqual(TestConstants.Schema, sequence.Schema);
+            Assert.AreEqual(TestConstants.StartsWith, sequence.StartWith);
+            Assert.AreEqual(TestConstants.IncrementBy, sequence.IncrementBy);
         }
 
         [TestMethod]
@@ -77,10 +75,10 @@ namespace ScriptGenerator.Tests
             var table = TestConstants.MockTable();
 
             //Assert
-            Assert.AreEqual(table.Name, TestConstants.TableName);
-            Assert.AreEqual(table.Schema, TestConstants.Schema);
-            Assert.AreEqual(table.Comment, TestConstants.CommentTable);
-            Assert.AreEqual(table.TableSpace, TestConstants.TableSpace);
+            Assert.AreEqual(TestConstants.TableName, table.Name);
+            Assert.AreEqual(TestConstants.Schema, table.Schema);
+            Assert.AreEqual(TestConstants.CommentTable, table.Comment);
+            Assert.AreEqual(TestConstants.TableSpace, table.TableSpace);
         }
     }
 }

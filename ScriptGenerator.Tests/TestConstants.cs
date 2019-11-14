@@ -72,5 +72,9 @@ namespace ScriptGenerator.Tests
             ReferencedTableName, 
             ReferencedColumnName, 
             null);
+
+        public const string CharsetTestRelativePath = "\\Resources\\TestCharset.txt";
+        public const string CharsetTestRelativePathIncorrect = "\\Resources\\TestCharsetsdasdasd.txt";
+        public const string CharsetTestResult = "' || chr(1) || '";
     }
 }

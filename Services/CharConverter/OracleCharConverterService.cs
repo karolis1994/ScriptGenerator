@@ -10,7 +10,9 @@ namespace ScriptGenerator.Services
     {
         private Dictionary<int, string> charset = new Dictionary<int, string>();
 
-        public async Task LoadCharset(string charsetFilePath)
+        public OracleCharConverterService() { }
+
+        public async Task<Dictionary<int, string>> LoadCharset(string charsetFilePath)
         {
             await Task.Run(() =>
             {
@@ -29,10 +31,16 @@ namespace ScriptGenerator.Services
                                 newCharset.Add(key, splitResult[1]);
                     }
                 }
+                else
+                {
+                    throw new ArgumentException("Incorrect charset file path supplied.");
+                }
 
                 charset = newCharset;
             })
             .ConfigureAwait(false);
+
+            return charset;
         }
 
         public async Task<string> ReplaceWithCharset(string original, bool convertApostrophe = false)

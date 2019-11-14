@@ -169,14 +169,6 @@ namespace ScriptGenerator
         {
             return (bool?)row.Cells[cell].Value ?? false;
         }
-        private string GetCellValueString(DataGridViewRow row, string cell)
-        {
-            return (string)row.Cells[cell].Value;
-        }
-        private DataType GetCellValueDataType(DataGridViewRow row, string cell)
-        {
-            return (DataType)row.Cells[cell].Value;
-        }
         private void AddUneditableRow(string columnName, DataType type, int? dataLength, string comment)
         {
             int index = tableColumnsGrid.Rows.Add(false, columnName, type, dataLength, null, true, comment, false, null, false, null, null, null, null, null);
