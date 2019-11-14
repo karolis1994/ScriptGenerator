@@ -54,7 +54,9 @@
     <Content Include="Resources\AssemblyInfo.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Compile Include="ServiceTests.cs" />
+    <Compile Include="ScriptGeneratorTests.cs" />
+    <Compile Include="VersioningTests.cs" />
+    <Compile Include="OracleCharConverterTests.cs" />
     <Compile Include="TestConstants.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,17 +1,14 @@
 ﻿using ScriptGenerator.Models;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace ScriptGenerator.Tests
 {
     public static class TestConstants
     {
         public const string Schema = "Schema";
+        public const string NameNonVisualSetting = "Name";
         public const string NameTable = "TableName";
         public const string NameSequence = "SequenceName";
         public const string NameColumn = "ColumnName";
@@ -34,6 +31,7 @@ namespace ScriptGenerator.Tests
         public const bool HasUnique = false;
         public const bool isNullable = false;
 
+        public static NonVisualSetting MockNonVisualSetting() => NonVisualSetting.CreateNew(NameNonVisualSetting);
         public static Trigger MockTrigger() => Trigger.CreateNew(
             Schema,
             NameTrigger,
@@ -53,7 +51,7 @@ namespace ScriptGenerator.Tests
             Schema,
             NameTable,
             NameColumn,
-            Type, 
+            Type,
             DataLength,
             DefaultValue,
             isNullable,
@@ -74,10 +72,10 @@ namespace ScriptGenerator.Tests
             Schema,
             NameConstraint,
             NameTable,
-            NameTableColumn, 
+            NameTableColumn,
             ReferencedSchemaName,
-            ReferencedTableName, 
-            ReferencedColumnName, 
+            ReferencedTableName,
+            ReferencedColumnName,
             null);
 
         public static string PathResources() => Directory.GetCurrentDirectory() + "\\Resources";

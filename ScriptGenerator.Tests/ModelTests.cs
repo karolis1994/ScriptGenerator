@@ -92,5 +92,15 @@ namespace ScriptGenerator.Tests
             Assert.AreEqual(TestConstants.NameTrigger, trigger.Name);
             Assert.AreEqual(TestConstants.NameTable, trigger.TableName);
         }
+
+        [TestMethod]
+        public void NonVisualSetting_CreateNew()
+        {
+            //Arrange / Act
+            var nonVisualSetting = TestConstants.MockNonVisualSetting();
+
+            //Assert
+            Assert.AreEqual(TestConstants.NameNonVisualSetting, nonVisualSetting.Name);
+        }
     }
 }

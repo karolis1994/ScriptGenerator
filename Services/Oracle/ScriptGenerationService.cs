@@ -168,6 +168,56 @@ namespace ScriptGenerator.Services
             .ConfigureAwait(false);
         }
 
+        public async Task<string> GenerateCreationScript(NonVisualSetting nonVisualSetting)
+        {
+            if (nonVisualSetting == null)
+                return string.Empty;
+
+            return await Task.Run(() =>
+            {
+                StringBuilder insertsBuilder = new StringBuilder();
+                StringBuilder scriptBuilder = new StringBuilder();
+                Int32 index = 0;
+
+                foreach (var clientValue in nonVisualSetting.Clients)
+                {
+                    if (clientValue.Key != NonVisualSetting.Else)
+                    {
+                        if (index == 0)
+                            insertsBuilder.AppendLine($"    IF ls_client = '{clientValue.Key}' THEN");
+                        else
+                            insertsBuilder.AppendLine($"    ELSIF ls_client = '{clientValue.Key}' THEN");
+                    }
+                    else
+                    {
+                        insertsBuilder.AppendLine($"    ELSE");
+                    }
+                    insertsBuilder.AppendLine($"      insert_non_visual('{clientValue.Key}', '{clientValue.Value}');");
+
+                    index++;
+                }
+                insertsBuilder.AppendLine($"    END IF;");
+
+                scriptBuilder.AppendLine($"DECLARE");
+                scriptBuilder.AppendLine($"  ln_exist NUMBER;");
+                scriptBuilder.AppendLine($"  ls_client VARCHAR2(250);");
+                scriptBuilder.AppendLine($"  PROCEDURE insert_non_visual(ps_name  IN VARCHAR2, ps_value IN VARCHAR2) AS");
+                scriptBuilder.AppendLine($"  BEGIN");
+                scriptBuilder.AppendLine($"    INSERT INTO SETTINGS.SYST_ATTRIBUTES_T(CODE, VALUE) VALUES(ps_name, ps_value);");
+                scriptBuilder.AppendLine($"  END; ");
+                scriptBuilder.AppendLine($"BEGIN");
+                scriptBuilder.AppendLine($"  SELECT COUNT(1) INTO ln_exist FROM SETTINGS.SYST_ATTRIBUTES_T WHERE CODE = '{nonVisualSetting.Name}';");
+                scriptBuilder.AppendLine($"  ls_client := SETTINGS.GET_SYST_ATTR('APT_CLIENT');");
+                scriptBuilder.AppendLine($"  IF ln_exist = 0 THEN");
+                scriptBuilder.AppendLine($"{insertsBuilder.ToString()}");
+                scriptBuilder.AppendLine($"  END IF;");
+                scriptBuilder.AppendLine($"END;");
+                scriptBuilder.AppendLine($"/");
+
+                return scriptBuilder.ToString();
+            });
+        }
+
         private string GenerateForeignKeyScript(ConstraintForeignKey c)
         {
             if (c == null)

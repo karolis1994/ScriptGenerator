@@ -35,5 +35,12 @@ namespace ScriptGenerator.Services
         /// <param name="trigger"></param>
         /// <returns></returns>
         Task<string> GenerateCreationScript(Trigger trigger);
+
+        /// <summary>
+        /// Generates non visual setting script
+        /// </summary>
+        /// <param name="nonVisualSetting"></param>
+        /// <returns></returns>
+        Task<string> GenerateCreationScript(NonVisualSetting nonVisualSetting);
     }
 }
