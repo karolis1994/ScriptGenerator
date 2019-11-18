@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Office.Interop.Word;
 
 namespace ScriptGenerator.Services
@@ -31,37 +32,40 @@ namespace ScriptGenerator.Services
         /// <param name="clientName"></param>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public Dictionary<string, int> GetClientSettings(string clientName, string filePath)
+        public async Task<Dictionary<string, int>> GetClientSettings(string clientName, string filePath)
         {
-            Dictionary<string, int> map = new Dictionary<string, int>();
-            int settingColumn;
-            int temp;
-
-            // Open a doc file.
-            Application application = new Application();
-            try
+            return await System.Threading.Tasks.Task.Run(() =>
             {
-                settingColumn = GetColumnBySuppliedClientName(clientName);
+                Dictionary<string, int> map = new Dictionary<string, int>();
+                int settingColumn;
+                int temp;
 
-                Document document = application.Documents.Open(filePath);
-                Table nonVisualSettingsTable = document.Tables[5];
-
-                for (int i = 2; i <= nonVisualSettingsTable.Rows.Count; i++)
+                // Open a doc file.
+                Application application = new Application();
+                try
                 {
-                    if (int.TryParse(nonVisualSettingsTable.Rows[i].Cells[settingColumn].Range.Text.Replace("\r\a", "").Trim(), out temp))
-                        map[nonVisualSettingsTable.Rows[i].Cells[1].Range.Text.Replace("\r\a", "")] = temp;
+                    settingColumn = GetColumnBySuppliedClientName(clientName);
+
+                    Document document = application.Documents.Open(filePath);
+                    Table nonVisualSettingsTable = document.Tables[5];
+
+                    for (int i = 2; i <= nonVisualSettingsTable.Rows.Count; i++)
+                    {
+                        if (int.TryParse(nonVisualSettingsTable.Rows[i].Cells[settingColumn].Range.Text.Replace("\r\a", "").Trim(), out temp))
+                            map[nonVisualSettingsTable.Rows[i].Cells[1].Range.Text.Replace("\r\a", "")] = temp;
+                    }
+
+                    // Close word.
+                    application.Quit();
+                }
+                catch
+                {
+                    // Close word.
+                    application.Quit();
                 }
 
-                // Close word.
-                application.Quit();
-            }
-            catch
-            {
-                // Close word.
-                application.Quit();
-            }
-
-            return map;
+                return map;
+            });
         }
 
         private int GetColumnBySuppliedClientName(string clientName)

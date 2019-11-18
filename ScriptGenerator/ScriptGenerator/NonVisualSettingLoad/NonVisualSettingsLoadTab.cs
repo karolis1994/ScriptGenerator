@@ -40,9 +40,10 @@ namespace ScriptGenerator
         }
 
         //non visual setting script generator button
-        private void NonVisLoadButton_Click(object sender, EventArgs e)
+        private async void NonVisLoadButton_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
+            nonVisLoadButton.Enabled = false;
 
             if (nonVisLoadCheckedListBox.CheckedItems.Count > 0 && !string.IsNullOrWhiteSpace(nonVisualLoadPathLabel.Text))
             {
@@ -61,7 +62,7 @@ namespace ScriptGenerator
                 stringBuilder.Append($"BEGIN{Environment.NewLine}");
                 stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting("APT_CLIENT", nonVisLoadCheckedListBox.CheckedItems[0].ToString()));
 
-                foreach (KeyValuePair<string, int> entry in wordService.GetClientSettings(nonVisLoadCheckedListBox.CheckedItems[0].ToString(), nonVisualLoadPathLabel.Text))
+                foreach (KeyValuePair<string, int> entry in await wordService.GetClientSettings(nonVisLoadCheckedListBox.CheckedItems[0].ToString(), nonVisualLoadPathLabel.Text))
                 {
                     if (entry.Key.Length <= 30)
                         stringBuilder.Append(GenerateUpdateStatementForNonVisualSetting(entry.Key, entry.Value.ToString()));
@@ -69,7 +70,15 @@ namespace ScriptGenerator
 
                 stringBuilder.Append($"END;");
 
-                scriptTextBox.Text = stringBuilder.ToString();
+                var result = stringBuilder.ToString();
+
+                this.Invoke(new Action(() =>
+                {
+                    scriptTextBox.Text = result;
+
+                    Cursor.Current = Cursors.Arrow;
+                    nonVisLoadButton.Enabled = true;
+                }));
             }
 
             Cursor.Current = Cursors.Arrow;

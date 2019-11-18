@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ScriptGenerator.Services
 {
@@ -14,6 +15,6 @@ namespace ScriptGenerator.Services
         /// <param name="clientName">The name of the client for whom the setting values should be retrieved</param>
         /// <param name="filePath">The path to the file where the document is located</param>
         /// <returns></returns>
-        Dictionary<string, int> GetClientSettings(string clientName, string filePath);
+        Task<Dictionary<string, int>> GetClientSettings(string clientName, string filePath);
     }
 }
