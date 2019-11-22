@@ -59,7 +59,7 @@ namespace ScriptGenerator.Services
                 scriptBuilder.AppendLine("      (");
                 scriptBuilder.AppendLine($"          {String.Join($",{Environment.NewLine}          ", columns)}");
                 scriptBuilder.AppendLine($"      ){(String.IsNullOrWhiteSpace(t.TableSpace) ? "" : " TABLESPACE " + t.TableSpace)}';");
-                scriptBuilder.AppendLine($"      {GeneratePrimaryKeyScript(primaryKeyConstraint)}'");
+                scriptBuilder.AppendLine($"      {GeneratePrimaryKeyScript(primaryKeyConstraint)}");
                 scriptBuilder.AppendLine($"      {String.Join(Environment.NewLine + "      ", commentScripts.Concat(fkScripts))}");
                 scriptBuilder.AppendLine($"      {String.Join(Environment.NewLine + "      ", uniqueConstraintScripts)}");
                 scriptBuilder.AppendLine("  END IF;");
@@ -267,13 +267,13 @@ namespace ScriptGenerator.Services
         {
             if (c != null && !string.IsNullOrWhiteSpace(c.DefaultValue))
             {
-                string result;
+                string result = "DEFAULT ";
                 if (long.TryParse(c.DefaultValue, out long intOutput) || c.DefaultValue.ToUpper() == "SYSDATE")
-                    result = c.DefaultValue;
+                    result += c.DefaultValue;
                 else if (DateTime.TryParse(c.DefaultValue, out DateTime dateOutput))
-                    result = $"TO_DATE(''{dateOutput.Date.ToString("yyyy-MM-dd")}'', ''yyyy-mm-dd'')";
+                    result += $"TO_DATE(''{dateOutput.Date.ToString("yyyy-MM-dd")}'', ''yyyy-mm-dd'')";
                 else
-                    result = $" DEFAULT ''{c.DefaultValue}''";
+                    result += $" DEFAULT ''{c.DefaultValue}''";
 
                 if (c.IsNullable)
                     result += " NOT NULL";
