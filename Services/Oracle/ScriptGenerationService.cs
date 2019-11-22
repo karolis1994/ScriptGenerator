@@ -245,7 +245,7 @@ namespace ScriptGenerator.Services
             if (c == null)
                 return string.Empty;
 
-            return $"EXECUTE IMMEDIATE 'ALTER TABLE {c.Schema}.{c.TableName} ADD CONSTRAINT {c.Name} UNIQUE ({c.TableColumnName});";
+            return $"EXECUTE IMMEDIATE 'ALTER TABLE {c.Schema}.{c.TableName} ADD CONSTRAINT {c.Name} UNIQUE ({c.TableColumnName})';";
         }
 
         private string GenerateCommentScript(Table t)
