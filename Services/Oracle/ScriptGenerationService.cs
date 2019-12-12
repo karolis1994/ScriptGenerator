@@ -277,6 +277,8 @@ namespace ScriptGenerator.Services
 
                 if (!c.IsNullable)
                     result += " NOT NULL";
+                else
+                    result += " NULL";
 
                 return result;
             }
