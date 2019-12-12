@@ -275,7 +275,7 @@ namespace ScriptGenerator.Services
                 else
                     result += $" DEFAULT ''{c.DefaultValue}''";
 
-                if (c.IsNullable)
+                if (!c.IsNullable)
                     result += " NOT NULL";
 
                 return result;
