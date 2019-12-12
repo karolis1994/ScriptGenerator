@@ -192,7 +192,7 @@ namespace ScriptGenerator.Services
                     {
                         insertsBuilder.AppendLine($"    ELSE");
                     }
-                    insertsBuilder.AppendLine($"      insert_non_visual('{clientValue.Key}', '{clientValue.Value}');");
+                    insertsBuilder.AppendLine($"      insert_non_visual('{nonVisualSetting.Name}', '{clientValue.Value}');");
 
                     index++;
                 }
