@@ -265,25 +265,27 @@ namespace ScriptGenerator.Services
         }
         private string GenerateDefaultValueDefinition(Column c)
         {
-            if (c != null && !string.IsNullOrWhiteSpace(c.DefaultValue))
+            if (c == null)
+                return string.Empty;
+
+            string result = String.Empty;
+            if (!string.IsNullOrWhiteSpace(c.DefaultValue))
             {
-                string result = "DEFAULT ";
+                result = " DEFAULT ";
                 if (long.TryParse(c.DefaultValue, out long intOutput) || c.DefaultValue.ToUpper() == "SYSDATE")
                     result += c.DefaultValue;
                 else if (DateTime.TryParse(c.DefaultValue, out DateTime dateOutput))
                     result += $"TO_DATE(''{dateOutput.Date.ToString("yyyy-MM-dd")}'', ''yyyy-mm-dd'')";
                 else
-                    result += $" DEFAULT ''{c.DefaultValue}''";
-
-                if (!c.IsNullable)
-                    result += " NOT NULL";
-                else
-                    result += " NULL";
-
-                return result;
+                    result += $"''{c.DefaultValue}''";
             }
 
-            return string.Empty;
+            if (!c.IsNullable)
+                result += " NOT NULL";
+            else
+                result += " NULL";
+
+            return result;
         }
         private string GenerateCommentScript(Column c)
         {
