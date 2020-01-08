@@ -1,4 +1,5 @@
 ﻿using ScriptGenerator.Services;
+using Services.Ais;
 using System;
 using System.Drawing;
 using System.IO;
@@ -9,17 +10,21 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator : Form
     {
-        private IWordService wordService;
-        private ICharConverterService charConverterService;
-        private IVersioningService versioningService;
-        private IScriptGenerationService scriptGenerationService;
+        private readonly IWordService wordService;
+        private readonly ICharConverterService charConverterService;
+        private readonly IVersioningService versioningService;
+        private readonly IScriptGenerationService scriptGenerationService;
+        private readonly ICodeComponentsGeneratorService aisComponentsGeneratorService;
 
-        public ScriptGenerator(IWordService wordWorker, ICharConverterService charConverterService, IVersioningService versioningService, IScriptGenerationService scriptGenerationService)
+        public ScriptGenerator(IWordService wordWorker, ICharConverterService charConverterService, 
+            IVersioningService versioningService, IScriptGenerationService scriptGenerationService,
+            ICodeComponentsGeneratorService aisComponentsGeneratorService)
         {
             this.wordService = wordWorker;
             this.charConverterService = charConverterService;
             this.versioningService = versioningService;
             this.scriptGenerationService = scriptGenerationService;
+            this.aisComponentsGeneratorService = aisComponentsGeneratorService;
 
             InitializeWindow();
         }
@@ -45,5 +50,10 @@ namespace ScriptGenerator
         }
 
         private static String Else = "Else";
+
+        private void aisTemplaterAddBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

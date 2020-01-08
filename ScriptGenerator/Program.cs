@@ -1,8 +1,6 @@
 ﻿using ScriptGenerator.Services;
+using Services.Ais;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ScriptGenerator
@@ -17,7 +15,8 @@ namespace ScriptGenerator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ScriptGenerator(new WordService(), new OracleCharConverterService(), new VersioningService(), new ScriptGenerationService()));
+            Application.Run(new ScriptGenerator(new WordService(), new OracleCharConverterService(), new VersioningService(),
+                    new ScriptGenerationService(), new CodeComponentsGeneratorService()));
         }
     }
 }

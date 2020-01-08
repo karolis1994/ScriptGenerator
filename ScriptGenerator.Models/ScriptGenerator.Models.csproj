@@ -46,7 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CodeComponentFile.cs" />
+    <Compile Include="Models\CodeModel.cs" />
+    <Compile Include="Models\CodeModelVariable.cs" />
     <Compile Include="Models\Column.cs" />
+    <Compile Include="Models\CommandType.cs" />
     <Compile Include="Models\Constraint.cs" />
     <Compile Include="Models\ConstraintForeignKey.cs" />
     <Compile Include="Models\DataType.cs" />

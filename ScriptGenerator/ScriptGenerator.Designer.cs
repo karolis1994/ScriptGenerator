@@ -164,8 +164,36 @@
             this.IsNullable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.IsUsedInCreation = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.IsUsedInUpdating = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.aisTemplater = new System.Windows.Forms.TabPage();
+            this.aisTemplaterSubNamespaceTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.aisTemplaterContextTextBox = new System.Windows.Forms.TextBox();
+            this.aisTemplaterContextLbl = new System.Windows.Forms.Label();
+            this.aisTemplaterIsValidityRangeCheckBox = new System.Windows.Forms.CheckBox();
+            this.aisTemplaterClassSummaryTextBox = new System.Windows.Forms.TextBox();
+            this.aisTemplaterCommentLbl = new System.Windows.Forms.Label();
+            this.aisTemplaterIsUserManagedCheckBox = new System.Windows.Forms.CheckBox();
+            this.aisTemplaterResetBtn = new System.Windows.Forms.Button();
+            this.aisTemplaterBtn = new System.Windows.Forms.Button();
+            this.aisTemplaterRemoveBtn = new System.Windows.Forms.Button();
+            this.aisTemplaterAddBtn = new System.Windows.Forms.Button();
+            this.aisTemplaterAggregateRootCheckBox = new System.Windows.Forms.CheckBox();
+            this.aisTemplaterModelNameTextBox = new System.Windows.Forms.TextBox();
+            this.aisTemplaterModelNameLbl = new System.Windows.Forms.Label();
+            this.aisTemplaterGrid = new System.Windows.Forms.DataGridView();
+            this.aisTemplaterNamespaceTextBox = new System.Windows.Forms.TextBox();
+            this.aisTemplaterNameSpaceLbl = new System.Windows.Forms.Label();
             this.nonVisualLoadFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.versioningFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.AisVariableAccessLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AisVariableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AisVariableType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AisVariableComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AisVariableStringLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AisVariableIsRequired = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.AisVariableIsPartOfUpdate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.AisVariableIsPartOfCreateNew = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.AisVariableIsMultilanguage = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableColumnsGrid)).BeginInit();
@@ -179,6 +207,8 @@
             this.versioning.SuspendLayout();
             this.domainModels.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.domainPropertiesGrid)).BeginInit();
+            this.aisTemplater.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.aisTemplaterGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // scriptTextBox
@@ -248,6 +278,7 @@
             this.tabControl1.Controls.Add(this.charConverterTabPage);
             this.tabControl1.Controls.Add(this.versioning);
             this.tabControl1.Controls.Add(this.domainModels);
+            this.tabControl1.Controls.Add(this.aisTemplater);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1511,9 +1542,257 @@
             this.IsUsedInUpdating.Name = "IsUsedInUpdating";
             this.IsUsedInUpdating.Width = 150;
             // 
+            // aisTemplater
+            // 
+            this.aisTemplater.Controls.Add(this.aisTemplaterSubNamespaceTextBox);
+            this.aisTemplater.Controls.Add(this.label2);
+            this.aisTemplater.Controls.Add(this.aisTemplaterContextTextBox);
+            this.aisTemplater.Controls.Add(this.aisTemplaterContextLbl);
+            this.aisTemplater.Controls.Add(this.aisTemplaterIsValidityRangeCheckBox);
+            this.aisTemplater.Controls.Add(this.aisTemplaterClassSummaryTextBox);
+            this.aisTemplater.Controls.Add(this.aisTemplaterCommentLbl);
+            this.aisTemplater.Controls.Add(this.aisTemplaterIsUserManagedCheckBox);
+            this.aisTemplater.Controls.Add(this.aisTemplaterResetBtn);
+            this.aisTemplater.Controls.Add(this.aisTemplaterBtn);
+            this.aisTemplater.Controls.Add(this.aisTemplaterRemoveBtn);
+            this.aisTemplater.Controls.Add(this.aisTemplaterAddBtn);
+            this.aisTemplater.Controls.Add(this.aisTemplaterAggregateRootCheckBox);
+            this.aisTemplater.Controls.Add(this.aisTemplaterModelNameTextBox);
+            this.aisTemplater.Controls.Add(this.aisTemplaterModelNameLbl);
+            this.aisTemplater.Controls.Add(this.aisTemplaterGrid);
+            this.aisTemplater.Controls.Add(this.aisTemplaterNamespaceTextBox);
+            this.aisTemplater.Controls.Add(this.aisTemplaterNameSpaceLbl);
+            this.aisTemplater.Location = new System.Drawing.Point(4, 22);
+            this.aisTemplater.Name = "aisTemplater";
+            this.aisTemplater.Padding = new System.Windows.Forms.Padding(3);
+            this.aisTemplater.Size = new System.Drawing.Size(1414, 348);
+            this.aisTemplater.TabIndex = 9;
+            this.aisTemplater.Text = "AIS templater";
+            this.aisTemplater.UseVisualStyleBackColor = true;
+            // 
+            // aisTemplaterSubNamespaceTextBox
+            // 
+            this.aisTemplaterSubNamespaceTextBox.Location = new System.Drawing.Point(650, 3);
+            this.aisTemplaterSubNamespaceTextBox.Name = "aisTemplaterSubNamespaceTextBox";
+            this.aisTemplaterSubNamespaceTextBox.Size = new System.Drawing.Size(100, 20);
+            this.aisTemplaterSubNamespaceTextBox.TabIndex = 18;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(557, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Sub namespace:";
+            // 
+            // aisTemplaterContextTextBox
+            // 
+            this.aisTemplaterContextTextBox.Location = new System.Drawing.Point(446, 3);
+            this.aisTemplaterContextTextBox.Name = "aisTemplaterContextTextBox";
+            this.aisTemplaterContextTextBox.Size = new System.Drawing.Size(100, 20);
+            this.aisTemplaterContextTextBox.TabIndex = 16;
+            // 
+            // aisTemplaterContextLbl
+            // 
+            this.aisTemplaterContextLbl.AutoSize = true;
+            this.aisTemplaterContextLbl.Location = new System.Drawing.Point(394, 6);
+            this.aisTemplaterContextLbl.Name = "aisTemplaterContextLbl";
+            this.aisTemplaterContextLbl.Size = new System.Drawing.Size(46, 13);
+            this.aisTemplaterContextLbl.TabIndex = 15;
+            this.aisTemplaterContextLbl.Text = "Context:";
+            // 
+            // aisTemplaterIsValidityRangeCheckBox
+            // 
+            this.aisTemplaterIsValidityRangeCheckBox.AutoSize = true;
+            this.aisTemplaterIsValidityRangeCheckBox.Location = new System.Drawing.Point(422, 32);
+            this.aisTemplaterIsValidityRangeCheckBox.Name = "aisTemplaterIsValidityRangeCheckBox";
+            this.aisTemplaterIsValidityRangeCheckBox.Size = new System.Drawing.Size(99, 17);
+            this.aisTemplaterIsValidityRangeCheckBox.TabIndex = 14;
+            this.aisTemplaterIsValidityRangeCheckBox.Text = "Is validity range";
+            this.aisTemplaterIsValidityRangeCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // aisTemplaterClassSummaryTextBox
+            // 
+            this.aisTemplaterClassSummaryTextBox.Location = new System.Drawing.Point(289, 3);
+            this.aisTemplaterClassSummaryTextBox.Name = "aisTemplaterClassSummaryTextBox";
+            this.aisTemplaterClassSummaryTextBox.Size = new System.Drawing.Size(100, 20);
+            this.aisTemplaterClassSummaryTextBox.TabIndex = 13;
+            // 
+            // aisTemplaterCommentLbl
+            // 
+            this.aisTemplaterCommentLbl.AutoSize = true;
+            this.aisTemplaterCommentLbl.Location = new System.Drawing.Point(204, 6);
+            this.aisTemplaterCommentLbl.Name = "aisTemplaterCommentLbl";
+            this.aisTemplaterCommentLbl.Size = new System.Drawing.Size(79, 13);
+            this.aisTemplaterCommentLbl.TabIndex = 12;
+            this.aisTemplaterCommentLbl.Text = "Class summary:";
+            // 
+            // aisTemplaterIsUserManagedCheckBox
+            // 
+            this.aisTemplaterIsUserManagedCheckBox.AutoSize = true;
+            this.aisTemplaterIsUserManagedCheckBox.Location = new System.Drawing.Point(312, 32);
+            this.aisTemplaterIsUserManagedCheckBox.Name = "aisTemplaterIsUserManagedCheckBox";
+            this.aisTemplaterIsUserManagedCheckBox.Size = new System.Drawing.Size(104, 17);
+            this.aisTemplaterIsUserManagedCheckBox.TabIndex = 11;
+            this.aisTemplaterIsUserManagedCheckBox.Text = "Is user managed";
+            this.aisTemplaterIsUserManagedCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // aisTemplaterResetBtn
+            // 
+            this.aisTemplaterResetBtn.Location = new System.Drawing.Point(90, 319);
+            this.aisTemplaterResetBtn.Name = "aisTemplaterResetBtn";
+            this.aisTemplaterResetBtn.Size = new System.Drawing.Size(75, 23);
+            this.aisTemplaterResetBtn.TabIndex = 10;
+            this.aisTemplaterResetBtn.Text = "Reset tab";
+            this.aisTemplaterResetBtn.UseVisualStyleBackColor = true;
+            this.aisTemplaterResetBtn.Click += new System.EventHandler(this.aisTemplaterResetBtn_Click);
+            // 
+            // aisTemplaterBtn
+            // 
+            this.aisTemplaterBtn.Location = new System.Drawing.Point(9, 319);
+            this.aisTemplaterBtn.Name = "aisTemplaterBtn";
+            this.aisTemplaterBtn.Size = new System.Drawing.Size(75, 23);
+            this.aisTemplaterBtn.TabIndex = 9;
+            this.aisTemplaterBtn.Text = "Generate";
+            this.aisTemplaterBtn.UseVisualStyleBackColor = true;
+            this.aisTemplaterBtn.Click += new System.EventHandler(this.aisTemplaterBtn_Click);
+            // 
+            // aisTemplaterRemoveBtn
+            // 
+            this.aisTemplaterRemoveBtn.Location = new System.Drawing.Point(90, 76);
+            this.aisTemplaterRemoveBtn.Name = "aisTemplaterRemoveBtn";
+            this.aisTemplaterRemoveBtn.Size = new System.Drawing.Size(133, 23);
+            this.aisTemplaterRemoveBtn.TabIndex = 7;
+            this.aisTemplaterRemoveBtn.Text = "Remove selected";
+            this.aisTemplaterRemoveBtn.UseVisualStyleBackColor = true;
+            this.aisTemplaterRemoveBtn.Click += new System.EventHandler(this.aisTemplaterRemoveBtn_Click);
+            // 
+            // aisTemplaterAddBtn
+            // 
+            this.aisTemplaterAddBtn.Location = new System.Drawing.Point(9, 76);
+            this.aisTemplaterAddBtn.Name = "aisTemplaterAddBtn";
+            this.aisTemplaterAddBtn.Size = new System.Drawing.Size(75, 23);
+            this.aisTemplaterAddBtn.TabIndex = 6;
+            this.aisTemplaterAddBtn.Text = "Add variable";
+            this.aisTemplaterAddBtn.UseVisualStyleBackColor = true;
+            this.aisTemplaterAddBtn.Click += new System.EventHandler(this.aisTemplaterAddBtn_Click);
+            // 
+            // aisTemplaterAggregateRootCheckBox
+            // 
+            this.aisTemplaterAggregateRootCheckBox.AutoSize = true;
+            this.aisTemplaterAggregateRootCheckBox.Location = new System.Drawing.Point(200, 32);
+            this.aisTemplaterAggregateRootCheckBox.Name = "aisTemplaterAggregateRootCheckBox";
+            this.aisTemplaterAggregateRootCheckBox.Size = new System.Drawing.Size(106, 17);
+            this.aisTemplaterAggregateRootCheckBox.TabIndex = 5;
+            this.aisTemplaterAggregateRootCheckBox.Text = "Is aggregate root";
+            this.aisTemplaterAggregateRootCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // aisTemplaterModelNameTextBox
+            // 
+            this.aisTemplaterModelNameTextBox.Location = new System.Drawing.Point(82, 29);
+            this.aisTemplaterModelNameTextBox.Name = "aisTemplaterModelNameTextBox";
+            this.aisTemplaterModelNameTextBox.Size = new System.Drawing.Size(112, 20);
+            this.aisTemplaterModelNameTextBox.TabIndex = 4;
+            // 
+            // aisTemplaterModelNameLbl
+            // 
+            this.aisTemplaterModelNameLbl.AutoSize = true;
+            this.aisTemplaterModelNameLbl.Location = new System.Drawing.Point(6, 29);
+            this.aisTemplaterModelNameLbl.Name = "aisTemplaterModelNameLbl";
+            this.aisTemplaterModelNameLbl.Size = new System.Drawing.Size(68, 13);
+            this.aisTemplaterModelNameLbl.TabIndex = 3;
+            this.aisTemplaterModelNameLbl.Text = "Model name:";
+            // 
+            // aisTemplaterGrid
+            // 
+            this.aisTemplaterGrid.AllowUserToAddRows = false;
+            this.aisTemplaterGrid.AllowUserToDeleteRows = false;
+            this.aisTemplaterGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.aisTemplaterGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.AisVariableAccessLevel,
+            this.AisVariableName,
+            this.AisVariableType,
+            this.AisVariableComment,
+            this.AisVariableStringLength,
+            this.AisVariableIsRequired,
+            this.AisVariableIsPartOfUpdate,
+            this.AisVariableIsPartOfCreateNew,
+            this.AisVariableIsMultilanguage});
+            this.aisTemplaterGrid.Location = new System.Drawing.Point(9, 105);
+            this.aisTemplaterGrid.Name = "aisTemplaterGrid";
+            this.aisTemplaterGrid.Size = new System.Drawing.Size(1399, 208);
+            this.aisTemplaterGrid.TabIndex = 2;
+            // 
+            // aisTemplaterNamespaceTextBox
+            // 
+            this.aisTemplaterNamespaceTextBox.Location = new System.Drawing.Point(82, 3);
+            this.aisTemplaterNamespaceTextBox.Name = "aisTemplaterNamespaceTextBox";
+            this.aisTemplaterNamespaceTextBox.Size = new System.Drawing.Size(112, 20);
+            this.aisTemplaterNamespaceTextBox.TabIndex = 1;
+            // 
+            // aisTemplaterNameSpaceLbl
+            // 
+            this.aisTemplaterNameSpaceLbl.AutoSize = true;
+            this.aisTemplaterNameSpaceLbl.Location = new System.Drawing.Point(6, 3);
+            this.aisTemplaterNameSpaceLbl.Name = "aisTemplaterNameSpaceLbl";
+            this.aisTemplaterNameSpaceLbl.Size = new System.Drawing.Size(67, 13);
+            this.aisTemplaterNameSpaceLbl.TabIndex = 0;
+            this.aisTemplaterNameSpaceLbl.Text = "Namespace:";
+            // 
             // nonVisualLoadFileDialog
             // 
             this.nonVisualLoadFileDialog.FileName = "Nevizualus_sistemos_nustatymai";
+            // 
+            // AisVariableAccessLevel
+            // 
+            this.AisVariableAccessLevel.HeaderText = "Access level";
+            this.AisVariableAccessLevel.Name = "AisVariableAccessLevel";
+            // 
+            // AisVariableName
+            // 
+            this.AisVariableName.HeaderText = "Name";
+            this.AisVariableName.Name = "AisVariableName";
+            this.AisVariableName.Width = 200;
+            // 
+            // AisVariableType
+            // 
+            this.AisVariableType.HeaderText = "Type";
+            this.AisVariableType.Name = "AisVariableType";
+            this.AisVariableType.Width = 200;
+            // 
+            // AisVariableComment
+            // 
+            this.AisVariableComment.HeaderText = "Comment";
+            this.AisVariableComment.Name = "AisVariableComment";
+            this.AisVariableComment.Width = 200;
+            // 
+            // AisVariableStringLength
+            // 
+            this.AisVariableStringLength.HeaderText = "String length";
+            this.AisVariableStringLength.Name = "AisVariableStringLength";
+            // 
+            // AisVariableIsRequired
+            // 
+            this.AisVariableIsRequired.HeaderText = "Is required";
+            this.AisVariableIsRequired.Name = "AisVariableIsRequired";
+            this.AisVariableIsRequired.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.AisVariableIsRequired.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // AisVariableIsPartOfUpdate
+            // 
+            this.AisVariableIsPartOfUpdate.HeaderText = "Is used in update";
+            this.AisVariableIsPartOfUpdate.Name = "AisVariableIsPartOfUpdate";
+            // 
+            // AisVariableIsPartOfCreateNew
+            // 
+            this.AisVariableIsPartOfCreateNew.HeaderText = "Is used in create";
+            this.AisVariableIsPartOfCreateNew.Name = "AisVariableIsPartOfCreateNew";
+            // 
+            // AisVariableIsMultilanguage
+            // 
+            this.AisVariableIsMultilanguage.HeaderText = "Is multilanguage";
+            this.AisVariableIsMultilanguage.Name = "AisVariableIsMultilanguage";
             // 
             // ScriptGenerator
             // 
@@ -1546,6 +1825,9 @@
             this.domainModels.ResumeLayout(false);
             this.domainModels.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.domainPropertiesGrid)).EndInit();
+            this.aisTemplater.ResumeLayout(false);
+            this.aisTemplater.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.aisTemplaterGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1691,6 +1973,34 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedSchema;
         private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn tableColumnsReferencedColumn;
+        private System.Windows.Forms.TabPage aisTemplater;
+        private System.Windows.Forms.TextBox aisTemplaterNamespaceTextBox;
+        private System.Windows.Forms.Label aisTemplaterNameSpaceLbl;
+        private System.Windows.Forms.DataGridView aisTemplaterGrid;
+        private System.Windows.Forms.Button aisTemplaterRemoveBtn;
+        private System.Windows.Forms.Button aisTemplaterAddBtn;
+        private System.Windows.Forms.CheckBox aisTemplaterAggregateRootCheckBox;
+        private System.Windows.Forms.TextBox aisTemplaterModelNameTextBox;
+        private System.Windows.Forms.Label aisTemplaterModelNameLbl;
+        private System.Windows.Forms.Button aisTemplaterResetBtn;
+        private System.Windows.Forms.Button aisTemplaterBtn;
+        private System.Windows.Forms.CheckBox aisTemplaterIsUserManagedCheckBox;
+        private System.Windows.Forms.TextBox aisTemplaterClassSummaryTextBox;
+        private System.Windows.Forms.Label aisTemplaterCommentLbl;
+        private System.Windows.Forms.CheckBox aisTemplaterIsValidityRangeCheckBox;
+        private System.Windows.Forms.TextBox aisTemplaterContextTextBox;
+        private System.Windows.Forms.Label aisTemplaterContextLbl;
+        private System.Windows.Forms.TextBox aisTemplaterSubNamespaceTextBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AisVariableAccessLevel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AisVariableName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AisVariableType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AisVariableComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AisVariableStringLength;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn AisVariableIsRequired;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn AisVariableIsPartOfUpdate;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn AisVariableIsPartOfCreateNew;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn AisVariableIsMultilanguage;
     }
 }
 
