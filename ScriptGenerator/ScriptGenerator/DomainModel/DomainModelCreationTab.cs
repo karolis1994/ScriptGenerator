@@ -25,11 +25,11 @@ namespace ";
             domainNameSpaceTextBox.Text = String.Empty;
         }
 
-        private void AddNewDomainPropertyRow(Int32 size = 1)
+        private void AddNewDomainPropertyRow(int size = 1)
         {
-            for (Int32 i = 0; i < size; i++)
+            for (int i = 0; i < size; i++)
             {
-                Int32 index = domainPropertiesGrid.Rows.Add(null, null, false, false, false);
+                domainPropertiesGrid.Rows.Add(null, null, false, false, false);
             }
         }
 

@@ -49,11 +49,6 @@ namespace ScriptGenerator
             InitializeTableTab();
         }
 
-        private static String Else = "Else";
-
-        private void aisTemplaterAddBtn_Click(object sender, EventArgs e)
-        {
-
-        }
+        private readonly static String Else = "Else";
     }
 }

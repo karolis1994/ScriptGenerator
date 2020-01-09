@@ -272,7 +272,7 @@ namespace ScriptGenerator.Services
             if (!string.IsNullOrWhiteSpace(c.DefaultValue))
             {
                 result = " DEFAULT ";
-                if (long.TryParse(c.DefaultValue, out long intOutput) || c.DefaultValue.ToUpper() == "SYSDATE")
+                if (long.TryParse(c.DefaultValue, out _) || c.DefaultValue.ToUpper() == "SYSDATE")
                     result += c.DefaultValue;
                 else if (DateTime.TryParse(c.DefaultValue, out DateTime dateOutput))
                     result += $"TO_DATE(''{dateOutput.Date.ToString("yyyy-MM-dd")}'', ''yyyy-mm-dd'')";

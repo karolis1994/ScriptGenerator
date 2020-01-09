@@ -38,7 +38,6 @@ namespace ScriptGenerator.Services
             {
                 Dictionary<string, int> map = new Dictionary<string, int>();
                 int settingColumn;
-                int temp;
 
                 // Open a doc file.
                 Application application = new Application();
@@ -51,7 +50,7 @@ namespace ScriptGenerator.Services
 
                     for (int i = 2; i <= nonVisualSettingsTable.Rows.Count; i++)
                     {
-                        if (int.TryParse(nonVisualSettingsTable.Rows[i].Cells[settingColumn].Range.Text.Replace("\r\a", "").Trim(), out temp))
+                        if (int.TryParse(nonVisualSettingsTable.Rows[i].Cells[settingColumn].Range.Text.Replace("\r\a", "").Trim(), out int temp))
                             map[nonVisualSettingsTable.Rows[i].Cells[1].Range.Text.Replace("\r\a", "")] = temp;
                     }
 

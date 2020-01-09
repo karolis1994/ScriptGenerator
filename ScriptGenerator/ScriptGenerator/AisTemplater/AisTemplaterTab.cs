@@ -21,11 +21,11 @@ namespace ScriptGenerator
         private const string templaterAisVariableIsPartOfCreateNew = "AisVariableIsPartOfCreateNew";
         private const string templaterAisVariableIsMultilanguage = "AisVariableIsMultilanguage";
 
-        private async void aisTemplaterBtn_Click(object sender, EventArgs e)
+        private async void AisTemplaterBtn_Click(object sender, EventArgs e)
         {
 
             Cursor.Current = Cursors.WaitCursor;
-            aisTemplaterBtn.Enabled = false;
+            AisTemplaterBtn.Enabled = false;
 
             TabToModelAisTemplater();
 
@@ -44,44 +44,44 @@ namespace ScriptGenerator
             this.Invoke(new Action(() =>
             {
                 Cursor.Current = Cursors.Arrow;
-                aisTemplaterBtn.Enabled = true;
+                AisTemplaterBtn.Enabled = true;
             }));
         }
 
-        private void aisTemplaterResetBtn_Click(object sender, EventArgs e)
+        private void AisTemplaterResetBtn_Click(object sender, EventArgs e)
         {
             ResetAisTemplaterTab();
         }
 
-        private void aisTemplaterAddBtn_Click(object sender, EventArgs e)
+        private void AisTemplaterAddBtn_Click(object sender, EventArgs e)
         {
             AddNewAisVariableRow();
         }
 
-        private void aisTemplaterRemoveBtn_Click(object sender, EventArgs e)
+        private void AisTemplaterRemoveBtn_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in aisTemplaterGrid.SelectedRows)
+            foreach (DataGridViewRow row in AisTemplaterGrid.SelectedRows)
             {
                 if (row.Index != 0)
-                    aisTemplaterGrid.Rows.Remove(row);
+                    AisTemplaterGrid.Rows.Remove(row);
             }
         }
 
         private void ResetAisTemplaterTab()
         {
-            aisTemplaterAggregateRootCheckBox.Checked = false;
+            AisTemplaterAggregateRootCheckBox.Checked = false;
 
-            aisTemplaterModelNameTextBox.Text = string.Empty;
-            aisTemplaterNamespaceTextBox.Text = string.Empty;
+            AisTemplaterModelNameTextBox.Text = string.Empty;
+            AisTemplaterNamespaceTextBox.Text = string.Empty;
 
-            aisTemplaterGrid.Rows.Clear();
+            AisTemplaterGrid.Rows.Clear();
         }
 
         private void AddNewAisVariableRow(int size = 1)
         {
             for (int i = 0; i < size; i++)
             {
-                aisTemplaterGrid.Rows.Add(null, null, null, null, null, false, false, false, false);
+                AisTemplaterGrid.Rows.Add(null, null, null, null, null, false, false, false, false);
             }
         }
 
@@ -90,7 +90,7 @@ namespace ScriptGenerator
             var variables = new HashSet<CodeModelVariable>();
 
             //Loop through each row and form variable script values
-            foreach (DataGridViewRow row in aisTemplaterGrid.Rows)
+            foreach (DataGridViewRow row in AisTemplaterGrid.Rows)
             {
                 variables.Add(
                     CodeModelVariable.CreateNew(
@@ -106,15 +106,15 @@ namespace ScriptGenerator
                     ));
             }
 
-            var model = CodeModel.CreateNew(aisTemplaterModelNameTextBox.Text,
-                aisTemplaterNamespaceTextBox.Text,
-                aisTemplaterClassSummaryTextBox.Text,
-                aisTemplaterAggregateRootCheckBox.Checked,
-                aisTemplaterIsUserManagedCheckBox.Checked,
-                aisTemplaterIsValidityRangeCheckBox.Checked,
+            var model = CodeModel.CreateNew(AisTemplaterModelNameTextBox.Text,
+                AisTemplaterNamespaceTextBox.Text,
+                AisTemplaterClassSummaryTextBox.Text,
+                AisTemplaterAggregateRootCheckBox.Checked,
+                AisTemplaterIsUserManagedCheckBox.Checked,
+                AisTemplaterIsValidityRangeCheckBox.Checked,
                 variables,
-                aisTemplaterContextTextBox.Text,
-                aisTemplaterSubNamespaceTextBox.Text);
+                AisTemplaterContextTextBox.Text,
+                AisTemplaterSubNamespaceTextBox.Text);
 
             aisModel = model;
 
