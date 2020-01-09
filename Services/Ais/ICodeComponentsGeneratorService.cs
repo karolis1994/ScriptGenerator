@@ -30,6 +30,27 @@ namespace Services.Ais
         Task<CodeComponentFile> GenerateAPIModel(CodeModel model);
 
         /// <summary>
+        /// Generates a multilanguage domain model class
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Task<CodeComponentFile> GenerateDomainModelMultilanguage(CodeModelVariable variable, CodeModel model);
+
+        /// <summary>
+        /// Generates multilanguage entity type configuration class
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Task<CodeComponentFile> GenerateEntityTypeConfigurationMultilanguage(CodeModelVariable variable, CodeModel model);
+
+        /// <summary>
+        /// Generates a multilanguage API model
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Task<CodeComponentFile> GenerateAPIModelMultilanguage(CodeModelVariable variable, CodeModel model);
+
+        /// <summary>
         /// Generates an interface for repository
         /// </summary>
         /// <param name="model"></param>

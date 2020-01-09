@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -10,6 +11,7 @@ namespace ScriptGenerator
     public partial class ScriptGenerator
     {
         private CodeModel aisModel;
+        private string sourcesPath = Directory.GetCurrentDirectory() + "\\GeneratedSources";
 
         private const string templaterVariableAccessLevel = "AisVariableAccessLevel";
         private const string templaterVariableName = "AisVariableName";
@@ -29,10 +31,15 @@ namespace ScriptGenerator
 
             TabToModelAisTemplater();
 
+            ClearDirectory();
+
             await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateDomainModel(aisModel), "\\Domain\\Models");
-            await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateRepositoryInterface(aisModel), "\\Domain\\Models");
+            if (aisModel.IsAggregateRoot)
+            {
+                await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateRepositoryInterface(aisModel), "\\Domain\\Models");
+                await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateRepository(aisModel), "\\Infrastructure\\Repositories");
+            }
             await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateEntityTypeConfiguration(aisModel), "\\Infrastructure\\EntityConfigurations");
-            await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateRepository(aisModel), "\\Infrastructure\\Repositories");
             await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateAPIModel(aisModel), "\\Application\\Models");
             await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateCommand(aisModel, CommandType.Create), "\\Application\\Commands");
             await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateCommand(aisModel, CommandType.Change), "\\Application\\Commands");
@@ -40,6 +47,13 @@ namespace ScriptGenerator
             await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateCommandHandler(aisModel, CommandType.Create), "\\Application\\Commands");
             await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateCommandHandler(aisModel, CommandType.Change), "\\Application\\Commands");
             await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateCommandHandler(aisModel, CommandType.Delete), "\\Application\\Commands");
+
+            foreach(var variable in aisModel.Variables.Where(v => v.IsFieldMultilanguage))
+            {
+                await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateAPIModelMultilanguage(variable, aisModel), "\\Application\\Models");
+                await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateDomainModelMultilanguage(variable, aisModel), "\\Domain\\Models");
+                await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateEntityTypeConfigurationMultilanguage(variable, aisModel), "\\Infrastructure\\EntityConfigurations");
+            }
 
             this.Invoke(new Action(() =>
             {
@@ -98,7 +112,7 @@ namespace ScriptGenerator
                         GetCellValue<string>(row, templaterVariableName),
                         GetCellValue<string>(row, templaterAisVariableType),
                         GetCellValue<string>(row, templaterAisVariableComment),
-                        GetCellValue<int?>(row, templaterAisVariableStringLength),
+                        GetCellValueInt(row, templaterAisVariableStringLength),
                         GetCellValueBool(row, templaterAisVariableIsRequired),
                         GetCellValueBool(row, templaterAisVariableIsPartOfUpdate),
                         GetCellValueBool(row, templaterAisVariableIsPartOfCreateNew),
@@ -125,13 +139,19 @@ namespace ScriptGenerator
         {
             await Task.Run(() =>
             {
-                var fullPath = Directory.GetCurrentDirectory() + relativePath;
+                var fullPath = sourcesPath + relativePath;
 
-                if (Directory.Exists(Directory.GetCurrentDirectory() + relativePath))
+                if (!Directory.Exists(Directory.GetCurrentDirectory() + relativePath))
                     Directory.CreateDirectory(fullPath);
 
                 File.WriteAllText(fullPath + "\\" + component.FileName, component.ComponentCodeText);
             });
+        }
+
+        private void ClearDirectory()
+        {
+            if (Directory.Exists(sourcesPath))
+                Directory.Delete(sourcesPath, true);
         }
     }
 }

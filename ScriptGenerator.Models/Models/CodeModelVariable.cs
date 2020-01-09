@@ -24,7 +24,7 @@
         /// <summary>
         /// Summary comment
         /// </summary>
-        public string Comment { get; set; }
+        public string Summary { get; set; }
 
         /// <summary>
         /// Size for length constraint
@@ -64,7 +64,7 @@
                 AccessLevel = string.IsNullOrWhiteSpace(accessLevel) ? "public" : accessLevel,
                 Name = name,
                 Type = type,
-                Comment = comment,
+                Summary = comment,
                 LengthConstraint = stringLength,
                 IsRequired = isRequired,
                 IsPartOfUpdate = isPartOfUpdate,

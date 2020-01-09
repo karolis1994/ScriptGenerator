@@ -30,6 +30,7 @@ using Core.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;";
+        private const string domainModelMultilanguageUsings = "using Core.Domain.Models;";
         private const string commandUsings = @"using Core.Web.Application.Commands;
 using MediatR;";
         private const string commandHandlerUsings = @"using Ais;
@@ -39,8 +40,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;";
-        private const string entityConfigurationUsings = @"using Funds.Domain.Models.Funds;
-using Microsoft.EntityFrameworkCore;
+        private const string entityConfigurationUsings = @"using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;";
         private const string repositoryInterfaceUsings = @"using Core.Domain.SeedWork;
 using System.Collections.Generic;
@@ -59,27 +59,27 @@ using System.Threading.Tasks;";
             {
                 var sb = new StringBuilder(apiModelUsings);
 
+                sb.AppendLine();
+                sb.AppendLine();
                 sb.AppendLine($"namespace {GetAPIModelNamespace(model.Namespace, model.SubNamespace)}");
                 sb.AppendLine("{");
-                sb.AppendLine($"{GenerateSummary(model.Summary, 1)}");
+                sb.Append($"{GenerateSummary(model.Summary, 1)}");
+                sb.AppendLine($"{identation}[WebForm]");
                 sb.AppendLine($"{identation}{GenerateModelClassDefinition(model)}");
                 sb.AppendLine($"{identation}{{");
 
                 foreach (var variable in model.Variables.Where(v => !v.IsFieldMultilanguage))
                 {
                     sb.AppendLine(GenerateVariableDefinition(variable, false, 2));
-                    sb.AppendLine();
                 }
 
                 foreach (var variable in model.Variables.Where(v => v.IsFieldMultilanguage))
                 {
                     sb.AppendLine(GenerateMultilanguageVariableDefinition(variable, model.Name, false, 2));
-                    sb.AppendLine();
                 }
 
                 sb.AppendLine(GenerateCreateNew(model, 2));
-                sb.AppendLine();
-                sb.AppendLine(GenerateUpdateWith(model, 2));
+                sb.Append(GenerateUpdateWith(model, 2));
                 sb.AppendLine($"{identation}}}");
                 sb.AppendLine("}");
 
@@ -97,22 +97,22 @@ using System.Threading.Tasks;";
             {
                 var sb = new StringBuilder(domainModelUsings);
 
+                sb.AppendLine();
+                sb.AppendLine();
                 sb.AppendLine($"namespace {GetDomainModelNamespace(model.Namespace, model.SubNamespace)}");
                 sb.AppendLine("{");
-                sb.AppendLine($"{GenerateSummary(model.Summary, 1)}");
+                sb.Append($"{GenerateSummary(model.Summary, 1)}");
                 sb.AppendLine($"{identation}{GenerateModelClassDefinition(model)}");
                 sb.AppendLine($"{identation}{{");
 
                 foreach (var variable in model.Variables.Where(v => !v.IsFieldMultilanguage))
                 {
                     sb.AppendLine(GenerateVariableDefinition(variable, true, 2));
-                    sb.AppendLine();
                 }
 
                 foreach (var variable in model.Variables.Where(v => v.IsFieldMultilanguage))
                 {
                     sb.AppendLine(GenerateMultilanguageVariableDefinition(variable, model.Name, true, 2));
-                    sb.AppendLine();
                 }
 
                 sb.AppendLine($"{identation}}}");
@@ -135,12 +135,13 @@ using System.Threading.Tasks;";
 
                 var className = GetCommandName(type, model.Name, false);
                 var sb = new StringBuilder(commandUsings);
+                sb.AppendLine();
                 sb.AppendLine($"using {GetAPIModelNamespace(model.Namespace, model.SubNamespace)};");
 
                 sb.AppendLine();
                 sb.AppendLine($"namespace {GetCommandsNamespace(model.Namespace, model.SubNamespace)}");
                 sb.AppendLine("{");
-                sb.AppendLine($"{GenerateSummary($"Command to {type.ToString().FirstCharToLower()} {model.Name}", 1)}");
+                sb.Append($"{GenerateSummary($"Command to {type.ToString().FirstCharToLower()} {model.Name}", 1)}");
                 sb.AppendLine($"{identation}public class {className} : IRequest<CommandResponse>");
                 sb.AppendLine($"{identation}{{");
 
@@ -151,7 +152,7 @@ using System.Threading.Tasks;";
                     sb.AppendLine($"{identation3}{model.Name} = {model.Name.FirstCharToLower()};");
                     sb.AppendLine($"{identation2}}}");
                     sb.AppendLine();
-                    sb.AppendLine(GenerateSummary($"{model.Name} identificator", 2));
+                    sb.Append(GenerateSummary($"{model.Name} identificator", 2));
                     sb.AppendLine($"{identation2}public long Id {{ get; }}");
                 }
                 else
@@ -161,7 +162,7 @@ using System.Threading.Tasks;";
                     sb.AppendLine($"{identation3}{model.Name} = {model.Name.FirstCharToLower()};");
                     sb.AppendLine($"{identation2}}}");
                     sb.AppendLine();
-                    sb.AppendLine(GenerateSummary($"{model.Name} model", 2));
+                    sb.Append(GenerateSummary($"{model.Name} model", 2));
                     sb.AppendLine($"{identation2}public {model.Name} {model.Name} {{ get; }}");
                 }
 
@@ -187,12 +188,13 @@ using System.Threading.Tasks;";
                 var repositoryInterface = GetRepositoryName(model.Name, true);
                 var repository = GetRepositoryName(model.Name, false).FirstCharToLower();
                 var sb = new StringBuilder(commandHandlerUsings);
-                sb.AppendLine($"usinng {GetDomainModelNamespace(model.Namespace, model.SubNamespace)};");
+                sb.AppendLine();
+                sb.AppendLine($"using {GetDomainModelNamespace(model.Namespace, model.SubNamespace)};");
 
                 sb.AppendLine();
                 sb.AppendLine($"namespace {GetCommandsNamespace(model.Namespace, model.SubNamespace)}");
                 sb.AppendLine("{");
-                sb.AppendLine($"{GenerateSummary($"Command to {type.ToString().FirstCharToLower()} {model.Name}", 1)}");
+                sb.Append($"{GenerateSummary($"Command to {type.ToString().FirstCharToLower()} {model.Name}", 1)}");
                 sb.AppendLine($"{identation}public class {className} : IRequestHandler<{commandName}, CommandResponse>");
                 sb.AppendLine($"{identation}{{");
                 sb.AppendLine($"{identation2}private readonly {repositoryInterface} {repository};");
@@ -243,13 +245,14 @@ using System.Threading.Tasks;";
                 var sb = new StringBuilder(entityConfigurationUsings);
 
                 sb.AppendLine();
+                sb.AppendLine();
                 sb.AppendLine($"namespace {GetEntityConfigurationNamespace(model.Namespace)}");
                 sb.AppendLine("{");
                 sb.AppendLine($"{identation}internal class {className} : IEntityTypeConfiguration<{model.Name}>");
                 sb.AppendLine($"{identation}{{");
                 sb.AppendLine($"{identation2}public void Configure(EntityTypeBuilder<{model.Name}> c)");
                 sb.AppendLine($"{identation2}{{");
-                sb.AppendLine($"{identation3}c.ToTable(\"{model.Name}\", FundsContext.DEFAULT_SCHEMA);");
+                sb.AppendLine($"{identation3}c.ToTable(\"{model.Name}\", {model.ContextName}.DefaultSchema);");
                 sb.AppendLine($"{identation3}c.Ignore(e => e.DomainEvents);");
                 sb.AppendLine($"{identation3}c.HasKey(e => e.Id);");
                 sb.AppendLine();
@@ -285,18 +288,19 @@ using System.Threading.Tasks;";
                 var sb = new StringBuilder(repositoryInterfaceUsings);
 
                 sb.AppendLine();
+                sb.AppendLine();
                 sb.AppendLine($"namespace {GetDomainModelNamespace(model.Namespace, model.SubNamespace)}");
                 sb.AppendLine("{");
-                sb.AppendLine(GenerateSummary($"{model.Name} repository", 1));
+                sb.Append(GenerateSummary($"{model.Name} repository", 1));
                 sb.AppendLine($"{identation}public interface {className} : IRepository<{model.Name}>");
                 sb.AppendLine($"{identation}{{");
-                sb.AppendLine(GenerateSummary($"Add a new {model.Name}", 2));
+                sb.Append(GenerateSummary($"Add a new {model.Name}", 2));
                 sb.AppendLine($"{identation2}{model.Name} Add({model.Name} {model.Name.FirstCharToLower()});");
                 sb.AppendLine();
-                sb.AppendLine(GenerateSummary($"Updates an existing {model.Name}", 2));
+                sb.Append(GenerateSummary($"Updates an existing {model.Name}", 2));
                 sb.AppendLine($"{identation2}{model.Name} Update({model.Name} {model.Name.FirstCharToLower()});");
                 sb.AppendLine();
-                sb.AppendLine(GenerateSummary($"Deletes an existing {model.Name}", 2));
+                sb.Append(GenerateSummary($"Deletes an existing {model.Name}", 2));
                 sb.AppendLine($"{identation2}void Delete({model.Name} {model.Name.FirstCharToLower()});");
                 sb.AppendLine();
                 sb.AppendLine($"{identation}}}");
@@ -323,6 +327,7 @@ using System.Threading.Tasks;";
                 var identation4 = GenerateIdentation(4);
                 var modelNameLower = model.Name.FirstCharToLower();
                 var sb = new StringBuilder(repositoryUsings);
+                sb.AppendLine();
                 sb.AppendLine($"using {GetDomainModelNamespace(model.Namespace, model.SubNamespace)};");
 
                 sb.AppendLine();
@@ -359,6 +364,105 @@ using System.Threading.Tasks;";
                 sb.AppendLine($"{identation2}{{");
                 sb.AppendLine($"{identation3}this.context.Remove({modelNameLower});");
                 sb.AppendLine($"{identation2}}}");
+                sb.AppendLine($"{identation}}}");
+                sb.AppendLine("}");
+
+                return new CodeComponentFile(sb.ToString(), className);
+            })
+            .ConfigureAwait(false);
+        }
+
+        public async Task<CodeComponentFile> GenerateDomainModelMultilanguage(CodeModelVariable variable, CodeModel model)
+        {
+            if (variable == null || model == null)
+                throw new ArgumentNullException();
+
+            return await Task.Run(() =>
+            {
+                var className = model.Name + variable.Name;
+                var sb = new StringBuilder(domainModelMultilanguageUsings);
+
+                sb.AppendLine();
+                sb.AppendLine();
+                sb.AppendLine($"namespace {GetDomainModelNamespace(model.Namespace, model.SubNamespace)}");
+                sb.AppendLine("{");
+                sb.Append($"{GenerateSummary($"Localized {model.Name} {variable.Name}", 1)}");
+                sb.AppendLine($"{identation}public sealed class {className} : EntityLocaleResource<long, {model.Name}>");
+                sb.AppendLine($"{identation}{{");
+                sb.AppendLine($"{identation}}}");
+                sb.AppendLine("}");
+
+                return new CodeComponentFile(sb.ToString(), className);
+            })
+            .ConfigureAwait(false);
+        }
+
+        public async Task<CodeComponentFile> GenerateEntityTypeConfigurationMultilanguage(CodeModelVariable variable, CodeModel model)
+        {
+            if (variable == null || model == null)
+                throw new ArgumentNullException();
+
+            return await Task.Run(() =>
+            {
+                var fullName = model.Name + variable.Name;
+                var className = fullName + "EntityTypeConfiguration";
+                var identation2 = GenerateIdentation(2);
+                var identation3 = GenerateIdentation(3);
+                var sb = new StringBuilder(entityConfigurationUsings);
+                sb.AppendLine();
+                sb.AppendLine($"using {GetDomainModelNamespace(model.Namespace, model.SubNamespace)}");
+
+                sb.AppendLine();
+                sb.AppendLine($"namespace {GetEntityConfigurationNamespace(model.Namespace)}");
+                sb.AppendLine("{");
+                sb.AppendLine($"{identation}internal class {className} : IEntityTypeConfiguration<{fullName}>");
+                sb.AppendLine($"{identation}{{");
+                sb.AppendLine($"{identation2}public void Configure(EntityTypeBuilder<{fullName}> c)");
+                sb.AppendLine($"{identation2}{{");
+                sb.AppendLine($"{identation3}c.ToTable(\"{fullName}\", {model.ContextName}.DefaultSchema)");
+                sb.AppendLine($"{identation3}c.HasKey(e => new {{ e.EntityId, e.Locale }});");
+
+                sb.AppendLine($"{identation3}c.Property(f => f.Value)");
+                if (variable.LengthConstraint.HasValue && variable.LengthConstraint > 0 && variable.Type.ToLower() == "string")
+                    sb.Append($".HasMaxLength({variable.LengthConstraint})");
+                sb.Append(";");
+
+                sb.AppendLine($"{identation2}}}");
+                sb.AppendLine($"{identation}}}");
+                sb.AppendLine("}");
+
+                return new CodeComponentFile(sb.ToString(), className);
+            })
+            .ConfigureAwait(false);
+        }
+
+        public async Task<CodeComponentFile> GenerateAPIModelMultilanguage(CodeModelVariable variable, CodeModel model)
+        {
+            if (variable == null || model == null)
+                throw new ArgumentNullException();
+
+            return await Task.Run(() =>
+            {
+                var className = model.Name + variable.Name;
+                var identation2 = GenerateIdentation(2);
+                var sb = new StringBuilder(domainModelMultilanguageUsings);
+
+                sb.AppendLine();
+                sb.AppendLine();
+                sb.AppendLine($"namespace {GetDomainModelNamespace(model.Namespace, model.SubNamespace)}");
+                sb.AppendLine("{");
+                sb.Append($"{GenerateSummary($"Localized {model.Name} {variable.Name}", 1)}");
+                sb.AppendLine($"{identation}[WebForm]");
+                sb.AppendLine($"{identation}public class {className} : ILocaleResource");
+                sb.AppendLine($"{identation}{{");
+                sb.Append(GenerateSummary($"{variable.Name} locale", 2));
+                sb.AppendLine($"{identation2}[EnumDataType(typeof(Locale))]");
+                sb.AppendLine($"{identation2}public Locale Locale {{ get; set; }}");
+                sb.AppendLine();
+                sb.Append(GenerateSummary($"{variable.Name} value", 2));
+                if (variable.LengthConstraint.HasValue && variable.Type.ToLower() == "string")
+                    sb.AppendLine($"{identation2}[StringLength({variable.LengthConstraint.Value})]");
+                sb.AppendLine($"{identation2}public string Value {{ get; set; }}");
                 sb.AppendLine($"{identation}}}");
                 sb.AppendLine("}");
 
@@ -458,10 +562,10 @@ using System.Threading.Tasks;";
 
             var localIdentation = GenerateIdentation(identationCount);
 
-            sb.AppendLine(GenerateSummary(variable.Comment, identationCount));
+            sb.Append(GenerateSummary(variable.Summary, identationCount));
             if (!isDomain)
             {
-                if (variable.LengthConstraint.HasValue)
+                if (variable.LengthConstraint.HasValue && variable.Type.ToLower() == "string")
                     sb.AppendLine($"{localIdentation}[StringLength({variable.LengthConstraint.Value})]");
 
                 if (variable.IsRequired)
@@ -480,15 +584,15 @@ using System.Threading.Tasks;";
 
             if (!isDomain)
             {
-                sb.AppendLine(GenerateSummary($"Localized {variable.Name.FirstCharToLower()}", identationCount));
+                sb.Append(GenerateSummary($"Localized {variable.Name.FirstCharToLower()}", identationCount));
                 sb.AppendLine($"{localIdentation}public IEnumerable<{localizedVariableName}> {variable.Name} {{ get; private set; }} = Enumerable.Empty<{localizedVariableName}>();");
             }
             else
             {
                 var summary = GenerateSummary($"Set of {variable.Name.FirstCharToLower()} in all supported languages", identationCount);
-                sb.AppendLine(summary);
+                sb.Append(summary);
                 sb.AppendLine($"{localIdentation}private HashSet<{localizedVariableName}> _{variable.Name} = new HashSet<{localizedVariableName}>();");
-                sb.AppendLine(summary);
+                sb.Append(summary);
                 sb.AppendLine($"{localIdentation}public IEnumerable<{localizedVariableName}> {variable.Name} {{ get; private set; }} => _{variable.Name};");
             }
 

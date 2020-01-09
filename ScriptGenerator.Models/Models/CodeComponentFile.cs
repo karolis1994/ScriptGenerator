@@ -8,7 +8,7 @@
         public CodeComponentFile(string codeText, string fileName)
         {
             this.ComponentCodeText = codeText;
-            this.FileName = fileName;
+            this.FileName = fileName.EndsWith(".cs") ? fileName : fileName + ".cs";
         }
 
         /// <summary>
