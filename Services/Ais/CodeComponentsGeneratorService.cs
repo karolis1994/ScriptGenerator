@@ -357,7 +357,7 @@ using System.Threading.Tasks;";
                 sb.AppendLine();
                 sb.AppendLine($"{identation2}public {model.Name} Update({model.Name} {modelNameLower})");
                 sb.AppendLine($"{identation2}{{");
-                sb.AppendLine($"{identation3}return return this.context.Update({modelNameLower}).Entity;");
+                sb.AppendLine($"{identation3}return this.context.Update({modelNameLower}).Entity;");
                 sb.AppendLine($"{identation2}}}");
                 sb.AppendLine();
                 sb.AppendLine($"{identation2}public void Delete({model.Name} {modelNameLower})");

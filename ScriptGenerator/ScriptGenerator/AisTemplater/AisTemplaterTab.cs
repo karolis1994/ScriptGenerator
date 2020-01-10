@@ -31,7 +31,7 @@ namespace ScriptGenerator
 
             TabToModelAisTemplater();
 
-            ClearDirectory();
+            //ClearDirectory();
 
             await WriteAisComponentToFile(await aisComponentsGeneratorService.GenerateDomainModel(aisModel), "\\Domain\\Models");
             if (aisModel.IsAggregateRoot)
