@@ -10,7 +10,7 @@ namespace ScriptGenerator
 {
     public partial class ScriptGenerator
     {
-        private CodeModel aisModel;
+        private CodeClass aisModel;
         private string sourcesPath = Directory.GetCurrentDirectory() + "\\GeneratedSources";
 
         private const string templaterVariableAccessLevel = "AisVariableAccessLevel";
@@ -99,7 +99,7 @@ namespace ScriptGenerator
             }
         }
 
-        private CodeModel TabToModelAisTemplater()
+        private CodeClass TabToModelAisTemplater()
         {
             var variables = new HashSet<CodeModelVariable>();
 
@@ -120,7 +120,7 @@ namespace ScriptGenerator
                     ));
             }
 
-            var model = CodeModel.CreateNew(AisTemplaterModelNameTextBox.Text,
+            var model = CodeClass.CreateNew(AisTemplaterModelNameTextBox.Text,
                 AisTemplaterNamespaceTextBox.Text,
                 AisTemplaterClassSummaryTextBox.Text,
                 AisTemplaterAggregateRootCheckBox.Checked,

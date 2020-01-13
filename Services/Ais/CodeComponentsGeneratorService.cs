@@ -50,7 +50,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;";
 
-        public async Task<CodeComponentFile> GenerateAPIModel(CodeModel model)
+        public async Task<CodeComponentFile> GenerateAPIModel(CodeClass model)
         {
             if (model == null)
                 throw new ArgumentNullException("Supplied code model was null.");
@@ -88,7 +88,7 @@ using System.Threading.Tasks;";
             .ConfigureAwait(false);
         }
 
-        public async Task<CodeComponentFile> GenerateDomainModel(CodeModel model)
+        public async Task<CodeComponentFile> GenerateDomainModel(CodeClass model)
         {
             if (model == null)
                 throw new ArgumentNullException("Supplied code model was null.");
@@ -123,7 +123,7 @@ using System.Threading.Tasks;";
             .ConfigureAwait(false);
         }
 
-        public async Task<CodeComponentFile> GenerateCommand(CodeModel model, CommandType type)
+        public async Task<CodeComponentFile> GenerateCommand(CodeClass model, CommandType type)
         {
             if (model == null)
                 throw new ArgumentNullException("Supplied code model was null.");
@@ -174,7 +174,7 @@ using System.Threading.Tasks;";
             .ConfigureAwait(false);
         }
 
-        public async Task<CodeComponentFile> GenerateCommandHandler(CodeModel model, CommandType type)
+        public async Task<CodeComponentFile> GenerateCommandHandler(CodeClass model, CommandType type)
         {
             if (model == null)
                 throw new ArgumentNullException("Supplied code model was null.");
@@ -232,7 +232,7 @@ using System.Threading.Tasks;";
             .ConfigureAwait(false);
         }
 
-        public async Task<CodeComponentFile> GenerateEntityTypeConfiguration(CodeModel model)
+        public async Task<CodeComponentFile> GenerateEntityTypeConfiguration(CodeClass model)
         {
             if (model == null)
                 throw new ArgumentNullException("Supplied code model was null.");
@@ -273,7 +273,7 @@ using System.Threading.Tasks;";
             .ConfigureAwait(false);
         }
 
-        public async Task<CodeComponentFile> GenerateRepositoryInterface(CodeModel model)
+        public async Task<CodeComponentFile> GenerateRepositoryInterface(CodeClass model)
         {
             if (model == null)
                 throw new ArgumentNullException("Supplied code model was null.");
@@ -311,7 +311,7 @@ using System.Threading.Tasks;";
             .ConfigureAwait(false);
         }
 
-        public async Task<CodeComponentFile> GenerateRepository(CodeModel model)
+        public async Task<CodeComponentFile> GenerateRepository(CodeClass model)
         {
             if (model == null)
                 throw new ArgumentNullException("Supplied code model was null.");
@@ -372,7 +372,7 @@ using System.Threading.Tasks;";
             .ConfigureAwait(false);
         }
 
-        public async Task<CodeComponentFile> GenerateDomainModelMultilanguage(CodeModelVariable variable, CodeModel model)
+        public async Task<CodeComponentFile> GenerateDomainModelMultilanguage(CodeModelVariable variable, CodeClass model)
         {
             if (variable == null || model == null)
                 throw new ArgumentNullException();
@@ -397,7 +397,7 @@ using System.Threading.Tasks;";
             .ConfigureAwait(false);
         }
 
-        public async Task<CodeComponentFile> GenerateEntityTypeConfigurationMultilanguage(CodeModelVariable variable, CodeModel model)
+        public async Task<CodeComponentFile> GenerateEntityTypeConfigurationMultilanguage(CodeModelVariable variable, CodeClass model)
         {
             if (variable == null || model == null)
                 throw new ArgumentNullException();
@@ -436,7 +436,7 @@ using System.Threading.Tasks;";
             .ConfigureAwait(false);
         }
 
-        public async Task<CodeComponentFile> GenerateAPIModelMultilanguage(CodeModelVariable variable, CodeModel model)
+        public async Task<CodeComponentFile> GenerateAPIModelMultilanguage(CodeModelVariable variable, CodeClass model)
         {
             if (variable == null || model == null)
                 throw new ArgumentNullException();
@@ -489,7 +489,7 @@ using System.Threading.Tasks;";
             return sb.ToString();
         }
 
-        private string GenerateCreateNew(CodeModel model, int identationCount)
+        private string GenerateCreateNew(CodeClass model, int identationCount)
         {
             var localIdentation = GenerateIdentation(identationCount);
             var sb = new StringBuilder();
@@ -502,7 +502,7 @@ using System.Threading.Tasks;";
             return sb.ToString();
         }
 
-        private string GenerateUpdateWith(CodeModel model, int identationCount)
+        private string GenerateUpdateWith(CodeClass model, int identationCount)
         {
             var localIdentation = GenerateIdentation(identationCount);
             var sb = new StringBuilder();
@@ -530,7 +530,7 @@ using System.Threading.Tasks;";
             return string.Join(", ", parameters);
         }
 
-        private string GenerateModelClassDefinition(CodeModel model)
+        private string GenerateModelClassDefinition(CodeClass model)
         {
             if (model == null)
                 return string.Empty;

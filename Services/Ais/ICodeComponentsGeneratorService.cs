@@ -13,56 +13,56 @@ namespace Services.Ais
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<CodeComponentFile> GenerateDomainModel(CodeModel model);
+        Task<CodeComponentFile> GenerateDomainModel(CodeClass model);
 
         /// <summary>
         /// Generates entity type configuration class
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<CodeComponentFile> GenerateEntityTypeConfiguration(CodeModel model);
+        Task<CodeComponentFile> GenerateEntityTypeConfiguration(CodeClass model);
 
         /// <summary>
         /// Generates an API model
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<CodeComponentFile> GenerateAPIModel(CodeModel model);
+        Task<CodeComponentFile> GenerateAPIModel(CodeClass model);
 
         /// <summary>
         /// Generates a multilanguage domain model class
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<CodeComponentFile> GenerateDomainModelMultilanguage(CodeModelVariable variable, CodeModel model);
+        Task<CodeComponentFile> GenerateDomainModelMultilanguage(CodeModelVariable variable, CodeClass model);
 
         /// <summary>
         /// Generates multilanguage entity type configuration class
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<CodeComponentFile> GenerateEntityTypeConfigurationMultilanguage(CodeModelVariable variable, CodeModel model);
+        Task<CodeComponentFile> GenerateEntityTypeConfigurationMultilanguage(CodeModelVariable variable, CodeClass model);
 
         /// <summary>
         /// Generates a multilanguage API model
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<CodeComponentFile> GenerateAPIModelMultilanguage(CodeModelVariable variable, CodeModel model);
+        Task<CodeComponentFile> GenerateAPIModelMultilanguage(CodeModelVariable variable, CodeClass model);
 
         /// <summary>
         /// Generates an interface for repository
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<CodeComponentFile> GenerateRepositoryInterface(CodeModel model);
+        Task<CodeComponentFile> GenerateRepositoryInterface(CodeClass model);
 
         /// <summary>
         /// Generates a repository class
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<CodeComponentFile> GenerateRepository(CodeModel model);
+        Task<CodeComponentFile> GenerateRepository(CodeClass model);
 
         /// <summary>
         /// Generates a command class
@@ -70,7 +70,7 @@ namespace Services.Ais
         /// <param name="model"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        Task<CodeComponentFile> GenerateCommand(CodeModel model, CommandType type);
+        Task<CodeComponentFile> GenerateCommand(CodeClass model, CommandType type);
 
         /// <summary>
         /// Generates a command handler class
@@ -78,6 +78,6 @@ namespace Services.Ais
         /// <param name="model"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        Task<CodeComponentFile> GenerateCommandHandler(CodeModel model, CommandType type);
+        Task<CodeComponentFile> GenerateCommandHandler(CodeClass model, CommandType type);
     }
 }

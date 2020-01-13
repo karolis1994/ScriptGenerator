@@ -5,8 +5,13 @@ namespace ScriptGenerator.Models
     /// <summary>
     /// Ais project model
     /// </summary>
-    public class CodeModel
+    public class CodeClass
     {
+        /// <summary>
+        /// Class access level
+        /// </summary>
+        public CodeAccessLevel AccessLevel { get; private set; }
+
         /// <summary>
         /// Model (class) name
         /// </summary>
@@ -59,10 +64,10 @@ namespace ScriptGenerator.Models
         /// <param name="isAggregateRoot"></param>
         /// <param name="variables"></param>
         /// <returns></returns>
-        public static CodeModel CreateNew(string name, string nameSpace, string summary, bool isAggregateRoot, bool isUserManaged, 
+        public static CodeClass CreateNew(string name, string nameSpace, string summary, bool isAggregateRoot, bool isUserManaged, 
             bool isValidDateTimeRange, IEnumerable<CodeModelVariable> variables, string contextName, string subNamespace)
         {
-            var model = new CodeModel()
+            var model = new CodeClass()
             {
                 Name = name,
                 Namespace = nameSpace,
